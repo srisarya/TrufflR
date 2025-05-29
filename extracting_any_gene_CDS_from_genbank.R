@@ -52,7 +52,7 @@ extract_gene_target_from_genbank <- function(genbank_text, genome_id, gene_synon
       if (grepl("^     [A-Za-z]", line)) {
         
         # Process previous feature if it was gene_target
-        if (!is.null(current_feature) && is_gene_target_feature(current_feature$lines)) {
+        if (!is.null(current_feature) && is_gene_target_feature(current_feature$lines, gene_synonyms)) {
           location <- extract_feature_location(current_feature$lines)
           if (!is.null(location)) {
             current_feature$location <- location
@@ -72,7 +72,7 @@ extract_gene_target_from_genbank <- function(genbank_text, genome_id, gene_synon
   }
   
   # Process the last feature
-  if (!is.null(current_feature) && is_gene_target_feature(current_feature$lines)) {
+  if (!is.null(current_feature) && is_gene_target_feature(current_feature$lines, gene_synonyms)) {
     location <- extract_feature_location(current_feature$lines)
     if (!is.null(location)) {
       current_feature$location <- location
