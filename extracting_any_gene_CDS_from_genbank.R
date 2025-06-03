@@ -184,26 +184,39 @@ get_gene_target_by_order <- function(taxid_file, max_per_order, output_dir, gene
       
       cat("  Query:", search_query, "\n")
       
-      # Search for gene sequences
-      search_result <- rentrez::entrez_search(
+      # Search for gene sequences with up to 3 retries
+      search_result <- NULL
+      attempt <- 1
+      order_name <- "Unknown"
+      while (is.null(search_result) && attempt <= 3) {
+      tryCatch({
+        search_result <- rentrez::entrez_search(
         db = "nuccore",
         term = search_query,
         retmax = max_per_order * 3  # Get more IDs to account for filtering
-      )
+        )
+        # Get taxonomic name
+        tax_summary <- rentrez::entrez_summary(db = "taxonomy", id = taxid)
+        if (!is.null(tax_summary$scientificname)) {
+        order_name <- tax_summary$scientificname
+        }
+        cat("  Order name:", order_name, "\n")
+      }, error = function(e) {
+        cat("  Search attempt", attempt, "failed:", e$message, "\n")
+        Sys.sleep(2 * attempt)  # Exponential backoff
+      })
+      attempt <- attempt + 1
+      }
+      if (is.null(search_result)) {
+      write(paste("Failed to retrieve search results for taxid:", taxid, "order:", order_name), file = file.path(output_dir, "error.log"), append = TRUE)
+      stop("Failed to retrieve search results after 3 attempts")
+      }
       
       sequences_found <- search_result$count
       sequences_to_process <- length(search_result$ids)
       
       cat("  Found:", sequences_found, "total sequences\n")
       cat("  Will process:", sequences_to_process, "sequences\n")
-      
-      # Get taxonomic name
-      order_name <- "Unknown"
-      tax_summary <- rentrez::entrez_summary(db = "taxonomy", id = taxid)
-      if (!is.null(tax_summary$scientificname)) {
-        order_name <- tax_summary$scientificname
-      }
-      cat("  Order name:", order_name, "\n")
       
       # Initialize variables for this taxon
       final_sequences <- character()
@@ -212,102 +225,112 @@ get_gene_target_by_order <- function(taxid_file, max_per_order, output_dir, gene
       
       # Process sequences up to max_per_order
       if (sequences_to_process > 0) {
-        for (seq_id in search_result$ids) {
-          if (sequences_retrieved >= max_per_order) break
+      for (seq_id in search_result$ids) {
+        if (sequences_retrieved >= max_per_order) break
+        
+        attempt_seq <- 1
+        success_seq <- FALSE
+        while (attempt_seq <= 3 && !success_seq) {
+        tryCatch({
+          # Get sequence summary to check if it's a complete genome
+          seq_summary <- rentrez::entrez_summary(db = "nuccore", id = seq_id)
           
-          tryCatch({
-            # Get sequence summary to check if it's a complete genome
-            seq_summary <- rentrez::entrez_summary(db = "nuccore", id = seq_id)
-            
-            # Check if this is a complete genome
-            if (!is.null(seq_summary$title) && grepl("complete genome", seq_summary$title, ignore.case = TRUE)) {
-              
-              # This is a complete genome - extract gene features
-              cat("    Processing complete genome:", seq_id, "\n")
-              
-              # Fetch GenBank record
-              genbank_record <- rentrez::entrez_fetch(
-                db = "nuccore",
-                id = seq_id,
-                rettype = "gb"
-              )
-              
-              # Save GenBank record for reference
-              genbank_file <- file.path(genbank_dir, paste0("genome_", seq_id, ".gb"))
-              writeLines(genbank_record, genbank_file)
-              
-              # Extract gene sequences from this genome using gene synonyms
-              gene_sequences <- extract_gene_target_from_genbank(genbank_record, seq_id, gene_synonyms)
-              str(gene_sequences)
-              if (length(gene_sequences) > 0) {
-                final_sequences <- c(final_sequences, gene_sequences)
-                extracted_count <- length(gene_sequences) / 2  # Divide by 2 (header + sequence)
-                gene_target_extracted_count <- gene_target_extracted_count + extracted_count
-                sequences_retrieved <- sequences_retrieved + extracted_count
-                cat("      Extracted", extracted_count, "gene features\n")
-              }
-              
-            } else {
-              
-              # This is a regular gene sequence - fetch directly
-              gene_sequence <- rentrez::entrez_fetch(
-                db = "nuccore",
-                id = seq_id,
-                rettype = "fasta"
-              )
-              
-              final_sequences <- c(final_sequences, gene_sequence)
-              sequences_retrieved <- sequences_retrieved + 1
-              cat("    Retrieved gene sequence:", seq_id, "\n")
-            }
-            
-            # Small delay between requests
-            Sys.sleep(0.3)
-            
-          }, error = function(e) {
-            cat("    Error processing sequence", seq_id, ":", e$message, "\n")
-          })
+          # Check if this is a complete genome
+          if (!is.null(seq_summary$title) && grepl("complete genome", seq_summary$title, ignore.case = TRUE)) {
+          
+          # This is a complete genome - extract gene features
+          cat("    Processing complete genome:", seq_id, "\n")
+          
+          # Fetch GenBank record
+          genbank_record <- rentrez::entrez_fetch(
+            db = "nuccore",
+            id = seq_id,
+            rettype = "gb"
+          )
+          
+          # Save GenBank record for reference
+          genbank_file <- file.path(genbank_dir, paste0("genome_", seq_id, ".gb"))
+          writeLines(genbank_record, genbank_file)
+          
+          # Extract gene sequences from this genome using gene synonyms
+          gene_sequences <- extract_gene_target_from_genbank(genbank_record, seq_id, gene_synonyms)
+          str(gene_sequences)
+          if (length(gene_sequences) > 0) {
+            final_sequences <- c(final_sequences, gene_sequences)
+            extracted_count <- length(gene_sequences) / 2  # Divide by 2 (header + sequence)
+            gene_target_extracted_count <- gene_target_extracted_count + extracted_count
+            sequences_retrieved <- sequences_retrieved + extracted_count
+            cat("      Extracted", extracted_count, "gene features\n")
+          }
+          
+          } else {
+          
+          # This is a regular gene sequence - fetch directly
+          gene_sequence <- rentrez::entrez_fetch(
+            db = "nuccore",
+            id = seq_id,
+            rettype = "fasta"
+          )
+          
+          final_sequences <- c(final_sequences, gene_sequence)
+          sequences_retrieved <- sequences_retrieved + 1
+          cat("    Retrieved gene sequence:", seq_id, "\n")
+          }
+          
+          # Small delay between requests
+          Sys.sleep(0.3)
+          success_seq <- TRUE
+        }, error = function(e) {
+          cat("    Attempt", attempt_seq, "failed for sequence", seq_id, ":", e$message, "\n")
+          Sys.sleep(0.5 * attempt_seq)
+          attempt_seq <<- attempt_seq + 1
+          if (attempt_seq > 3) {
+          cat("    Failed to process sequence", seq_id, "after 3 attempts\n")
+          write(paste("Failed to process sequence:", seq_id, "after 3 attempts in order", order_name), file = file.path(output_dir, "error.log"), append = TRUE)
+          }
+        })
         }
       }
-      
-      # Save sequences if any were obtained
-      if (length(final_sequences) > 0) {
-        safe_order_name <- gsub("[^A-Za-z0-9]", "_", order_name)
-        output_file <- file.path(output_dir, paste0("taxid_", taxid, "_", safe_order_name, ".fasta"))
-        
-        writeLines(final_sequences, output_file)
-        cat("  Retrieved", sequences_retrieved, "sequences total\n")
-        cat("  Gene features extracted from genomes:", gene_target_extracted_count, "\n")
-        cat("  Saved to:", output_file, "\n")
-      } else {
-        cat("  No sequences obtained\n")
       }
-      
-      # Add results to summary
-      results_summary <- rbind(results_summary, data.frame(
-        taxid = taxid,
-        order_name = order_name,
-        sequences_found = sequences_found,
-        sequences_retrieved = sequences_retrieved,
-        gene_target_extracted_from_genomes = gene_target_extracted_count,
-        stringsAsFactors = FALSE
-      ))
-      
-      cat("  ✓ Complete\n\n")
-      Sys.sleep(1.0)
-      
     }, error = function(e) {
       cat("  ✗ Error:", e$message, "\n\n")
       
       results_summary <<- rbind(results_summary, data.frame(
-        taxid = taxid,
-        order_name = "ERROR",
-        sequences_found = 0,
-        sequences_retrieved = 0,
-        gene_target_extracted_from_genomes = 0,
-        stringsAsFactors = FALSE
+      taxid = taxid,
+      order_name = "ERROR",
+      sequences_found = 0,
+      sequences_retrieved = 0,
+      gene_target_extracted_from_genomes = 0,
+      stringsAsFactors = FALSE
       ))
     })
+      
+    # Save sequences if any were obtained
+    if (length(final_sequences) > 0) {
+      safe_order_name <- gsub("[^A-Za-z0-9]", "_", order_name)
+      output_file <- file.path(output_dir, paste0("taxid_", taxid, "_", safe_order_name, ".fasta"))
+      
+      writeLines(final_sequences, output_file)
+      cat("  Retrieved", sequences_retrieved, "sequences total\n")
+      cat("  Gene features extracted from genomes:", gene_target_extracted_count, "\n")
+      cat("  Saved to:", output_file, "\n")
+    } else {
+      cat("  No sequences obtained\n")
+    }
+      
+    # Add results to summary
+    results_summary <- rbind(results_summary, data.frame(
+      taxid = taxid,
+      order_name = order_name,
+      sequences_found = sequences_found,
+      sequences_retrieved = sequences_retrieved,
+      gene_target_extracted_from_genomes = gene_target_extracted_count,
+      stringsAsFactors = FALSE
+    ))
+      
+    cat("  ✓ Complete\n\n")
+    Sys.sleep(1.0)
+  
   }
   
   # Save summary
