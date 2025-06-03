@@ -1,139 +1,59 @@
 # Load required libraries
 library(rentrez)  # For interfacing with NCBI Entrez databases
 
-# Improved helper function to extract gene_target features from GenBank records
 extract_gene_target_from_genbank <- function(genbank_text, genome_id, gene_synonyms) {
+  # Combine GenBank text into a single string for easier handling
+  gb_str <- paste(genbank_text, collapse = "\n")
   
-  # Split GenBank record into lines
-  lines <- strsplit(genbank_text, "\n")[[1]]
-  
-  # Initialize variables
-  gene_target_sequences <- character()
-  in_features <- FALSE
-  current_feature <- NULL
-  sequence_lines <- character()
-  in_origin <- FALSE
-  gene_target_features <- list()
-  
-  # Parse GenBank record
-  for (line in lines) {
-    
-    # Check if we're in the FEATURES section
-    if (grepl("^FEATURES", line)) {
-      in_features <- TRUE
-      next
-    }
-    
-    # Check if we're in the ORIGIN section (sequence data)
-    if (grepl("^ORIGIN", line)) {
-      in_origin <- TRUE
-      in_features <- FALSE
-      next
-    }
-    
-    # End of record
-    if (grepl("^//", line)) {
-      break
-    }
-    
-    # Collect sequence data
-    if (in_origin) {
-      # Remove line numbers and spaces, keep only nucleotides
-      clean_line <- gsub("[^acgtACGTnN]", "", line)
-      if (nchar(clean_line) > 0) {
-        sequence_lines <- c(sequence_lines, clean_line)
-      }
-    }
-    
-    # Process features
-    if (in_features && !in_origin) {
-      
-      # New feature line (starts with 5 spaces and feature type)
-      if (grepl("^     [A-Za-z]", line)) {
-        
-        # Process previous feature if it was gene_target
-        if (!is.null(current_feature) && is_gene_target_feature(current_feature$lines, gene_synonyms)) {
-          location <- extract_feature_location(current_feature$lines)
-          if (!is.null(location)) {
-            current_feature$location <- location
-            gene_target_features <- append(gene_target_features, list(current_feature))
-          }
-        }
-        
-        # Start new feature
-        feature_type <- trimws(strsplit(line, "\\s+")[[1]][1])
-        current_feature <- list(type = feature_type, lines = c(line))
-        
-      } else if (grepl("^                     ", line) && !is.null(current_feature)) {
-        # Continuation of current feature (21 spaces)
-        current_feature$lines <- c(current_feature$lines, line)
-      }
-    }
-  }
-  
-  # Process the last feature
-  if (!is.null(current_feature) && is_gene_target_feature(current_feature$lines, gene_synonyms)) {
-    location <- extract_feature_location(current_feature$lines)
-    if (!is.null(location)) {
-      current_feature$location <- location
-      gene_target_features <- append(gene_target_features, list(current_feature))
-    }
-  }
-  
-  # Reconstruct full genome sequence
-  full_sequence <- paste(sequence_lines, collapse = "")
-  
-  # Extract gene_target sequences based on coordinates
-  extracted_sequences <- character()
-  
-  if (length(gene_target_features) > 0) {
-    for (i in seq_along(gene_target_features)) {
-      feature <- gene_target_features[[i]]
-      
-      if (!is.null(feature$location)) {
-        tryCatch({
-          # Extract sequence based on coordinates
-          start_pos <- feature$location$start
-          end_pos <- feature$location$end
-          
-          if (start_pos <= nchar(full_sequence) && end_pos <= nchar(full_sequence) && start_pos > 0) {
-            gene_target_seq <- substr(full_sequence, start_pos, end_pos)
-            
-            # Handle complement sequences if needed
-            if (feature$location$complement) {
-              gene_target_seq <- reverse_complement(gene_target_seq)
-            }
-            
-            # Create FASTA header
-            header <- paste0(">gene_target_from_", genome_id, "_", start_pos, "..", end_pos, 
-                             ifelse(feature$location$complement, "_complement", ""))
-            
-            extracted_sequences <- c(extracted_sequences, header, gene_target_seq)
-          }
-          
-        }, error = function(e) {
-          cat("      Error extracting gene_target sequence:", e$message, "\n")
-        })
-      }
-    }
-  }
-  
-  return(extracted_sequences)
-}
+  #   Extract raw sequence from ORIGIN section
+  origin_match <- regexpr("ORIGIN[^\n]*\n([a-z0-9 \n]*)//", gb_str, perl = TRUE)
+  if (origin_match == -1) stop("No ORIGIN section found")
 
-# Helper function to check if a feature is gene_target-related
-is_gene_target_feature <- function(feature_lines, gene_synonyms) {
-  # Convert all lines to a single string for searching
-  feature_text <- paste(feature_lines, collapse = " ")
+  origin_seq_raw <- regmatches(gb_str, origin_match)
+  origin_lines <- unlist(strsplit(origin_seq_raw, "\n"))
+  origin_seq <- tolower(gsub("[^acgt]", "", paste(origin_lines, collapse = "")))
+  # Split text into lines and locate CDS features
+  lines <- unlist(strsplit(gb_str, "\n"))
+  cds_indices <- grep("^\\s{5}CDS\\s+", lines)
   
-  # Look for gene_target names in various forms
-  for (pattern in gene_synonyms) {
-    if (grepl(pattern, feature_text, ignore.case = TRUE)) {
-      return(TRUE)
+  for (i in cds_indices) {
+    location_line <- lines[i]
+    location_str <- sub("^\\s{5}CDS\\s+", "", location_line)
+    
+    # Capture qualifiers until next feature (starts with 5 spaces but not continuation)
+    qualifiers <- c()
+    j <- i + 1
+    while (j <= length(lines) && (grepl("^\\s{21}", lines[j]) || grepl("^\\s{5}/", lines[j]))) {
+      qualifiers <- c(qualifiers, lines[j])
+      j <- j + 1
+    }
+    
+    # Collapse wrapped lines (multiline qualifiers)
+    qualifier_text <- paste(qualifiers, collapse = "")
+    # Extract all gene and product qualifiers
+    gene_matches <- regmatches(qualifier_text, gregexpr("/(gene|product)=['\"][^'\"]+['\"]", qualifier_text, perl = TRUE))[[1]]
+    gene_values <- gsub("^/(gene|product)=['\"]|['\"]$", "", gene_matches)
+    
+    # Match any synonym
+    if (any(tolower(gene_values) %in% tolower(gene_synonyms))) {
+      # Handle complement() and join()
+      is_complement <- grepl("^complement\\(", location_str)
+      location_clean <- gsub("[^0-9\\.]", "", location_str)
+      coords <- as.numeric(unlist(strsplit(location_clean, "\\.\\.")))
+      
+      if (length(coords) != 2) next  # Skip malformed location
+      
+      seq_sub <- substr(origin_seq, coords[1], coords[2])
+      if (is_complement) {
+        seq_sub <- as.character(Biostrings::reverseComplement(Biostrings::DNAString(seq_sub)))
+      }
+      
+      header <- paste0(">gene_target_from_", genome_id, "_", coords[1], "..", coords[2])
+      return(c(header, seq_sub))
     }
   }
   
-  return(FALSE)
+  stop("No matching gene found.")
 }
 
 # Improved helper function to extract feature location coordinates
@@ -318,7 +238,7 @@ get_gene_target_by_order <- function(taxid_file, max_per_order, output_dir, gene
               
               # Extract gene sequences from this genome using gene synonyms
               gene_sequences <- extract_gene_target_from_genbank(genbank_record, seq_id, gene_synonyms)
-              
+              str(gene_sequences)
               if (length(gene_sequences) > 0) {
                 final_sequences <- c(final_sequences, gene_sequences)
                 extracted_count <- length(gene_sequences) / 2  # Divide by 2 (header + sequence)
@@ -461,9 +381,9 @@ coi_synonyms <- c(
 
 # Run the analysis with COI synonyms
 results <- get_gene_target_by_order(
-  taxid_file = "all_animal_order_taxids.txt",
+  taxid_file = "taxids.txt",
   max_per_order = 2,
-  output_dir = "all_animal_orders",
+  output_dir = "all_animal_orders3",
   gene_synonyms = coi_synonyms  # Pass the gene synonyms vector here
 )
 
