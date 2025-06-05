@@ -1,3 +1,41 @@
+# TrufflR: Extract specific gene sequences from NCBI's database for specific taxa
+
+# 1. create_gene_search_query() - Constructs NCBI search queries by combining
+#    user-provided gene search terms with taxonomic constraints
+
+# 2. extract_feature_location() - Helper function that parses GenBank feature 
+#    location strings to extract start/end coordinates and strand information
+
+# 3. reverse_complement() - Simple utility to reverse complement DNA sequences
+#    for genes on the negative strand
+
+# 4. extract_gene_target_from_genbank() - Core function that parses complete 
+#    GenBank records, finds CDS features matching target genes, extracts their
+#    sequences from the genome, and applies reverse complement if needed
+
+# 5. get_gene_target_by_order() - Main orchestrating function that:
+#    - Reads taxonomic IDs from input file
+#    - For each taxon: searches NCBI, downloads sequences/genomes
+#    - Calls extraction functions to get target genes
+#    - Saves individual FASTA files and creates summary statistics
+
+# 6. combine_sequences() - Final utility that merges all individual FASTA files
+#    into one master file for downstream analysis
+
+# USER INPUTS:
+# - taxid_file: Text file containing NCBI taxonomic IDs (one per line)
+# - gene_synonyms: Vector of search terms with NCBI field tags (e.g., "COI[Gene]")
+# - max_per_order: Maximum sequences to retrieve per taxonomic group
+# - output_dir: Directory path for saving results
+
+# OUTPUTS:
+# - Individual FASTA files per taxonomic group
+# - Combined master FASTA file with all sequences
+# - CSV summary with retrieval statistics
+# - GenBank records folder with complete genome files
+# - Error log for troubleshooting failed retrievals
+
+
 # Load required libraries
 library(rentrez)  # For interfacing with NCBI Entrez databases
 
