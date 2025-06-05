@@ -6,20 +6,17 @@
 # 2. extract_feature_location() - Helper function that parses GenBank feature 
 #    location strings to extract start/end coordinates and strand information
 
-# 3. reverse_complement() - Simple utility to reverse complement DNA sequences
-#    for genes on the negative strand
-
-# 4. extract_gene_target_from_genbank() - Core function that parses complete 
+# 3. extract_gene_target_from_genbank() - Core function that parses complete 
 #    GenBank records, finds CDS features matching target genes, extracts their
 #    sequences from the genome, and applies reverse complement if needed
 
-# 5. get_gene_target_by_order() - Main orchestrating function that:
+# 4. get_gene_target_by_order() - Main orchestrating function that:
 #    - Reads taxonomic IDs from input file
 #    - For each taxon: searches NCBI, downloads sequences/genomes
 #    - Calls extraction functions to get target genes
 #    - Saves individual FASTA files and creates summary statistics
 
-# 6. combine_sequences() - Final utility that merges all individual FASTA files
+# 5. combine_sequences() - Final utility that merges all individual FASTA files
 #    into one master file for downstream analysis
 
 # USER INPUTS:
@@ -128,23 +125,6 @@ extract_feature_location <- function(feature_lines) {
   }
   
   return(NULL)
-}
-
-# Simple reverse complement function
-reverse_complement <- function(seq) {
-  # Convert to uppercase
-  seq <- toupper(seq)
-  
-  # Create complement
-  complement_map <- c("A" = "T", "T" = "A", "G" = "C", "C" = "G", "N" = "N")
-  seq_chars <- strsplit(seq, "")[[1]]
-  complement_chars <- complement_map[seq_chars]
-  complement_chars[is.na(complement_chars)] <- "N"  # Handle any unknown characters
-  
-  # Reverse the sequence
-  rev_complement <- paste(rev(complement_chars), collapse = "")
-  
-  return(rev_complement)
 }
 
 create_gene_search_query <- function(taxid, gene_synonyms) {
