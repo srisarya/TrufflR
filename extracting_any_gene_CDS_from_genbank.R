@@ -110,20 +110,11 @@ reverse_complement <- function(seq) {
 }
 
 create_gene_search_query <- function(taxid, gene_synonyms) {
-  # Create OR conditions for each gene synonym
-  gene_conditions <- character()
-  
-  for (synonym in gene_synonyms) {
-    # Add different search patterns for each synonym
-    gene_conditions <- c(gene_conditions, 
-                         paste0(synonym, "[Gene]"),
-                         paste0("\"", synonym, "\"[All Fields]"))
-  }
-  
+  # Use gene synonyms exactly as provided by user (no additional field tags)
   # Combine all conditions with OR
-  gene_query_part <- paste(gene_conditions, collapse = " OR ")
+  gene_query_part <- paste(gene_synonyms, collapse = " OR ")
   
-  # Complete query
+  # Complete query - only add the taxid part
   full_query <- paste0("txid", taxid, "[Organism] AND (", gene_query_part, ")")
   
   return(full_query)
@@ -386,32 +377,53 @@ combine_sequences <- function(output_dir, combined_file) {
 
 # EXAMPLE USAGE:
 
-# Define gene synonyms for COI/COX1
-coi_synonyms <- c(
-  "COI", "COX1", "COXI",
-  "cytochrome c oxidase subunit 1",
-  "cytochrome c oxidase subunit I",
-  "cytochrome oxidase subunit 1",
-  "cytochrome oxidase subunit I"
+## Example with Title field searches
+rRNA_16S_synonyms <- c(
+  "16S[Title]", 
+  "16S rRNA[Title]", 
+  "16S ribosomal RNA[Title]",
+  "small subunit ribosomal RNA[Title]",
+  "SSU rRNA[Title]"
 )
 
-# Or define synonyms for a different gene (example: 16S rRNA)
-# rRNA_16S_synonyms <- c(
-#   "16S", "16S rRNA", "16S ribosomal RNA",
-#   "small subunit ribosomal RNA",
-#   "SSU rRNA"
-# )
+## Or mix different field types
+coi_synonyms <- c(
+  "COI[Gene]",
+  "COX1[Gene]", 
+  "cytochrome c oxidase subunit 1[Title]",
+  "cytochrome oxidase[All Fields]"
+)
+
+## Or use more specific searches
+specific_search <- c(
+  "\"cytochrome c oxidase subunit I\"[Title]",
+  "COI[Gene] AND complete[Title]"
+)
 
 # Run the analysis with COI synonyms
 results <- get_gene_target_by_order(
-  taxid_file = "taxids.txt",
+  taxid_file = "metazoans_5_taxids.txt",
   max_per_order = 2,
-  output_dir = "all_animal_orders3",
+  output_dir = "metazoans_5_taxids_CO1",
   gene_synonyms = coi_synonyms  # Pass the gene synonyms vector here
 )
 
 # Combine all sequences into one file
 combine_sequences(
-  output_dir = "all_animal_orders",
-  combined_file = "all_animal_orders/gene_sequences.fasta"
+  output_dir = "metazoans_5_taxids_CO1",
+  combined_file = "metazoans_5_taxids_CO1/gene_sequences.fasta"
+)
+
+# Run the analysis with SSU synonyms
+results <- get_gene_target_by_order(
+  taxid_file = "metazoans_5_taxids.txt",
+  max_per_order = 2,
+  output_dir = "metazoans_5_taxids_SSU",
+  gene_synonyms = rRNA_16S_synonyms  # Pass the gene synonyms vector here
+)
+
+# Combine all sequences into one file
+combine_sequences(
+  output_dir = "metazoans_5_taxids_SSU",
+  combined_file = "metazoans_5_taxids_SSU/gene_sequences.fasta"
 )
