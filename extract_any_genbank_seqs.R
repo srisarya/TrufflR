@@ -202,42 +202,6 @@ extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_sy
   })
 }
 
-# Improved helper function to extract feature location coordinates
-extract_feature_location <- function(feature_lines) {
-  
-  # Look for location information in the feature lines
-  location_text <- paste(feature_lines, collapse = " ")
-  
-  # Initialize complement flag
-  is_complement <- FALSE
-  
-  # Check for complement
-  if (grepl("complement", location_text, ignore.case = TRUE)) {
-    is_complement <- TRUE
-  }
-  
-  # Extract coordinates from various patterns
-  # Pattern 1: Simple coordinates like "570..9008"
-  simple_match <- regexpr("\\d+\\.\\.\\d+", location_text)
-  
-  if (simple_match > 0) {
-    location_str <- regmatches(location_text, simple_match)
-    coords <- strsplit(location_str, "\\.\\.")[[1]]
-    
-    if (length(coords) == 2) {
-      start_pos <- as.numeric(coords[1])
-      end_pos <- as.numeric(coords[2])
-      
-      # Validate coordinates
-      if (!is.na(start_pos) && !is.na(end_pos) && start_pos > 0 && end_pos > start_pos) {
-        return(list(start = start_pos, end = end_pos, complement = is_complement))
-      }
-    }
-  }
-  
-  return(NULL)
-}
-
 # Main function for gene extraction by taxonomic ID
 get_gene_target_by_taxid <- function(taxid_file, max_per_taxid, output_dir, gene_synonyms, feature_types = c("CDS")) {
   
@@ -519,33 +483,30 @@ rrna_16s_synonyms <- c(
 
 # Run the analysis with COI synonyms
 results <- get_gene_target_by_taxid(
-  taxid_file = "proseriate_taxid.txt",
-  max_per_taxid = 2,
-  output_dir = "test_proseriate_CO1",
+  taxid_file = "metazoans_5_taxids.txt",
+  max_per_taxid = 10,
+  output_dir = "test_metazoans_5_CO1",
   gene_synonyms = coi_synonyms,
   feature_types = c("CDS")  # Default for protein-coding genes
 )
 
-# Example for rRNA extraction
-# results_rrna <- get_gene_target_by_taxid(
-#   taxid_file = "metazoans_5_taxids.txt",
-#   max_per_taxid = 2,
-#   output_dir = "metazoans_5_taxids_16S",
-#   gene_synonyms = rrna_16s_synonyms,
-#   feature_types = c("rRNA")  # Specify rRNA features
-# )
+# Combine all sequences into one file
+combine_sequences(
+  output_dir = "test_metazoans_5_CO1",
+  combined_file = "test_metazoans_5_CO1/gene_sequences.fasta"
+)
 
-# Example for mixed feature types
-# results_mixed <- get_gene_target_by_taxid(
-#   taxid_file = "metazoans_5_taxids.txt",
-#   max_per_taxid = 2,
-#   output_dir = "metazoans_5_taxids_mixed",
-#   gene_synonyms = c("COI", "16S"),
-#   feature_types = c("CDS", "rRNA")  # Search both feature types
-# )
+# Example for rRNA extraction
+results_rrna <- get_gene_target_by_taxid(
+  taxid_file = "metazoans_5_taxids.txt",
+  max_per_taxid = 10,
+  output_dir = "test_metazoans_5_taxids_16S",
+  gene_synonyms = rrna_16s_synonyms,
+  feature_types = c("rRNA")  # Specify rRNA features
+)
 
 # Combine all sequences into one file
 combine_sequences(
-  output_dir = "test_proseriate_CO1",
-  combined_file = "test_proseriate_CO1/gene_sequences.fasta"
+  output_dir = "test_metazoans_5_taxids_16S",
+  combined_file = "test_metazoans_5_taxids_16S/gene_sequences.fasta"
 )
