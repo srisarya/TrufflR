@@ -51,6 +51,36 @@ validate_gene_match <- function(seq_summary, gene_synonyms) {
   return(FALSE)
 }
 
+# NEW FUNCTION: Check if genomic sequence contains target genes by examining GenBank features
+# This function looks at the actual gene features in a GenBank record to see if our target genes are present
+validate_genomic_gene_match <- function(genbank_record_text, gene_synonyms) {
+  # Clean gene synonyms by removing NCBI field tags (like [Gene]) and make lowercase for comparison
+  clean_synonyms <- tolower(gsub("\\[.*?\\]", "", gene_synonyms))
+  
+  # Convert the entire GenBank record to lowercase for case-insensitive searching
+  genbank_lower <- tolower(genbank_record_text)
+  
+  # Look for gene features in the GenBank record
+  # GenBank files have sections like:
+  #     gene            123..456
+  #                     /gene="COI"
+  # or  CDS             123..456
+  #                     /product="cytochrome c oxidase subunit I"
+  
+  # Check if any of our target gene synonyms appear in the features section
+  for (synonym in clean_synonyms) {
+    # Look for the synonym in gene names, product descriptions, etc.
+    # This searches the entire GenBank text for our gene names
+    if (grepl(synonym, genbank_lower, ignore.case = TRUE)) {
+      cat("    ✓ Found target gene '", synonym, "' in GenBank features\n", sep = "")
+      return(TRUE)
+    }
+  }
+  
+  cat("    ✗ Target genes not found in GenBank features\n")
+  return(FALSE)
+}
+
 # Function to determine sequence type based on title
 determine_sequence_type <- function(title) {
   title_lower <- tolower(title)
@@ -58,28 +88,50 @@ determine_sequence_type <- function(title) {
   if (grepl("partial", title_lower)) {
     return("PARTIAL_CDS")
   } else if (grepl("genome|chromosome|scaffold", title_lower)) {
-    return("GENOMIC")
+    return("GENOMIC")  # This includes complete genomes, chromosomes, and large genomic scaffolds
   } else {
     return("COMPLETE_CDS")
   }
 }
 
 # Updated function using geneviewer's gbk_features_to_df for feature extraction
+# This function now uses geneviewer::genbank_to_fasta() to extract the complete nucleotide sequence
 extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_synonyms, feature_types = c("CDS"), return_aa = FALSE) {
   tryCatch({
-    # Read GenBank file using geneviewer - handle both file path and temp file
-    if (file.exists(genbank_file)) {
-      gb_data <- geneviewer::read_gbk(genbank_file)
-    } else {
+    # Check if GenBank file exists
+    if (!file.exists(genbank_file)) {
       stop("GenBank file not found")
     }
+    
+    # *** NEW: Use geneviewer::genbank_to_fasta() to extract the nucleotide sequence ***
+    # This function converts the GenBank file to FASTA format and extracts the DNA sequence from the ORIGIN section
+    cat("    Extracting nucleotide sequence from GenBank file using geneviewer::genbank_to_fasta()\n")
+    fasta_result <- geneviewer::genbank_to_fasta(genbank_file)
+    
+    # Extract the DNA sequence from the FASTA result
+    # The result should be a character vector with header and sequence
+    if (length(fasta_result) < 2) {
+      stop("Failed to extract sequence from GenBank file")
+    }
+    
+    # Parse the FASTA result - first line is header, rest is sequence
+    fasta_lines <- strsplit(fasta_result, "\n")[[1]]
+    complete_seq <- paste(fasta_lines[-1], collapse = "")  # Remove header, join sequence lines
+    
+    # Remove any whitespace or newlines from the sequence
+    complete_seq <- gsub("\\s", "", complete_seq)
+    
+    cat("    Extracted complete sequence of length:", nchar(complete_seq), "\n")
     
     # Initialize vector to store all extracted sequences
     all_extracted_sequences <- character()
     
-    # Process each feature type
+    # Process each feature type (e.g., CDS, rRNA, tRNA, etc.)
     for (feature_type in feature_types) {
+      cat("    Processing feature type:", feature_type, "\n")
+      
       # Extract features of specified type using gbk_features_to_df
+      # This gets all the gene annotations (coordinates, names, products) from the GenBank file
       features_df <- geneviewer::gbk_features_to_df(
         genbank_file,
         feature = feature_type,
@@ -94,14 +146,14 @@ extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_sy
       
       cat("    Feature columns available:", paste(colnames(features_df), collapse = ", "), "\n")
       
-      # Prepare gene synonyms for matching (remove NCBI field tags and convert to lowercase)
+      # Prepare gene synonyms for matching (remove NCBI field tags like [Gene] and convert to lowercase)
       clean_synonyms <- tolower(gsub("\\[.*?\\]", "", gene_synonyms))
       cat("    Looking for genes:", paste(clean_synonyms, collapse = ", "), "\n")
       
       # Look for matching gene names in available columns
       gene_matches <- c()
       
-      # Check 'gene' column if it exists
+      # Check 'gene' column if it exists (this contains gene symbols like "COI", "COX1")
       if ("gene" %in% colnames(features_df)) {
         gene_col_matches <- which(sapply(features_df$gene, function(x) {
           if (is.na(x)) return(FALSE)
@@ -113,7 +165,7 @@ extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_sy
         }
       }
       
-      # Check 'product' column if it exists
+      # Check 'product' column if it exists (this contains product descriptions like "cytochrome c oxidase subunit I")
       if ("product" %in% colnames(features_df)) {
         product_col_matches <- which(sapply(features_df$product, function(x) {
           if (is.na(x)) return(FALSE)
@@ -121,7 +173,7 @@ extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_sy
         }))
         gene_matches <- c(gene_matches, product_col_matches)
         if (length(product_col_matches) > 0) {
-          cat("    Debug: Found matches in 'product' column:", product_col_matches, "\n")
+          cat("    Found matches in 'product' column:", product_col_matches, "\n")
         }
       }
       
@@ -135,82 +187,87 @@ extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_sy
       
       cat("    Found", length(all_matches), "matching", feature_type, "features\n")
       
-      # Get the complete sequence for extraction
-      complete_seq <- NULL
-      if (!is.null(gb_data$sequence) && nchar(gb_data$sequence) > 0) {
-        complete_seq <- gb_data$sequence
-      } else {
-        warning("No sequence data found in GenBank record")
-        next
-      }
-      
       # Extract sequences for all matches
       for (match_idx in all_matches) {
         feature <- features_df[match_idx, ]
-        cat("    Debug: Processing feature at row", match_idx, "\n")
+        cat("    Processing feature at row", match_idx, "\n")
         
-        # For CDS features, check if we want amino acid sequence
+        # For CDS features, check if we want amino acid sequence instead of DNA
         if (feature_type == "CDS" && return_aa && "translation" %in% colnames(features_df)) {
-          # Use translated amino acid sequence if available
+          # Use translated amino acid sequence if available and requested
           gene_seq <- feature$translation
           if (is.na(gene_seq) || gene_seq == "") {
-            cat("    Warning: No translation found for CDS feature, falling back to DNA\n")
-            gene_seq <- NULL
+            cat("    Warning: No translation found for CDS feature, falling back to DNA extraction\n")
+            gene_seq <- NULL  # Will fall through to DNA extraction below
           } else {
-            cat("    Debug: Using amino acid translation\n")
+            cat("    Using amino acid translation from GenBank annotation\n")
           }
         } else {
-          gene_seq <- NULL
+          gene_seq <- NULL  # Will extract DNA sequence
         }
         
-        # If no amino acid sequence or not requested, extract DNA sequence
+        # If no amino acid sequence or not requested, extract DNA sequence using coordinates
         if (is.null(gene_seq)) {
-          # Get sequence coordinates from the dataframe
-          start_pos <- feature$start
-          end_pos <- feature$end
-          strand <- feature$strand
+          # *** LINES 199-201 EQUIVALENT: Get sequence coordinates from the features dataframe ***
+          start_pos <- feature$start  # Start position of the gene in the genome
+          end_pos <- feature$end      # End position of the gene in the genome  
+          strand <- feature$strand    # Strand orientation (+ or -, or 1 or -1)
           
-          cat("    Debug: Extracting DNA from positions", start_pos, "to", end_pos, "strand:", strand, "\n")
+          cat("    Extracting DNA from positions", start_pos, "to", end_pos, "on strand:", strand, "\n")
           
-          # Validate coordinates
+          # Validate coordinates are within the sequence bounds
           if (is.na(start_pos) || is.na(end_pos) || start_pos < 1 || end_pos > nchar(complete_seq)) {
             cat("    Warning: Invalid coordinates for feature - start:", start_pos, "end:", end_pos, "genome length:", nchar(complete_seq), "\n")
-            next
+            next  # Skip this feature
           }
           
-          # Extract subsequence
+          # *** EXTRACT THE GENE SEQUENCE using substring and coordinates ***
+          # This pulls out the specific gene sequence from the complete genome sequence
           gene_seq <- substr(complete_seq, start_pos, end_pos)
+          cat("    Extracted raw sequence of length:", nchar(gene_seq), "\n")
           
-          # Apply reverse complement if on negative strand using seqinr
+          # *** Apply reverse complement if gene is on the negative strand ***
+          # Genes on the negative strand need to be reverse-complemented to get the correct sequence
           if (!is.na(strand) && (strand == "-" || strand == -1)) {
-            gene_seq <- seqinr::c2s(seqinr::comp(seqinr::s2c(gene_seq), forceToLower = FALSE))
-            gene_seq <- seqinr::c2s(rev(seqinr::s2c(gene_seq)))
-            cat("    Debug: Applied reverse complement using seqinr\n")
+            cat("    Gene is on negative strand, applying reverse complement\n")
+            # Use seqinr functions to reverse complement the sequence
+            gene_seq <- seqinr::c2s(seqinr::comp(seqinr::s2c(gene_seq), forceToLower = FALSE))  # Complement
+            gene_seq <- seqinr::c2s(rev(seqinr::s2c(gene_seq)))  # Reverse
+            cat("    Applied reverse complement, final sequence length:", nchar(gene_seq), "\n")
           }
         }
         
-        # Create FASTA header with feature information
+        # Create descriptive FASTA header with all the gene information
         gene_name <- "unknown"
         if ("gene" %in% colnames(features_df) && !is.na(feature$gene) && feature$gene != "") {
-          gene_name <- feature$gene
+          gene_name <- feature$gene  # Use gene symbol if available (e.g., "COI")
         } else if ("product" %in% colnames(features_df) && !is.na(feature$product) && feature$product != "") {
-          gene_name <- feature$product
+          gene_name <- feature$product  # Use product description if gene symbol not available
         }
         
+        # Determine sequence type for the header
         seq_type <- if (feature_type == "CDS" && return_aa && "translation" %in% colnames(features_df) && !is.na(feature$translation)) "AA" else "DNA"
+        
+        # Create comprehensive FASTA header with genome ID, gene info, coordinates, and strand
         header <- paste0(">", genome_id, "_taxid_GENOME_EXTRACTED_", gene_name, "_", feature_type, "_", seq_type, "_", 
                          feature$start, "..", feature$end, 
                          ifelse(!is.na(feature$strand) && (feature$strand == "-" || feature$strand == -1), "_complement", ""))
         
+        # Add the header and sequence to our results
         all_extracted_sequences <- c(all_extracted_sequences, header, gene_seq)
-        cat("    Debug: Added sequence of length", nchar(gene_seq), "\n")
+        cat("    ✓ Successfully extracted", gene_name, "sequence of length", nchar(gene_seq), "\n")
+        
+        # *** PRINT THE SEQUENCE TO CONSOLE FOR VERIFICATION ***
+        cat("    EXTRACTED SEQUENCE (first 100 bp):", substr(gene_seq, 1, 100), "...\n")
       }
     }
     
+    # Check if we found any sequences
     if (length(all_extracted_sequences) == 0) {
       stop("No matching genes found in any specified feature types")
     }
     
+    cat("    Total sequences extracted:", length(all_extracted_sequences) / 2, "\n")
     return(all_extracted_sequences)
     
   }, error = function(e) {
@@ -332,37 +389,52 @@ get_gene_target_by_taxid <- function(taxid_file, max_per_taxid, output_dir, gene
               # Determine sequence type
               seq_type <- determine_sequence_type(seq_summary$title)
               
-              # Check if this is a complete genome
-              if (seq_type == "COMPLETE_GENOME") {
+              # *** MAJOR CHANGE: Handle genomic sequences differently ***
+              # Check if this is a genomic sequence (complete genome, chromosome, scaffold)
+              if (seq_type == "GENOMIC") {
                 
-                # This is a complete genome - extract gene features using geneviewer
-                cat("    Processing complete genome:", seq_id, "\n")
+                # For genomic sequences, we need to download the GenBank record first
+                # to check if it actually contains our target genes
+                cat("    Processing genomic sequence:", seq_id, "\n")
                 
-                # Fetch GenBank record with features
+                # Fetch GenBank record with features to check for target genes
                 genbank_record <- rentrez::entrez_fetch(
                   db = "nuccore",
                   id = seq_id,
-                  rettype = "gbwithparts",
+                  rettype = "gbwithparts",  # This gets the full GenBank format with all features
                   retmode = "text"
                 )
                 
-                # Save GenBank record as temporary file for geneviewer
-                temp_gbk <- tempfile(fileext = ".gbk")
-                writeLines(genbank_record, temp_gbk)
-                
-                # Extract gene sequences using geneviewer
-                gene_sequences <- extract_gene_target_with_geneviewer(temp_gbk, seq_id, gene_synonyms, feature_types)
-                
-                if (length(gene_sequences) > 0) {
-                  final_sequences <- c(final_sequences, gene_sequences)
-                  extracted_count <- length(gene_sequences) / 2  # Divide by 2 (header + sequence)
-                  gene_target_extracted_count <- gene_target_extracted_count + extracted_count
-                  sequences_retrieved <- sequences_retrieved + extracted_count
-                  cat("      Extracted", extracted_count, "gene features\n")
+                # *** NEW: Check if the genomic record actually contains our target genes ***
+                # Instead of just checking the title, we examine the actual gene features
+                if (validate_genomic_gene_match(genbank_record, gene_synonyms)) {
+                  cat("    ✓ Genomic sequence contains target genes, proceeding with extraction\n")
+                  
+                  # Save GenBank record as temporary file for geneviewer
+                  temp_gbk <- tempfile(fileext = ".gbk")
+                  writeLines(genbank_record, temp_gbk)
+                  
+                  # Extract gene sequences using geneviewer
+                  # This function will look through all the features in the GenBank file,
+                  # find the ones that match our target genes, and extract their DNA sequences
+                  # from the ORIGIN section using the coordinate information
+                  gene_sequences <- extract_gene_target_with_geneviewer(temp_gbk, seq_id, gene_synonyms, feature_types)
+                  
+                  if (length(gene_sequences) > 0) {
+                    final_sequences <- c(final_sequences, gene_sequences)
+                    extracted_count <- length(gene_sequences) / 2  # Divide by 2 (header + sequence)
+                    gene_target_extracted_count <- gene_target_extracted_count + extracted_count
+                    sequences_retrieved <- sequences_retrieved + extracted_count
+                    cat("      Extracted", extracted_count, "gene features\n")
+                  }
+                  
+                  # Clean up temp file
+                  unlink(temp_gbk)
+                  
+                } else {
+                  # *** CHANGE: Now we properly skip genomic sequences that don't contain target genes ***
+                  cat("    ✗ Genomic sequence does not contain target genes, skipping\n")
                 }
-                
-                # Clean up temp file
-                unlink(temp_gbk)
                 
               } else {
                 
@@ -527,7 +599,7 @@ coi_synonyms <- c(
 # Run the analysis with COI synonyms
 results <- get_gene_target_by_taxid(
   taxid_file = "proseriate_taxid.txt",
-  max_per_taxid = 50,
+  max_per_taxid = 20,
   output_dir = "test_proseriate_CO1",
   gene_synonyms = coi_synonyms,
   feature_types = c("CDS")  # Default for protein-coding genes
@@ -537,19 +609,4 @@ results <- get_gene_target_by_taxid(
 combine_sequences(
   output_dir = "test_proseriate_CO1",
   combined_file = "test_proseriate_CO1/gene_sequences.fasta"
-)
-
-# Example for rRNA extraction
-results_rrna <- get_gene_target_by_taxid(
-  taxid_file = "metazoans_5_taxids.txt",
-  max_per_taxid = 10,
-  output_dir = "test_metazoans_5_taxids_CO1",
-  gene_synonyms = coi_synonyms,
-  feature_types = c("CDS")  # Specify rRNA features
-)
-
-# Combine all sequences into one file
-combine_sequences(
-  output_dir = "test_metazoans_5_taxids_CO1",
-  combined_file = "test_metazoans_5_taxids_CO1/gene_sequences.fasta"
 )
