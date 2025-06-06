@@ -35,7 +35,6 @@
 
 # Load required libraries
 library(rentrez)     # For interfacing with NCBI Entrez databases
-library(geneviewer)  # For parsing GenBank files
 library(Biostrings)  # For sequence manipulation
 
 # Functions
@@ -48,92 +47,6 @@ create_gene_search_query <- function(taxid, gene_synonyms) {
   full_query <- paste0("txid", taxid, "[Organism] AND (", gene_query_part, ")")
   
   return(full_query)
-}
-
-# New function using geneviewer for complete genome feature extraction
-extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_synonyms, feature_types = c("CDS")) {
-  tryCatch({
-    # Parse GenBank file using geneviewer
-    gb_data <- geneviewer::read_gbk(genbank_file)
-    
-    # Extract features of specified types
-    target_features <- gb_data$genes[gb_data$genes$type %in% feature_types, ]
-    
-    if (nrow(target_features) == 0) {
-      stop(paste("No", paste(feature_types, collapse = "/"), "features found in genome"))
-    }
-    
-    # Look for matching gene names in the gene and product columns
-    gene_synonyms_lower <- tolower(gene_synonyms)
-    
-    # Check both gene and product columns for matches
-    gene_matches <- which(tolower(target_features$gene) %in% gene_synonyms_lower)
-    product_matches <- which(tolower(target_features$product) %in% gene_synonyms_lower)
-    
-    # For rRNA features, also check if any gene synonym appears in the product description
-    # This helps catch cases like "16S ribosomal RNA" when searching for "16S"
-    partial_matches <- c()
-    for (synonym in gene_synonyms_lower) {
-      partial_matches <- c(partial_matches, 
-                           which(grepl(synonym, tolower(target_features$product), fixed = TRUE)))
-    }
-    
-    # Combine matches and remove duplicates
-    all_matches <- unique(c(gene_matches, product_matches, partial_matches))
-    
-    if (length(all_matches) == 0) {
-      stop(paste("No matching genes found in", paste(feature_types, collapse = "/"), "features"))
-    }
-    
-    # Extract sequences for all matches
-    extracted_sequences <- character()
-    
-    for (match_idx in all_matches) {
-      feature <- target_features[match_idx, ]
-      
-      # Get sequence coordinates
-      start_pos <- feature$start
-      end_pos <- feature$end
-      strand <- feature$strand
-      feature_type <- feature$type
-      
-      # Extract sequence from the genome sequence
-      # The genome sequence should be available in gb_data$sequence
-      if (is.null(gb_data$sequence) || nchar(gb_data$sequence) == 0) {
-        warning("No sequence data found in GenBank record")
-        next
-      }
-      
-      # Extract subsequence
-      gene_seq <- substr(gb_data$sequence, start_pos, end_pos)
-      
-      # Apply reverse complement if on negative strand
-      if (!is.na(strand) && strand == "-") {
-        gene_seq <- as.character(Biostrings::reverseComplement(Biostrings::DNAString(gene_seq)))
-      }
-      
-      # Create FASTA header with feature type information
-      gene_name <- ifelse(!is.na(feature$gene) && feature$gene != "", 
-                          feature$gene, 
-                          feature$product)
-      
-      header <- paste0(">", gene_name, "_", feature_type, "_from_", genome_id, "_", 
-                       start_pos, "..", end_pos, 
-                       ifelse(!is.na(strand) && strand == "-", "_complement", ""))
-      
-      extracted_sequences <- c(extracted_sequences, header, gene_seq)
-    }
-    
-    return(extracted_sequences)
-    
-  }, error = function(e) {
-    # If geneviewer fails, fall back to the original method
-    warning("geneviewer parsing failed, falling back to manual parsing: ", e$message)
-    
-    # Read the GenBank file manually
-    genbank_text <- readLines(genbank_file)
-    return(extract_gene_target_from_genbank(genbank_text, genome_id, gene_synonyms))
-  })
 }
 
 # Keep the original function as fallback
@@ -191,42 +104,6 @@ extract_gene_target_from_genbank <- function(genbank_text, genome_id, gene_synon
   }
   
   stop("No matching gene found.")
-}
-
-# Improved helper function to extract feature location coordinates
-extract_feature_location <- function(feature_lines) {
-  
-  # Look for location information in the feature lines
-  location_text <- paste(feature_lines, collapse = " ")
-  
-  # Initialize complement flag
-  is_complement <- FALSE
-  
-  # Check for complement
-  if (grepl("complement", location_text, ignore.case = TRUE)) {
-    is_complement <- TRUE
-  }
-  
-  # Extract coordinates from various patterns
-  # Pattern 1: Simple coordinates like "570..9008"
-  simple_match <- regexpr("\\d+\\.\\.\\d+", location_text)
-  
-  if (simple_match > 0) {
-    location_str <- regmatches(location_text, simple_match)
-    coords <- strsplit(location_str, "\\.\\.")[[1]]
-    
-    if (length(coords) == 2) {
-      start_pos <- as.numeric(coords[1])
-      end_pos <- as.numeric(coords[2])
-      
-      # Validate coordinates
-      if (!is.na(start_pos) && !is.na(end_pos) && start_pos > 0 && end_pos > start_pos) {
-        return(list(start = start_pos, end = end_pos, complement = is_complement))
-      }
-    }
-  }
-  
-  return(NULL)
 }
 
 # Renamed and refactored main function
