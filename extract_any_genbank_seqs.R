@@ -96,27 +96,44 @@ determine_sequence_type <- function(title) {
 
 # Updated function using geneviewer's gbk_features_to_df for feature extraction
 # This function now uses geneviewer::genbank_to_fasta() to extract the complete nucleotide sequence
-extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_synonyms, feature_types = c("CDS"), return_aa = FALSE) {
+extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_synonyms, feature_types, output_dir = tempdir()) {
   tryCatch({
     # Check if GenBank file exists
     if (!file.exists(genbank_file)) {
       stop("GenBank file not found")
     }
     
+    # FIXED: Put FASTA output in same directory as input GenBank file
+    genbank_dir <- dirname(genbank_file)
+    temp_fasta_file <- file.path(genbank_dir, paste0(genome_id, "_temp_genome.fasta"))
+    
     # *** NEW: Use geneviewer::genbank_to_fasta() to extract the nucleotide sequence ***
     # This function converts the GenBank file to FASTA format and extracts the DNA sequence from the ORIGIN section
     cat("    Extracting nucleotide sequence from GenBank file using geneviewer::genbank_to_fasta()\n")
-    fasta_result <- geneviewer::genbank_to_fasta(genbank_file)
     
-    # Extract the DNA sequence from the FASTA result
-    # The result should be a character vector with header and sequence
-    if (length(fasta_result) < 2) {
-      stop("Failed to extract sequence from GenBank file")
+    # FIXED: Handle the geneviewer function call properly and check return value
+    fasta_result <- tryCatch({
+      geneviewer::genbank_to_fasta(genbank_file, temp_fasta_file)
+    }, error = function(e) {
+      stop("Failed to convert GenBank to FASTA: ", e$message)
+    })
+    
+    # Check if the FASTA file was created successfully
+    if (!file.exists(temp_fasta_file)) {
+      stop("Failed to create FASTA file from GenBank record")
     }
     
-    # Parse the FASTA result - first line is header, rest is sequence
-    fasta_lines <- strsplit(fasta_result, "\n")[[1]]
-    complete_seq <- paste(fasta_lines[-1], collapse = "")  # Remove header, join sequence lines
+    # Read the generated FASTA file
+    fasta_lines <- readLines(temp_fasta_file)
+    
+    if (length(fasta_lines) < 2) {
+      stop("Generated FASTA file appears to be empty or invalid")
+    }
+    
+    # Parse the FASTA content - first line is header, rest is sequence
+    header_line <- fasta_lines[1]
+    sequence_lines <- fasta_lines[-1]
+    complete_seq <- paste(sequence_lines, collapse = "")
     
     # Remove any whitespace or newlines from the sequence
     complete_seq <- gsub("\\s", "", complete_seq)
@@ -192,21 +209,10 @@ extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_sy
         feature <- features_df[match_idx, ]
         cat("    Processing feature at row", match_idx, "\n")
         
-        # For CDS features, check if we want amino acid sequence instead of DNA
-        if (feature_type == "CDS" && return_aa && "translation" %in% colnames(features_df)) {
-          # Use translated amino acid sequence if available and requested
-          gene_seq <- feature$translation
-          if (is.na(gene_seq) || gene_seq == "") {
-            cat("    Warning: No translation found for CDS feature, falling back to DNA extraction\n")
-            gene_seq <- NULL  # Will fall through to DNA extraction below
-          } else {
-            cat("    Using amino acid translation from GenBank annotation\n")
-          }
-        } else {
-          gene_seq <- NULL  # Will extract DNA sequence
-        }
+        # FIXED: Initialize gene_seq variable properly
+        gene_seq <- NULL
         
-        # If no amino acid sequence or not requested, extract DNA sequence using coordinates
+        # Extract DNA sequence using coordinates
         if (is.null(gene_seq)) {
           # *** LINES 199-201 EQUIVALENT: Get sequence coordinates from the features dataframe ***
           start_pos <- feature$start  # Start position of the gene in the genome
@@ -246,7 +252,7 @@ extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_sy
         }
         
         # Determine sequence type for the header
-        seq_type <- if (feature_type == "CDS" && return_aa && "translation" %in% colnames(features_df) && !is.na(feature$translation)) "AA" else "DNA"
+        seq_type <- "DNA"  # FIXED: Simplified since we're working with DNA sequences
         
         # Create comprehensive FASTA header with genome ID, gene info, coordinates, and strand
         header <- paste0(">", genome_id, "_taxid_GENOME_EXTRACTED_", gene_name, "_", feature_type, "_", seq_type, "_", 
@@ -262,6 +268,11 @@ extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_sy
       }
     }
     
+    # Clean up temporary file
+    if (file.exists(temp_fasta_file)) {
+      unlink(temp_fasta_file)
+    }
+    
     # Check if we found any sequences
     if (length(all_extracted_sequences) == 0) {
       stop("No matching genes found in any specified feature types")
@@ -274,7 +285,6 @@ extract_gene_target_with_geneviewer <- function(genbank_file, genome_id, gene_sy
     stop("geneviewer parsing failed: ", e$message)
   })
 }
-
 # Main function for gene extraction by taxonomic ID
 get_gene_target_by_taxid <- function(taxid_file, max_per_taxid, output_dir, gene_synonyms, feature_types = c("CDS")) {
   
@@ -418,7 +428,7 @@ get_gene_target_by_taxid <- function(taxid_file, max_per_taxid, output_dir, gene
                   # This function will look through all the features in the GenBank file,
                   # find the ones that match our target genes, and extract their DNA sequences
                   # from the ORIGIN section using the coordinate information
-                  gene_sequences <- extract_gene_target_with_geneviewer(temp_gbk, seq_id, gene_synonyms, feature_types)
+                  gene_sequences <- extract_gene_target_with_geneviewer(temp_gbk, seq_id, gene_synonyms, feature_types )
                   
                   if (length(gene_sequences) > 0) {
                     final_sequences <- c(final_sequences, gene_sequences)
