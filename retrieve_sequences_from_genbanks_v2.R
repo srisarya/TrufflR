@@ -23,11 +23,12 @@ determine_sequence_type <- function(title) {
 # Extract gene sequences from GenBank for multiple taxa
 # @param - taxid_file - Path to text file containing taxids (one per line)
 # @param - gene_synonyms - Vector of gene search terms with NCBI field tags
+# @param - feature_type - Feature type to extract: "CDS", "gene", "rRNA", "tRNA", or "all" (default: "all")
 # @param - retmax - Maximum number of sequences to retrieve per taxid (default: 5)
 # @param - output_base_dir - Base directory for output folders (default: current directory)
 # @return - df - containing results for each taxid
 
-extract_gene_sequences <- function(taxid_file, gene_synonyms, retmax = 5, output_base_dir) {
+extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "all", retmax = 5, output_base_dir) {
   
   # Read taxids from file
   if (!file.exists(taxid_file)) {
@@ -39,7 +40,8 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, retmax = 5, output
   taxids <- taxids[taxids != ""]  # Remove empty lines
   
   cat("Searching for", taxids, "\n")
-  cat("Gene synonyms:", paste(gene_synonyms, collapse = ", "), "\n\n")
+  cat("Gene synonyms:", paste(gene_synonyms, collapse = ", "), "\n")
+  cat("Feature type filter:", feature_type, "\n\n")
   
   # Define gene patterns for filtering (remove NCBI field tags and convert to lowercase)
   gene_patterns <- gsub("\\[.*?\\]", "", gene_synonyms)
@@ -196,13 +198,19 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, retmax = 5, output
       }
       cat("\n")
       
-      # Filter dataframes for target genes
+      # Filter dataframes for target genes and feature types
       gene_coords <- lapply(gb_str_dfs, function(df) {
         if (!is.null(df) && nrow(df) > 0 && "gene" %in% colnames(df)) {
+          # Filter by gene name
           filtered_df <- df[grepl(paste(gene_patterns, collapse = "|"), 
                                   tolower(df$gene), ignore.case = TRUE), ]
           
-          available_cols <- intersect(c("gene", "strand", "start", "end"), colnames(filtered_df))
+          # Filter by feature type if specified
+          if (feature_type != "all" && "type" %in% colnames(filtered_df)) {
+            filtered_df <- filtered_df[tolower(filtered_df$type) == tolower(feature_type), ]
+          }
+          
+          available_cols <- intersect(c("gene", "strand", "start", "end", "type"), colnames(filtered_df))
           if (length(available_cols) > 0) {
             return(filtered_df[, available_cols, drop = FALSE])
           }
@@ -229,6 +237,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, retmax = 5, output
             start_pos <- coords$start[j]
             end_pos <- coords$end[j]
             strand <- if("strand" %in% colnames(coords)) coords$strand[j] else "+"
+            feature_info <- if("type" %in% colnames(coords)) coords$type[j] else "unknown"
             
             tryCatch({
               if (length(dna_seq) > 0) {
@@ -239,9 +248,9 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, retmax = 5, output
                   gene_subseq <- Biostrings::reverseComplement(gene_subseq)
                 }
                 
-                seq_name <- paste0(id, "_", gene_name, "_", j)
+                seq_name <- paste0(id, "_", gene_name, "_", feature_info, "_", j)
                 id_extracted_sequences[[seq_name]] <- gene_subseq
-                cat("  Extracted:", gene_name, "(", length(gene_subseq), "bp )\n")
+                cat("  Extracted:", gene_name, "(", feature_info, ",", length(gene_subseq), "bp )\n")
               }
             }, error = function(e) {
               cat("  Error extracting sequence:", e$message, "\n")
@@ -275,6 +284,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, retmax = 5, output
       cat("Analysis Summary for Taxid:", taxid, "\n", file = summary_file)
       cat("Taxon name:", taxon_name, "\n", file = summary_file, append = TRUE)
       cat("Query:", full_query, "\n", file = summary_file, append = TRUE)
+      cat("Feature type filter:", feature_type, "\n", file = summary_file, append = TRUE)
       cat("Total sequences processed:", length(ids), "\n", file = summary_file, append = TRUE)
       cat("GenBank files created:", length(gb_str_dfs), "\n", file = summary_file, append = TRUE)
       cat("FASTA files created:", length(gb_seq_dfs), "\n", file = summary_file, append = TRUE)
@@ -384,15 +394,14 @@ coi_synonyms <- c("COI[Gene]",
                   "cytochrome oxidase[All Fields]")
 
 rRNA_16S_synonyms <- c("16S[Title]", 
-                      "16S rRNA[Title]", 
-                      "16S ribosomal RNA[Title]",
-                      "small subunit ribosomal RNA[Title]",
-                      "SSU rRNA[Title]")
+                       "16S rRNA[Title]", 
+                       "16S ribosomal RNA[Title]",
+                       "small subunit ribosomal RNA[Title]",
+                       "SSU rRNA[Title]")
 
-# Run analysis
-results <- extract_gene_sequences("metazoans_5_taxids.txt", coi_synonyms, retmax = 3, output_base_dir = "test_metazoan")
+# Run analysis with feature type filtering
+results <- extract_gene_sequences("metazoans_5_taxids.txt", coi_synonyms, feature_type = "CDS", retmax = 3, output_base_dir = "test_metazoan")
 combine_sequences(output_dir = "test_metazoan", combined_file = "test_metazoan/gene_sequences.fasta")
 
-results_SSU <- extract_gene_sequences("metazoans_5_taxids.txt", rRNA_16S_synonyms, retmax = 3, output_base_dir = "test_metazoan_SSU")
+results_SSU <- extract_gene_sequences("metazoans_5_taxids.txt", rRNA_16S_synonyms, feature_type = "rRNA", retmax = 3, output_base_dir = "test_metazoan_SSU")
 combine_sequences(output_dir = "test_metazoan_SSU", combined_file = "test_metazoan_SSU/gene_sequences.fasta")
-
