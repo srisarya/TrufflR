@@ -4,9 +4,10 @@ library(geneviewer)  # For parsing GenBank files
 library(Biostrings)  # For sequence manipulation
 library(seqinr)      # For sequence manipulation and reverse complement
 
-#' Determine sequence type based on title
-#' @param title The sequence title/description
-#' @return Character string indicating sequence type
+# Determine sequence type based on title
+# @param title The sequence title/description
+# @return Character string indicating sequence type
+
 determine_sequence_type <- function(title) {
   title_lower <- tolower(title)
   
@@ -19,12 +20,12 @@ determine_sequence_type <- function(title) {
   }
 }
 
-#' Extract gene sequences from GenBank for multiple taxa
-#' @param taxid_file Path to text file containing taxids (one per line)
-#' @param gene_synonyms Vector of gene search terms with NCBI field tags
-#' @param retmax Maximum number of sequences to retrieve per taxid (default: 5)
-#' @param output_base_dir Base directory for output folders (default: current directory)
-#' @return List containing results for each taxid
+# Extract gene sequences from GenBank for multiple taxa
+# @param taxid_file Path to text file containing taxids (one per line)
+# @param gene_synonyms Vector of gene search terms with NCBI field tags
+# @param retmax Maximum number of sequences to retrieve per taxid (default: 5)
+# @param output_base_dir Base directory for output folders (default: current directory)
+# @return List containing results for each taxid
 
 extract_gene_sequences <- function(taxid_file, gene_synonyms, retmax = 5, output_base_dir) {
   
@@ -332,6 +333,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, retmax = 5, output
     }
     
     # Save overall summary table
+    return(overall_sequence_summary)
     overall_summary_file <- file.path(output_base_dir, "overall_sequence_summary.csv")
     write.csv(overall_sequence_summary, overall_summary_file, row.names = FALSE)
     cat("\nOverall sequence summary saved to:", overall_summary_file, "\n")
@@ -343,30 +345,6 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, retmax = 5, output
   }
   
   return(invisible(all_results))
-}
-
-combine_sequences <- function(output_dir, combined_file) {
-  fasta_files <- list.files(output_dir, pattern = "extracted_genes.fasta$", full.names = TRUE)
-  
-  if (length(fasta_files) == 0) {
-    cat("No FASTA files found in", output_dir, "\n")
-    return()
-  }
-  
-  cat("Combining", length(fasta_files), "FASTA files into", combined_file, "\n")
-  
-  all_sequences <- character()
-  
-  for (file in fasta_files) {
-    sequences <- readLines(file)
-    all_sequences <- c(all_sequences, sequences)
-  }
-  
-  writeLines(all_sequences, combined_file)
-  
-  total_seqs <- length(grep("^>", all_sequences))
-  cat("Combined file contains", total_seqs, "sequences\n")
-  cat("Saved as:", combined_file, "\n")
 }
 
 # Example usage:
@@ -389,5 +367,6 @@ rRNA_16S_synonyms <- c(
 
 # Run analysis
 results <- extract_gene_sequences("metazoans_5_taxids.txt", coi_synonyms, retmax = 3, output_base_dir = "test_metazoan")
+
 results_SSU <- extract_gene_sequences("metazoans_5_taxids.txt", rRNA_16S_synonyms, retmax = 3, output_base_dir = "test_metazoan_SSU")
 
