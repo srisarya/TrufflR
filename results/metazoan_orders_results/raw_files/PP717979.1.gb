@@ -1,0 +1,67 @@
+LOCUS       PP717979                 664 bp    DNA     linear   INV 27-MAY-2025
+DEFINITION  Stragulum bicolor voucher G1 cytochrome c oxidase subunit I (COX1)
+            gene, partial cds; mitochondrial.
+ACCESSION   PP717979
+VERSION     PP717979.1
+KEYWORDS    .
+SOURCE      mitochondrion Stragulum bicolor
+  ORGANISM  Stragulum bicolor
+            Eukaryota; Metazoa; Cnidaria; Anthozoa; Octocorallia;
+            Malacalcyonacea; Clavulariidae; Stragulum.
+REFERENCE   1  (bases 1 to 664)
+  AUTHORS   Moura,C.J., Wirtz,P., Nhanque,F.T., Barbosa,C. and Serrao,E.
+  TITLE     Hotspot of Exotic Benthic Marine Invertebrates Discovered in the
+            Tropical East Atlantic: DNA Barcoding Insights From the Bijagos
+            Archipelago, Guinea-Bissau
+  JOURNAL   Ecol Evol 15 (3), e70964 (2025)
+   PUBMED   40060715
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 664)
+  AUTHORS   Moura,C.J.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (23-APR-2024) CCMAR, Universidade do Algarve, Campus de
+            Gambelas, Faro 8005-139 Faro, Portugal
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: ONTbarcoder v. 2.2
+            Sequencing Technology :: ONT
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..664
+                     /organism="Stragulum bicolor"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="G1"
+                     /db_xref="taxon:2803060"
+                     /geo_loc_name="Guinea-Bissau: Joao Vieira"
+                     /lat_lon="11.049997 N 15.607268 W"
+                     /collection_date="29-Apr-2023"
+                     /collected_by="Carlos J. Moura"
+     gene            <1..>664
+                     /gene="COX1"
+     CDS             <1..>664
+                     /gene="COX1"
+                     /codon_start=2
+                     /transl_table=4
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="WZW36114.1"
+                     /translation="DHLYNVIVTSHALLMIFFLVMPVMIGGFGNWFVPIMIGAPDMAF
+                     PRLNNISFWLLPPSLILLVGSMFVEQGAGTGWTIYPPLSSIQAHSGGAVDMAIFSLHL
+                     AGISSILSSINFITTIINMRVPGMSMHRLPLFVWSVLITTILLLLSLPVLAGAITMLL
+                     TDRNFNTTFFDPAGGGDPILFQHLFWFFGHPEVYILILPGFGMVSQIIPTFSAKQHIF
+                     GYL"
+ORIGIN      
+        1 tgatcattta tataatgtaa ttgtaacatc acatgcttta ttaatgattt tcttcttggt
+       61 aatgccagta atgattggag gattcggaaa ttggtttgtg ccaattatga ttggtgcgcc
+      121 tgatatggct tttcctagat taaataatat tagtttctgg ttattgccac cttctttaat
+      181 actattagtt ggttcgatgt ttgtagaaca gggggcaggt acaggctgga ccatttatcc
+      241 cccattatca agtattcaag cccattcagg aggagcagtg gatatggcta tatttagcct
+      301 acatctagct ggtatatctt ccattttaag ttctattaac tttataacta ctataattaa
+      361 tatgagggtt cctggtatga gtatgcatag attaccttta tttgtttggt ctgtattaat
+      421 tactacaata ttgttattat tatctttacc agtattagct ggtgcaatta caatgttatt
+      481 gacagataga aattttaata caacattctt tgatcctgcg ggaggaggag atcccatttt
+      541 atttcaacac ttattttggt tttttgggca ccctgaagta tatatattaa ttctaccagg
+      601 atttggtatg gtatctcaaa ttatccctac attctctgct aaacaacata tttttggtta
+      661 ttta
+//
+
+

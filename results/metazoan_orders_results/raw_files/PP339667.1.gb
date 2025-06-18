@@ -1,0 +1,67 @@
+LOCUS       PP339667                 568 bp    DNA     linear   INV 15-NOV-2024
+DEFINITION  Kowalevskia tenuis isolate kt1-y cytochrome c oxidase subunit I
+            (COX1) gene, partial cds; mitochondrial.
+ACCESSION   PP339667
+VERSION     PP339667.1
+KEYWORDS    .
+SOURCE      mitochondrion Kowalevskia tenuis
+  ORGANISM  Kowalevskia tenuis
+            Eukaryota; Metazoa; Chordata; Tunicata; Appendicularia; Copelata;
+            Kowalevskiidae; Kowalevskia.
+REFERENCE   1  (bases 1 to 568)
+  AUTHORS   Albaina,A., Garic,R. and Yebra,L.
+  TITLE     Know your limits; miniCOI metabarcoding fails with key marine
+            zooplankton taxa
+  JOURNAL   J Plankton Res (2024) In press
+  REMARK    Publication Status: Available-Online prior to print
+            DOI: 10.1093/plankt/fbae057
+REFERENCE   2  (bases 1 to 568)
+  AUTHORS   Garic,R., Albaina,A. and Yebra,L.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-FEB-2024) Institute for Marine and Coastal Research,
+            University of Dubrovnik, Kneza Damjana Jude 12, Dubrovnik 20000,
+            Croatia
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..568
+                     /organism="Kowalevskia tenuis"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="kt1-y"
+                     /db_xref="taxon:2547646"
+                     /geo_loc_name="Croatia"
+                     /lat_lon="42.45889 N 17.93389 E"
+                     /collection_date="03-Oct-2011"
+                     /collected_by="Rade Garic"
+                     /identified_by="Rade Garic"
+                     /PCR_primers="fwd_name: LCO1490, fwd_seq:
+                     ggtcaacaaatcataaagatattgg, rev_name: HCO2198, rev_seq:
+                     taaacttcagggtgaccaaaaaatca"
+     gene            <1..>568
+                     /gene="COX1"
+     CDS             <1..>568
+                     /gene="COX1"
+                     /codon_start=2
+                     /transl_table=5
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="WVX51772.1"
+                     /translation="TLYLILSVWGGLISTFFSVMMRIELVSPQNKYIIEEVVYNNAVT
+                     SHSLVMIFFFLMPTLISSFGNWLIPLYMSVPDMAFPRMNNLSFWLLLPAVLFVLMSSL
+                     SGSSFSGGWTLYPPLSSKLGTPSMSMDYMIFAVHLASASSIMGSVNFMSTIIVFSGKS
+                     FDMGNIPLLIWAFFMTVYLLVFSLPVLAA"
+ORIGIN      
+        1 aactttatat ttaatcttaa gagtgtgggg aggattgatt agaacttttt tctcagtaat
+       61 aatacgaatt gaattagtta gtccacaaaa taaatacatt attgaagaag ttgtttataa
+      121 taatgcggta acctctcaca gattagtcat aatttttttt tttttgatac ctactttaat
+      181 ttctagattt ggtaattgac taatcccttt atatataaga gtccctgata tagctttccc
+      241 ccggataaat aatttatcat tttgactttt actaccagct gtactgtttg tattaatatc
+      301 ttctttatct gggagtaggt tcaggggggg gtgaacttta taccctcctt tatcttctaa
+      361 attaggtact ccaagtatat caatagatta tataattttt gcagttcatc tcgctagagc
+      421 atcctcaatt atggggaggg ttaactttat atcaacaatt attgtattta gaggaaagag
+      481 atttgatata ggaaatatcc ctttattaat ttgagctttt tttataactg tatacttact
+      541 agttttttct cttcctgttc ttgctgcc
+//
+
+

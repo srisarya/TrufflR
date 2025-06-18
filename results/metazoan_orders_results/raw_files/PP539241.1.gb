@@ -1,0 +1,72 @@
+LOCUS       PP539241                 724 bp    DNA     linear   INV 10-FEB-2025
+DEFINITION  Cerapanorpa sinuata isolate 2 tRNA-Leu gene, partial sequence;
+            cytochrome oxidase subunit 2 (COX2) gene, complete cds; and
+            tRNA-Lys gene, partial sequence; mitochondrial.
+ACCESSION   PP539241
+VERSION     PP539241.1
+KEYWORDS    .
+SOURCE      mitochondrion Cerapanorpa sinuata
+  ORGANISM  Cerapanorpa sinuata
+            Eukaryota; Metazoa; Ecdysozoa; Arthropoda; Hexapoda; Insecta;
+            Pterygota; Neoptera; Endopterygota; Mecoptera; Panorpidae;
+            Cerapanorpa.
+REFERENCE   1  (bases 1 to 724)
+  AUTHORS   Gao,K., Hua,Y., He,L.-L. and Hua,B.-Z.
+  TITLE     Alpine refugial isolation drove divergence of the cold-adapted
+            montane scorpionfly Cerapanorpa obtusa (Mecoptera: Panorpidae)
+  JOURNAL   J Syst Evol (2025) In press
+  REMARK    Publication Status: Available-Online prior to print
+            DOI: 10.1111/jse.13150
+REFERENCE   2  (bases 1 to 724)
+  AUTHORS   Gao,K., He,L. and Hua,B.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (25-MAR-2024) College of Life Sciences, Northwest
+            University, Taibai Rd., Xi'an, Shaanxi 710069, China
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: ChromasPro v. 1.5
+            Sequencing Technology :: Illumina
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..724
+                     /organism="Cerapanorpa sinuata"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="2"
+                     /db_xref="taxon:2021429"
+     tRNA            <1..19
+                     /product="tRNA-Leu"
+     gene            25..712
+                     /gene="COX2"
+     CDS             25..712
+                     /gene="COX2"
+                     /note="TAA stop codon is completed by the addition of 3' A
+                     residues to the mRNA"
+                     /codon_start=1
+                     /transl_except=(pos:712,aa:TERM)
+                     /transl_table=5
+                     /product="cytochrome oxidase subunit 2"
+                     /protein_id="XOB76753.1"
+                     /translation="MSTWSNLGLQNSASPLMEQLTFFHDHTMLIVIMITVLVGYMMSS
+                     LFFNTYTNRYLLESQGIEVIWTILPAITLIFIALPSLRLLYLLDEVSDPAITLKTIGH
+                     QWYWSYEYSDFISLEFDSYMIPSNELDIDGFRLLDVDNRAVLPMNTQIRMLVSAADVL
+                     HSWTIPALGVKVDATPGRLNQTSFLINRPGLFFGQCSEICGANHSFMPIVIESVTTST
+                     FIKWISAMSAA"
+     tRNA            713..>724
+                     /product="tRNA-Lys"
+ORIGIN      
+        1 atttcttctt ttattagaaa actaatgtct acatgaagaa acttaggttt acaaaataga
+       61 gcttctcctt taatagaaca attaacattt tttcatgatc atacaatatt aattgttatt
+      121 ataatcacag ttttagtagg atatataata agatcattat tttttaatac ttacacaaac
+      181 cgatatttac tagaaagtca agggattgaa gtaatttgaa caattcttcc cgctattaca
+      241 ttaattttta ttgccttacc ctcattacga ttattatatt tattagatga agttagagac
+      301 cctgctatta ctttaaaaac aattggacat caatgatatt gaagttatga atattctgat
+      361 tttatttcat tagaatttga ttcatacata attccatcga atgaattaga tattgacgga
+      421 tttcgattat tagacgtaga taatcgagct gttttaccaa taaatactca aattcgaata
+      481 ttagtttcag cagcagatgt ccttcattca tgaactatcc cagctctagg agtaaaggtt
+      541 gatgcaaccc ctggtcgttt aaatcaaaca agttttttaa ttaatcggcc tggattattt
+      601 tttggtcaat gttctgaaat ttgtggagct aatcatagat ttatacctat tgttatcgaa
+      661 agagttacaa caagtacatt tattaagtga atttcagcaa taagtgctgc ttcattagat
+      721 gact
+//
+
+

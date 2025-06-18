@@ -1,0 +1,84 @@
+LOCUS       PP471098                 963 bp    DNA     linear   INV 02-JUN-2024
+DEFINITION  Diadema setosum isolate DS101 large subunit ribosomal RNA gene,
+            partial sequence; and cytochrome c oxidase subunit 1 (cox1) gene,
+            partial cds; mitochondrial.
+ACCESSION   PP471098
+VERSION     PP471098.1
+KEYWORDS    .
+SOURCE      mitochondrion Diadema setosum
+  ORGANISM  Diadema setosum
+            Eukaryota; Metazoa; Echinodermata; Eleutherozoa; Echinozoa;
+            Echinoidea; Euechinoidea; Acroechinoidea; Diadematoida;
+            Diadematidae; Diadema.
+REFERENCE   1  (bases 1 to 963)
+  AUTHORS   Roth,L., Eviatar,G., Schmidt,L.M., Bonomo,M., Feldstein-Farkash,T.,
+            Schubert,P., Ziegler,M., Al-Sawalmih,A., Abdallah,I.S., Quod,J.P.
+            and Bronstein,O.
+  TITLE     Mass mortality of diadematoid sea urchins in the Red Sea and
+            Western Indian Ocean
+  JOURNAL   Curr Biol (2024) In press
+   PUBMED   38788707
+  REMARK    Publication Status: Available-Online prior to print
+REFERENCE   2  (bases 1 to 963)
+  AUTHORS   Bronstein,O. and Roth,L.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-MAR-2024) Zoology, Tel Aviv University, Ramat Aviv,
+            Tel Aviv 6997801, Israel
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..963
+                     /organism="Diadema setosum"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="DS101"
+                     /specimen_voucher="SMNHTAU_EC25796"
+                     /db_xref="taxon:31175"
+                     /tissue_type="spine muscle"
+                     /geo_loc_name="Israel: Red Sea, Eilat, Underwater
+                     Observatory Park water tables"
+                     /lat_lon="29.503700 N 34.917817 E"
+                     /collection_date="08-Jun-2020"
+                     /collected_by="Gal Eviatar"
+                     /PCR_primers="fwd_name: coi16bf, fwd_seq:
+                     agccaggtcagtttctatct, rev_name: coier, rev_seq:
+                     gctcgtgtgtctacgtccat"
+                     /note="clade b"
+     rRNA            <1..75
+                     /product="large subunit ribosomal RNA"
+     gene            76..>963
+                     /gene="cox1"
+     CDS             76..>963
+                     /gene="cox1"
+                     /codon_start=1
+                     /transl_table=9
+                     /product="cytochrome c oxidase subunit 1"
+                     /protein_id="XBE45062.1"
+                     /translation="MHLSRWLFSTNHKDIGTLYLIFGAWAGMVGTAMSVIIRAELAQP
+                     GSLLNDDQIYNVVVTAHALVMIFFMVMPIMIGGFGNWLIPLMIGAPDMAFPRMNNMSF
+                     WLVPPSFILLLASAGVESGAGTGWTIYPPLSSNIAHAGGSVDLAIFSLHLAGASSILA
+                     SINFITTIINMRTPGMSFDRLPLFVWSVFITAFLLLLSLPVLAGAITMLLTDRNINTT
+                     FFDPAGGGDPILFQHLFWFFGHPEVYILILPGFGMISHVIAHYSGKREPFGYLGMVYA
+                     MIAIGILGFLVWAHHMFTVG"
+ORIGIN      
+        1 gcgacttctc tctcttagta cgaaaggacc agagaggggg tgccaatatc acctataagc
+       61 acctgaatta aaaacatgca cctaagacga tgattgtttt caactaacca taaggatatc
+      121 ggtactcttt atctaatctt cggggcctga gccggaatgg tcggaaccgc catgagagtg
+      181 attatccgag ccgaattagc tcaaccagga tctctcctaa aagatgacca aatctacaat
+      241 gtagtagtaa ctgcccacgc cctagtaatg atctttttta tggtcatgcc aataatgatt
+      301 ggcgggtttg gaaactggct aatcccatta atgatagggg caccagatat ggcttttccc
+      361 cgaatgaaca aaatgagttt ctggctggtg cccccttctt ttattttgct tctagcctct
+      421 gccggagtag agagaggagc aggtacaggg tgaaccattt atcctccact ttctagaaac
+      481 attgctcacg ccggtggatc cgtggattta gctatttttt ctctccactt ggccggtgcc
+      541 tcctcaatcc ttgcttctat taattttatt accactatta tcaaaatgcg aactcccgga
+      601 atgtcttttg accgcttacc tctgtttgta tggtcagttt ttattaccgc cttcctactt
+      661 ttgctttccc tcccagtact agccggagca atcacaatgc tcttaactga ccgaaaaatt
+      721 aataccacct tttttgatcc tgcaggaggg ggagacccca ttttatttca acacctattt
+      781 tgattcttcg gtcacccaga agtttacatc cttattcttc caggatttgg aatgatttct
+      841 catgtaattg cccactactc aggaaagcga gaaccattcg gttatctagg aatggtttat
+      901 gctatgatcg ctattggaat acttggtttc ttagtatgag ctcaccacat gtttacagtt
+      961 gga
+//
+
+
