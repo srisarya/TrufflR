@@ -4,6 +4,29 @@ library(geneviewer)  # For parsing GenBank files
 library(Biostrings)  # For sequence manipulation
 library(seqinr)      # For sequence manipulation and reverse complement
 
+# Function to extract GenBank accession from FASTA header
+# @param fasta_header - The FASTA header line (starting with >)
+# @return Character string with accession number or original ID if not found
+extract_accession <- function(fasta_header) {
+  # Remove the > symbol from header
+  header_clean <- gsub("^>", "", fasta_header)
+  
+  # Look for GenBank accession pattern: 2 letters + 6 digits + . + 1 digit
+  # This regex captures the accession at the beginning of the header
+  accession_match <- regexpr("^[A-Z]{2}[0-9]{6}\\.[0-9]", header_clean)
+  
+  if (accession_match > 0) {
+    # Extract the matched accession
+    accession <- substr(header_clean, accession_match, 
+                        accession_match + attr(accession_match, "match.length") - 1)
+    return(accession)
+  } else {
+    # Fallback: try to get first part before space (common format)
+    first_part <- strsplit(header_clean, " ")[[1]][1]
+    return(first_part)
+  }
+}
+
 # Determine sequence type based on title
 # @param -  title - The sequence title/description
 # @return - Character - string indicating sequence type
@@ -42,6 +65,9 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
   cat("Searching for", taxids, "\n")
   cat("Gene synonyms:", paste(gene_synonyms, collapse = ", "), "\n")
   cat("Feature type filter:", feature_type, "\n\n")
+  
+  all_gb_str_dfs <- list()
+  all_gb_seq_dfs <- list()
   
   # Define gene patterns for filtering (remove NCBI field tags and convert to lowercase)
   gene_patterns <- gsub("\\[.*?\\]", "", gene_synonyms)
@@ -117,40 +143,50 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
       # Initialize storage lists
       gb_str_dfs <- list()
       gb_seq_dfs <- list()
-      sequence_info <- list()  # Store sequence metadata including titles
+      sequence_info <- list()  # Store sequence metadata including titles and accessions
+      id_to_accession <- list()  # Map NCBI IDs to accessions for consistent naming
       
       # Process each sequence ID
       for (i in seq_along(ids)) {
         cat("Processing ID:", ids[i], "\n")
         
-        # Fetch and save GenBank record
-        genbank_records <- rentrez::entrez_fetch(
-          db = "nuccore",
-          id = ids[i],
-          rettype = "gb",
-          retmode = "text"
-        )
-        filename_gb <- file.path(raw_files_folder, paste0(ids[i], ".gb"))
-        writeLines(genbank_records, filename_gb)
-        
-        # Fetch and save FASTA record
+        # Fetch FASTA record first to get accession
         fasta_records <- rentrez::entrez_fetch(
           db = "nuccore",
           id = ids[i],
           rettype = "fasta",
           retmode = "text"
         )
-        filename_fa <- file.path(raw_files_folder, paste0(ids[i], ".fa"))
-        writeLines(fasta_records, filename_fa)
         
-        # Extract title from FASTA header for sequence type determination
+        # Extract accession from FASTA header
         fasta_lines <- strsplit(fasta_records, "\n")[[1]]
         header_line <- fasta_lines[1]
         sequence_title <- gsub("^>", "", header_line)
+        accession <- extract_accession(header_line)
         
-        # Store sequence info
+        # Store the mapping from NCBI ID to accession
+        id_to_accession[[ids[i]]] <- accession
+        
+        cat("  Accession:", accession, "\n")
+        
+        # Fetch and save GenBank record using accession for filename
+        genbank_records <- rentrez::entrez_fetch(
+          db = "nuccore",
+          id = ids[i],
+          rettype = "gb",
+          retmode = "text"
+        )
+        filename_gb <- file.path(raw_files_folder, paste0(accession, ".gb"))
+        writeLines(genbank_records, filename_gb)
+        
+        # Save FASTA record using accession for filename
+        filename_fa <- file.path(raw_files_folder, paste0(accession, ".fa"))
+        writeLines(fasta_records, filename_fa)
+        
+        # Store sequence info with both ID and accession
         sequence_info[[ids[i]]] <- list(
           id = ids[i],
+          accession = accession,
           title = sequence_title,
           type = determine_sequence_type(sequence_title)
         )
@@ -160,6 +196,13 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
           gb_df <- geneviewer::read_gbk(filename_gb) %>% 
             geneviewer::gbk_features_to_df()
           gb_str_dfs[[ids[i]]] <- gb_df
+          all_gb_str_dfs[[paste0(taxid, "_", ids[i])]] <- gb_df
+          
+          # Print the GenBank dataframe
+          cat("GenBank features for", accession, ":\n")
+          print(gb_df)
+          cat("\n")
+          
         }, error = function(e) {
           cat("Error processing GenBank for ID", ids[i], ":", e$message, "\n")
         })
@@ -168,19 +211,37 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
         tryCatch({
           gb_fa <- Biostrings::readDNAStringSet(filename_fa)
           gb_seq_dfs[[ids[i]]] <- gb_fa
+          all_gb_seq_dfs[[paste0(taxid, "_", ids[i])]] <- gb_fa
+          
+          # Print the FASTA sequences
+          cat("FASTA sequences for", accession, ":\n")
+          print(gb_fa)
+          cat("\n")
+          
         }, error = function(e) {
           cat("Error processing FASTA for ID", ids[i], ":", e$message, "\n")
         })
       }
       
-      # Create sequence type summary table for this taxid
+      # Print all GenBank dataframes for this taxid
+      cat("All GenBank dataframes for taxid", taxid, ":\n")
+      print(gb_str_dfs)
+      cat("\n")
+      
+      # Print all FASTA sequences for this taxid  
+      cat("All FASTA sequences for taxid", taxid, ":\n")
+      print(gb_seq_dfs)
+      cat("\n")
+      
+      # Create sequence type summary table for this taxid (now includes accessions)
       seq_summary_df <- do.call(rbind, lapply(sequence_info, function(x) {
         data.frame(
           Taxid = taxid,
           Taxon_Name = taxon_name,
           Sequence_ID = x$id,
+          Accession = x$accession,
           Sequence_Type = x$type,
-          Title = substr(x$title, 1, 100),  # Truncate long titles
+          Title = x$title,
           stringsAsFactors = FALSE
         )
       }))
@@ -221,15 +282,16 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
       # Remove empty dataframes
       gene_coords <- gene_coords[sapply(gene_coords, nrow) > 0]
       
-      # Extract gene sequences and save separately for each ID
+      # Extract gene sequences and save separately for each ID (now using accessions)
       for (id in names(gene_coords)) {
         if (id %in% names(gb_seq_dfs)) {
           coords <- gene_coords[[id]]
           dna_seq <- gb_seq_dfs[[id]]
+          accession <- id_to_accession[[id]]  # Get the accession for this ID
           
-          cat("Extracting gene sequences for ID", id, "\n")
+          cat("Extracting gene sequences for accession", accession, "(ID:", id, ")\n")
           
-          # Create separate sequences for this ID
+          # Create separate sequences for this accession
           id_extracted_sequences <- list()
           
           for (j in 1:nrow(coords)) {
@@ -248,7 +310,8 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
                   gene_subseq <- Biostrings::reverseComplement(gene_subseq)
                 }
                 
-                seq_name <- paste0(id, "_", gene_name, "_", feature_info, "_", j)
+                # Use accession in sequence name instead of NCBI ID
+                seq_name <- paste0(accession, "_", gene_name, "_", feature_info, "_", j)
                 id_extracted_sequences[[seq_name]] <- gene_subseq
                 cat("  Extracted:", gene_name, "(", feature_info, ",", length(gene_subseq), "bp )\n")
               }
@@ -257,29 +320,40 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
             })
           }
           
-          # Save extracted sequences for this ID if any were found
+          # Save extracted sequences for this accession if any were found
           if (length(id_extracted_sequences) > 0) {
             gene_stringset <- Biostrings::DNAStringSet(id_extracted_sequences)
-            names(gene_stringset) <- names(id_extracted_sequences)
             
-            # Create filename with taxon name and ID
-            output_filename <- paste0(taxon_name_clean, "_taxid", taxid, "_", id, "_extracted_genes.fasta")
+            # Get the sequence type for this accession from our stored info
+            seq_type <- sequence_info[[id]]$type
+            
+            # Create clean FASTA headers: accession|gene_name|[sequence_type]
+            clean_names <- character(length(id_extracted_sequences))
+            for (k in seq_along(id_extracted_sequences)) {
+              seq_name <- names(id_extracted_sequences)[k]
+              # Extract just the gene name from the original sequence name
+              # Original format was: accession_genename_featuretype_number
+              parts <- strsplit(seq_name, "_")[[1]]
+              gene_name <- parts[2]  # Second part is the gene name
+              
+              # Create the new clean header format
+              clean_names[k] <- paste0(accession, "|", gene_name, "|[", seq_type, "]")
+            }
+            names(gene_stringset) <- clean_names
+            
+            # Create filename with taxon name and accession (not NCBI ID)
+            output_filename <- paste0(taxon_name_clean, "_taxid", taxid, "_", accession, "_extracted_genes.fasta")
             output_file <- file.path(extracted_folder, output_filename)
             
             Biostrings::writeXStringSet(gene_stringset, output_file)
-            cat("Gene sequences for ID", id, "saved to:", output_file, "\n")
+            cat("Gene sequences for accession", accession, "saved to:", output_file, "\n")
           } else {
-            cat("No gene sequences could be extracted for ID", id, "\n")
+            cat("No gene sequences could be extracted for accession", accession, "\n")
           }
         }
       }
       
-      # # Save sequence type summary to file
-      # summary_table_file <- file.path(output_folder, paste0(taxon_name_clean, "_taxid", taxid, "_sequence_summary.csv"))
-      # write.csv(seq_summary_df, summary_table_file, row.names = FALSE)
-      # cat("Sequence type summary saved to:", summary_table_file, "\n")
-      # 
-      # Create analysis summary file
+      # Create analysis summary file (now includes accession information)
       summary_file <- file.path(output_folder, paste0(taxon_name_clean, "_taxid", taxid, "_analysis_summary.txt"))
       cat("Analysis Summary for Taxid:", taxid, "\n", file = summary_file)
       cat("Taxon name:", taxon_name, "\n", file = summary_file, append = TRUE)
@@ -290,7 +364,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
       cat("FASTA files created:", length(gb_seq_dfs), "\n", file = summary_file, append = TRUE)
       cat("Gene matches found:", length(gene_coords), "\n", file = summary_file, append = TRUE)
       
-      # Count total extracted sequences across all IDs
+      # Count total extracted sequences across all accessions (pattern updated)
       total_extracted <- length(list.files(extracted_folder, pattern = paste0(taxon_name_clean, "_taxid", taxid, "_.*_extracted_genes.fasta")))
       cat("Separate FASTA files created:", total_extracted, "\n", file = summary_file, append = TRUE)
       
@@ -300,12 +374,19 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
         cat("  ", type, ":", type_counts[type], "\n", file = summary_file, append = TRUE)
       }
       
-      # Store results for this taxid
+      # Add accession mapping to summary
+      cat("\nNCBI ID to Accession Mapping:\n", file = summary_file, append = TRUE)
+      for (ncbi_id in names(id_to_accession)) {
+        cat("  ", ncbi_id, "->", id_to_accession[[ncbi_id]], "\n", file = summary_file, append = TRUE)
+      }
+      
+      # Store results for this taxid (now includes accession mapping)
       all_results[[taxid]] <- list(
         taxid = taxid,
         taxon_name = taxon_name,
         query = full_query,
         ids = ids,
+        id_to_accession = id_to_accession,
         gb_str_dfs = gb_str_dfs,
         fasta_sequences = gb_seq_dfs,
         sequence_info = sequence_info,
@@ -342,8 +423,14 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
       cat("  ", type, ":", overall_type_counts[type], "\n")
     }
     
-    # Save overall summary table
-    return(overall_sequence_summary)
+    # Save overall summary table (now includes accession column)
+    return(list(
+      results = all_results,
+      gb_dataframes = all_gb_str_dfs,     # ALL dataframes across all taxids
+      fasta_sequences = all_gb_seq_dfs,   # ALL sequences across all taxids  
+      sequence_summary = overall_sequence_summary
+    ))
+    
     overall_summary_file <- file.path(output_base_dir, "overall_sequence_summary.csv")
     write.csv(overall_sequence_summary, overall_summary_file, row.names = FALSE)
     cat("\nOverall sequence summary saved to:", overall_summary_file, "\n")
@@ -362,7 +449,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
 # @param - combined_file - output multifasta (default: combined_seqs.fa)
 
 combine_sequences <- function(output_dir, combined_file = "combined_seqs.fa") {
-  fasta_files <- list.files(output_dir, pattern = "\\extracted_genes.fasta$", full.names = TRUE)
+  fasta_files <- list.files(output_dir, pattern = "\\.fasta$", full.names = TRUE)
   
   if (length(fasta_files) == 0) {
     cat("No FASTA files found in", output_dir, "\n")
@@ -399,9 +486,27 @@ rRNA_16S_synonyms <- c("16S[Title]",
                        "small subunit ribosomal RNA[Title]",
                        "SSU rRNA[Title]")
 
-# Run analysis with feature type filtering
-results <- extract_gene_sequences("metazoans_5_taxids.txt", coi_synonyms, feature_type = "CDS", retmax = 3, output_base_dir = "test_metazoan")
-combine_sequences(output_dir = "test_metazoan", combined_file = "test_metazoan/gene_sequences.fasta")
+rRNA_28S_synonyms <- c("28S[Title]", 
+                       "28S rRNA[Title]", 
+                       "28S ribosomal RNA[Title]",
+                       "large subunit ribosomal RNA[Title]",
+                       "LSU rRNA[Title]")
 
-results_SSU <- extract_gene_sequences("metazoans_5_taxids.txt", rRNA_16S_synonyms, feature_type = "rRNA", retmax = 3, output_base_dir = "test_metazoan_SSU")
-combine_sequences(output_dir = "test_metazoan_SSU", combined_file = "test_metazoan_SSU/gene_sequences.fasta")
+# Run analysis with feature type filtering
+results <- extract_gene_sequences("taxids/proseriate_taxid.txt", coi_synonyms, feature_type = "CDS", retmax = 10, output_base_dir = "test/test_proseriate")
+combine_sequences(output_dir = "tests/test_proseriate", combined_file = "test/test_proseriate/gene_sequences.fasta")
+
+#main_analysis_result<-extract_gene_sequences("results/rhabditophora_family_results/", coi_synonyms, feature_type = "CDS", retmax = 10, output_base_dir = "results/rhabditophora_family_results/")
+#combine_sequences(output_dir = "results/rhabditophora_family_results/", combined_file = "results/rhabditophora_family_results/gene_sequences.fasta")
+
+#main_analysis_result<-extract_gene_sequences("metazoan_orders.txt", coi_synonyms, feature_type = "CDS", retmax = 3, output_base_dir = "results/metazoan_orders_results")
+#combine_sequences(output_dir = "results/metazoan_orders_results", combined_file = "results/metazoan_orders_results/gene_sequences.fasta")
+
+# results <- extract_gene_sequences("metazoans_5_taxids.txt", coi_synonyms, feature_type = "tRNA", retmax = 3, output_base_dir = "test_metazoan_tRNA")
+# combine_sequences(output_dir = "test_metazoan_tRNA", combined_file = "test_metazoan_tRNA/gene_sequences.fasta")
+
+# results_SSU <- extract_gene_sequences("metazoans_5_taxids.txt", rRNA_16S_synonyms, feature_type = "rRNA", retmax = 3, output_base_dir = "test_metazoan_SSU")
+# combine_sequences(output_dir = "test_metazoan_SSU", combined_file = "test_metazoan_SSU/gene_sequences.fasta")
+
+# results_LSU <- extract_gene_sequences("metazoans_5_taxids.txt", rRNA_28S_synonyms, feature_type = "rRNA", retmax = 3, output_base_dir = "test_metazoan_LSU")
+# combine_sequences(output_dir = "test_metazoan_LSU", combined_file = "test_metazoan_LSU/gene_sequences.fasta")
