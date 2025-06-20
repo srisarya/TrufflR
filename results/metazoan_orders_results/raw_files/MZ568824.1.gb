@@ -1,0 +1,84 @@
+LOCUS       MZ568824                 968 bp    DNA     linear   INV 03-JUL-2022
+DEFINITION  Bathysalenia phoinissa isolate BMG005 16S ribosomal RNA gene,
+            partial sequence; and cytochrome c oxidase subunit 1 (COX1) gene,
+            partial cds; mitochondrial.
+ACCESSION   MZ568824
+VERSION     MZ568824.1
+KEYWORDS    .
+SOURCE      mitochondrion Bathysalenia phoinissa
+  ORGANISM  Bathysalenia phoinissa
+            Eukaryota; Metazoa; Echinodermata; Eleutherozoa; Echinozoa;
+            Echinoidea; Euechinoidea; Calycina; Salenioida; Saleniidae;
+            Bathysalenia.
+REFERENCE   1  (bases 1 to 968)
+  AUTHORS   Mongiardino Koch,N., Thompson,J.R., Hatch,A.S., McCowin,M.F.,
+            Armstrong,A.F., Coppard,S.E., Aguilera,F., Bronstein,O., Kroh,A.,
+            Mooi,R. and Rouse,G.W.
+  TITLE     Phylogenomic analyses of echinoid diversification prompt a
+            re-evaluation of their fossil record
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 968)
+  AUTHORS   Kroh,A.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (14-JUL-2021) Department of Geology & Palaeontology,
+            Natural History Museum Vienna, Burgrin 7, Wien 1010, Austria
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..968
+                     /organism="Bathysalenia phoinissa"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="BMG005"
+                     /isolation_source="BioMaglo Cruise, station DW4820, depth
+                     295-336 m"
+                     /specimen_voucher="MNHN-IE-2016-23"
+                     /db_xref="taxon:2175313"
+                     /tissue_type="tubefeet + spine muscle"
+                     /dev_stage="adult"
+                     /geo_loc_name="Mayotte"
+                     /lat_lon="13.083333 S 45.100000 E"
+                     /collection_date="27-Jan-2017"
+                     /collected_by="MNHN, BioMaglo Expedition"
+                     /identified_by="Andreas Kroh"
+                     /PCR_primers="fwd_name: COI16f, fwd_seq:
+                     agccaggtcagtttctatct, rev_name: COIer, rev_seq:
+                     gctcgtgtgtctacgtccat"
+     rRNA            <1..80
+                     /product="16S ribosomal RNA"
+     gene            81..>968
+                     /gene="COX1"
+     CDS             81..>968
+                     /gene="COX1"
+                     /codon_start=1
+                     /transl_table=9
+                     /product="cytochrome c oxidase subunit 1"
+                     /protein_id="USS20254.1"
+                     /translation="MQLSRWLFSTNHKDIGTLYLIFGAWAGMVGTAMSVIIRAELAQP
+                     GSLLQDDQIYNVVVTAHALVMIFFMVMPIMIGGFGNWLIPLMIGAPDMAFPRMNNMSF
+                     WLVPPSFILLLASAGVESGAGTGWTIYPPLSSNIAHAGGSVDLAIFSLHLAGASSILA
+                     SINFITTIINMRTPGVSFDRLPLFVWSVFVTAFLLLLSLPVLAGAITMLLTDRNINTT
+                     FFDPAGGGDPILFQHLFWFFGHPEVYILILPGFGMISHVIAHYSGKREPFGYLGMVYA
+                     MIAIGVLGFLVWAHHMFTVG"
+ORIGIN      
+        1 acgaatactc ctttcttagt acgaaaggac cagaaaggaa gtgccaatgc ctaacagtaa
+       61 gcactaatta aattaaaaac atgcaactaa gacgatgact attttctact aaccacaagg
+      121 acattggaac cctttattta atttttggag cttgagctgg gatggtagga actgctatga
+      181 gtgtaatcat tcgtgcagaa ctagcccaac ccgggtctct acttcaagat gaccaaattt
+      241 acaaagtagt ggtaactgcc cacgccctag taatgatttt ttttatggtg atgcccatta
+      301 tgattggggg attcggaaat tggttgattc cccttatgat cggagcacca gacatggcct
+      361 ttcctcgaat gaataaaatg aggttttgac ttgttcctcc atcttttatc ctacttttag
+      421 cctctgctgg tgttgaaaga ggagcgggta ccgggtgaac aatctatcca cccctatcca
+      481 gaaatatcgc tcatgcaggt ggatctgtag acttggctat cttttcccta catttagccg
+      541 gagcatcttc aatcctagcc tccattaatt ttatcaccac aataattaat atgcgaaccc
+      601 caggagtctc ttttgaccga ctccctctct tcgtgtgatc tgtgtttgta accgcatttc
+      661 tccttcttct atccctccca gtactagctg gagccatcac catgcttctt actgaccgaa
+      721 acatcaatac aacattcttt gacccagcag gtgggggaga ccctatttta ttccaacact
+      781 tgttctgatt ctttgggcac ccagaagttt atattctaat tcttccagga ttcggaatga
+      841 tttctcacgt tattgcccac tactcaggaa agcgagaacc attcggatat ttaggaatgg
+      901 tttacgcaat gatcgcaatt ggtgttttag gattcttagt atgagcccac catatgttta
+      961 cagtaggt
+//
+
+

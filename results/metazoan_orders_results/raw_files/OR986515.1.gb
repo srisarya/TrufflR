@@ -1,0 +1,66 @@
+LOCUS       OR986515                 577 bp    DNA     linear   INV 21-APR-2025
+DEFINITION  Doliolula equus voucher SQ19_16S_62E_A cytochrome c oxidase subunit
+            I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   OR986515
+VERSION     OR986515.1
+DBLINK      BioProject: PRJNA971221
+KEYWORDS    .
+SOURCE      mitochondrion Doliolula equus
+  ORGANISM  Doliolula equus
+            Eukaryota; Metazoa; Chordata; Tunicata; Thaliacea; Doliolida;
+            Doliopsidae; Doliolula.
+REFERENCE   1  (bases 1 to 577)
+  AUTHORS   Questel,J.M., Smoot,C.A., Collins,A.G., Lindsay,D.J. and
+            Hopcroft,R.R.
+  TITLE     DNA barcoding deep-water zooplankton from the Gulf of Alaska, North
+            Pacific Ocean
+  JOURNAL   Front Mar Sci 12, 1-13 (2025)
+  REMARK    DOI: 10.3389/fmars.2025.1515048
+REFERENCE   2  (bases 1 to 577)
+  AUTHORS   Questel,J.M.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-DEC-2023) Institute of Marine Science, University of
+            Alaska Fairbanks, O'Neill Building Suite 245, 2150 Koyukuk Drive,
+            Fairbanks, AK 99775, USA
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..577
+                     /organism="Doliolula equus"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolation_source="Gulf of Alaska"
+                     /specimen_voucher="SQ19_16S_62E_A"
+                     /db_xref="taxon:3108665"
+                     /geo_loc_name="USA"
+                     /lat_lon="58.020902 N 147.731459 W"
+                     /collection_date="Jul-2019"
+                     /collected_by="Russell Hopcroft, Jennifer Questel"
+                     /note="station: GAK13.5; gear: MultiNet_150um.2.5"
+     gene            <1..>577
+                     /gene="COX1"
+     CDS             <1..>577
+                     /gene="COX1"
+                     /codon_start=3
+                     /transl_table=13
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="WQG45934.1"
+                     /translation="TGMSVVIRTELSQPGQVIGDGQLYNVMVTAHAFIMIFFFVMPVM
+                     IGGFGNWLLPLMLGAPDMAFPRLNNMSFWLLPPAFFMLCLSSFVGVGVGTGWTVYPPL
+                     ASNLAHAGPSVDCAIFSLHLAGVSSILGSMNFLVTMMNMSSKGQNPLNLSLFCWSVMV
+                     TTILLVLSLPVLAAAITMLLFDRNFNTTFFDP"
+ORIGIN      
+        1 gaactggtat aagcgtagta attcgtactg agttgtcaca acctggacag gtgattaggg
+       61 ataggcagtt gtataatgtt atagttactg cacatgcttt tattataatt tttttttttg
+      121 ttatacccgt gataattaga ggttttggta attgactttt acctttaata ttgggtgcac
+      181 cagatatagc atttcctcga ttaaataata taagcttttg acttttacct cctgcgtttt
+      241 ttatactatg tttatcttct tttgtaaggg taagagtaag aactggttga acagtttatc
+      301 ctcctttagc tagtaatttg gctcatgcta gaccttcagt tgattgtgca attttttctt
+      361 tacatttagc tagagtatct agtattttag gttcaataaa ttttttagtg actataataa
+      421 atataagtag taaaggtcaa aatcctttaa atttatcttt attttgttga tcagttatag
+      481 taactactat tttattagtt ttatcattac cagtattagc agcagctatt acaatacttc
+      541 tttttgatcg taattttaat acaacttttt ttgatcc
+//
+
+

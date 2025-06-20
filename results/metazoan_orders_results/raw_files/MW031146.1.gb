@@ -1,0 +1,67 @@
+LOCUS       MW031146                 658 bp    DNA     linear   INV 05-NOV-2020
+DEFINITION  Sphenoderes neptunus isolate MH_T6.4 cytochrome c oxidase subunit I
+            (COX1) gene, partial cds; mitochondrial.
+ACCESSION   MW031146
+VERSION     MW031146.1
+KEYWORDS    .
+SOURCE      mitochondrion Sphenoderes neptunus
+  ORGANISM  Sphenoderes neptunus
+            Eukaryota; Metazoa; Ecdysozoa; Scalidophora; Kinorhyncha;
+            Cyclorhagida; Kentrorhagata; Semnoderidae; Sphenoderes.
+REFERENCE   1  (bases 1 to 658)
+  AUTHORS   Sorensen,M.V. and Herranz,M.
+  TITLE     Adult moulting and dimorphism in a new species of Sphenoderes
+            (Kinorhyncha: Kentrorhagata)-Is the exception becoming the rule?
+  JOURNAL   Acta Zool (2020) In press
+  REMARK    Publication Status: Available-Online prior to print
+            DOI: 10.1111/azo.12361
+REFERENCE   2  (bases 1 to 658)
+  AUTHORS   Herranz,M.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-SEP-2020) Natural History Museum of Denmark,
+            University of Copenhagen, Universitetsparken, 15, Copenhagen 2100,
+            Denmark
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: Trinity v. 2.10.0
+            Sequencing Technology :: Illumina
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..658
+                     /organism="Sphenoderes neptunus"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="MH_T6.4"
+                     /isolation_source="Black mud"
+                     /db_xref="taxon:2774164"
+                     /geo_loc_name="Italy: Gulf of Naples"
+                     /lat_lon="40.6475 N 14.3653 E"
+                     /collection_date="20-Oct-2019"
+                     /collected_by="Maria Herranz, Martin V. Sorensen"
+     gene            <1..>658
+                     /gene="COX1"
+     CDS             <1..>658
+                     /gene="COX1"
+                     /codon_start=2
+                     /transl_table=5
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="QNV71111.1"
+                     /translation="SLYFILGMWGGFVGASYSFIIRLELAHPGLWMGSSQLYNKIITA
+                     HALLMIFFMVMPVLFGGFGNWLLPLMMSLPDMAFARLNNLSFWVVPPALLLLLISFNT
+                     DGGVGTGWTIYPPLSGSLGHSGAAVDLAIFSLHLAGVGSILGSINFLVTLLYMRLDNI
+                     SIDQFSFLNVGLLVTGFLLLTTIPVLAGGITMLLLDRNFNTSFYEVGGGGDPVLFQHI
+                     F"
+ORIGIN      
+        1 aagactttat tttattttag ggatatgggg tggatttgtt ggagcttctt atagatttat
+       61 tattcgttta gaattggcac accctgggtt atgaatgggg aggaggcaac tttataataa
+      121 aattattact gcacatgcat tattaataat tttttttatg gtaataccag tattatttgg
+      181 tgggtttgga aattgattat taccattaat gataagtctt cctgatatag cttttgcacg
+      241 tttaaataat ttaaggtttt gagttgtacc acctgcttta ttattgttgt taattagatt
+      301 taacacagat gggggggttg gtacgggttg aacaatttac ccgcctttat ctggatcttt
+      361 ggggcatagt ggtgctgctg tagatttagc tattttttct ttacatttgg ctggggttgg
+      421 gtctatttta ggatctatta attttttagt aactcttctt tacatgcgtt tagataatat
+      481 ttctattgat caatttagat ttttaaatgt aggtttatta gtaacaggat ttttgttatt
+      541 racaacaatt ccggtgttag cwgggggtat tacaatactt cttttrgatc gaaattttaa
+      601 tacttcattt tatgaggttg gagggggagg ggacccggtt ttatttcaac atattttt
+//
+
+

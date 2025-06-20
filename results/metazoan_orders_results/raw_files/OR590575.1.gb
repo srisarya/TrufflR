@@ -1,0 +1,70 @@
+LOCUS       OR590575                 658 bp    DNA     linear   INV 02-OCT-2023
+DEFINITION  Hemithiris psittacea voucher USNM:IZ:1691943 cytochrome c oxidase
+            subunit I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   OR590575
+VERSION     OR590575.1
+DBLINK      BioProject: PRJNA622478
+KEYWORDS    .
+SOURCE      mitochondrion Hemithiris psittacea
+  ORGANISM  Hemithiris psittacea
+            Eukaryota; Metazoa; Spiralia; Lophotrochozoa; Brachiopoda;
+            Rhynchonelliformea; Rhynchonellata; Rhynchonellida;
+            Hemithiridoidea; Hemithyrididae; Hemithiris.
+REFERENCE   1  (bases 1 to 658)
+  AUTHORS   O'Mahoney,M.J., Ashton,G.V., McCann,L., Keel,W.G. and Pecnik,S.J.
+  TITLE     Dutch Harbor Marine Invasive Species BioBlitz
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 658)
+  AUTHORS   O'Mahoney,M.J., Ashton,G.V., McCann,L., Keel,W.G. and Pecnik,S.J.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (19-SEP-2023) Invertebrate Zoology, Smithsonian
+            Institution, 10th & Constitution Aves. NW, Washington, DC 20560,
+            USA
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..658
+                     /organism="Hemithiris psittacea"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="USNM:IZ:1691943"
+                     /db_xref="BOLD:DUTCH784-23"
+                     /db_xref="taxon:763142"
+                     /geo_loc_name="USA: Unalaska Bay; Eider Point; AK"
+                     /lat_lon="53.9584 N 166.5856 W"
+                     /collection_date="05-Sep-2018"
+                     /collected_by="Gail V Ashton, Geoff Keel, Michael JV
+                     O'Mahoney"
+                     /identified_by="Simon J Pecnik"
+                     /PCR_primers="fwd_name: jgLCO1490, fwd_seq:
+                     tbtcbacbaaycayaargayattgg, rev_name: jgHCO2198, rev_seq:
+                     tabacytcbggrtgbccraaraayca"
+     gene            <1..>658
+                     /gene="COX1"
+     CDS             <1..>658
+                     /gene="COX1"
+                     /codon_start=2
+                     /transl_table=5
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="WNI00466.1"
+                     /translation="TLYFILGIWSGMIGLSLSVLIRLELGQPGSLLGDDQLYNVVVTS
+                     HAFVMIFFLVMPIMIGGFGNWLIPLMVGSPDMAYPRLNNLSFWLLPPSLILLMSSTLM
+                     EGGAGTGWTIYPPLASASAHSGPPVDLTILSLHLAGASSILGAINFIASSLNLRTKGS
+                     SLDQIPLLIWSIKITVVLLLLSLPVLAGAITMLLTDRNFSTSFFDPAGGGDPVLFQHL
+                     F"
+ORIGIN      
+        1 tacactttat tttatcctag gcatttgatc aggaatgatc ggcctatccc taagagttct
+       61 aatccgacta gaactaggac aacccggcag actcctcgga gacgaccaac tctacaatgt
+      121 agtagtaacg tctcacgcct tcgttataat tttcttctta gtaataccca ttataattgg
+      181 gggatttggt aattgactaa tcccccttat agtgggctct ccagacatag cttatccccg
+      241 cctaaacaac ctaagattct gactactccc cccttccttg attcttctta tatcctccac
+      301 cctcatggag ggaggagccg gaacgggatg gacaatttat cctcctctag cctccgcaag
+      361 agcccactca ggaccccctg ttgacctaac catcctatct ctacacctag caggagcctc
+      421 ctcaattctc ggggccatca attttatcgc ctcctcccta aacctccgaa ccaaaggctc
+      481 aagcctagat caaatccccc ttcttatctg atctattaaa atcaccgtag tcctcctact
+      541 tctatctctt ccagttctag ccggagcaat caccatgctt ctcacagatc gaaacttcag
+      601 aacctcattc ttcgaccccg caggaggagg agatcccgtc ctattccaac acctattc
+//
+
+

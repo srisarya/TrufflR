@@ -1,0 +1,57 @@
+LOCUS       OR361384                 529 bp    DNA     linear   MAM 01-AUG-2024
+DEFINITION  Didelphis albiventris voucher MACN-CT 65 cytochrome c oxidase
+            subunit I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   OR361384
+VERSION     OR361384.1
+KEYWORDS    .
+SOURCE      mitochondrion Didelphis albiventris (white-eared opossum)
+  ORGANISM  Didelphis albiventris
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Mammalia; Metatheria; Didelphimorphia; Didelphidae; Didelphis.
+REFERENCE   1  (bases 1 to 529)
+  AUTHORS   Chemisquy,M.A., Gonzalez Ittig,R. and Martin,G.
+  TITLE     Hidden in plain sight: Didelphis albiventris (Didelphimorphia:
+            Didelphidae) might not be a single species
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 529)
+  AUTHORS   Chemisquy,M.A.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (28-JUL-2023) Museo de Ciencias Antropologicas y
+            Naturales, Universidad Nacional de La Rioja y CONICET, Av. Luis M.
+            de La Fuente s.n., La Rioja, La Rioja 5300, Argentina
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..529
+                     /organism="Didelphis albiventris"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="MACN-CT 65"
+                     /db_xref="taxon:42716"
+                     /geo_loc_name="Argentina"
+     gene            <1..>529
+                     /gene="COX1"
+     CDS             <1..>529
+                     /gene="COX1"
+                     /codon_start=3
+                     /transl_table=2
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="WKX02854.1"
+                     /translation="VIVTAHAFIMIFFMVMPIMIGGFGNWLVPLMIGAPDMAFPRMNN
+                     MSFWLLPPSFLLLLASSTIEAGAGTGWTVYPPLAGNLAHAGASVDLAIFSLHLAGISS
+                     ILGAINFITTIINMKPPAMSQYQTPLFVWSVMITAVLLLLSLPVLAAGITMLLTDRNL
+                     NTTFFDPAGGGDPIL"
+ORIGIN      
+        1 atgtgatcgt aaccgcccat gcttttatta tgatcttttt tatagttata cccattataa
+       61 ttggaggatt tggtaattga ctagtcccac ttataattgg agctcctgac atagcattcc
+      121 cgcgaataaa caatataagc ttctgacttc ttcctccgtc attcctacta ttattagcat
+      181 cctccaccat tgaagcagga gctggaacag gttgaacagt atatccgcca cttgctggca
+      241 acttagccca tgcaggtgct tcagttgacc tagctatctt ctcccttcat ctagcaggta
+      301 tttcttctat tctaggtgcc atcaatttta ttactactat tattaacata aaaccacctg
+      361 caatatcaca ataccaaact ccactattcg tctgatcagt aataatcaca gcagtattac
+      421 tacttttatc ccttcccgtt ctagccgcag gaattactat gttattaaca gatcgtaatt
+      481 taaatactac tttctttgat cctgctggag gaggagaccc aattctata
+//
+
+

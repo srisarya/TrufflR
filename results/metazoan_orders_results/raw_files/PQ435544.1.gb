@@ -1,0 +1,89 @@
+LOCUS       PQ435544                1431 bp    DNA     linear   INV 21-FEB-2025
+DEFINITION  Asteroschema sublaeve voucher SIO:BIC:E7073 cytochrome c oxidase
+            subunit I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   PQ435544
+VERSION     PQ435544.1
+DBLINK      BioProject: PRJNA1142170
+KEYWORDS    .
+SOURCE      mitochondrion Asteroschema sublaeve
+  ORGANISM  Asteroschema sublaeve
+            Eukaryota; Metazoa; Echinodermata; Eleutherozoa; Asterozoa;
+            Ophiuroidea; Ophiuridea; Euryalida; Asteroschematidae;
+            Asteroschema.
+REFERENCE   1  (bases 1 to 1431)
+  AUTHORS   Seid,C.A., Hiley,A.S., McCowin,M.F., Carvajal,J.I., Cha,H.,
+            Ahyong,S.T., Ashford,O.S., Breedy,O., Eernisse,D.J., Goffredi,S.K.,
+            Hendrickx,M.E., Kocot,K.M., Mah,C.L., Miller,A.K., Mongiardino
+            Koch,N., Mooi,R., O'Hara,T.D., Pleijel,F., Stiller,J., Tilic,E.,
+            Valentich-Scott,P., Waren,A., Wicksten,M.K., Wilson,N.G.,
+            Cordes,E.E., Levin,L.A., Cortes,J. and Rouse,G.W.
+  TITLE     A faunal inventory of methane seeps on the Pacific margin of Costa
+            Rica
+  JOURNAL   Zookeys 1222, 1-250 (2025)
+   PUBMED   39877055
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 1431)
+  AUTHORS   O'Hara,T.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (05-OCT-2024) Benthic Invertebrate Collection, Scripps
+            Institution of Oceanography, 9500 Gilman Dr #0244, La Jolla, CA
+            92093, USA
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1431
+                     /organism="Asteroschema sublaeve"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="SIO:BIC:E7073"
+                     /db_xref="taxon:1037267"
+                     /geo_loc_name="Costa Rica: Pacific Ocean, Parrita Seep"
+                     /lat_lon="8.9759 N 84.6238 W"
+                     /collection_date="06-Jun-2017"
+                     /collected_by="Carlos Gomez, Odalisca Breedy"
+     gene            <1..>1431
+                     /gene="COX1"
+     CDS             <1..>1431
+                     /gene="COX1"
+                     /codon_start=1
+                     /transl_table=9
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="XHS91173.1"
+                     /translation="LYINRWLFSTNHKDIGTLYLIFGAWAGTVGTAMSNIIRVELSQP
+                     GSLIQNDQTYNVMVTAHAFIMIFFMVMPIMIGGFGNWLVPLMIGAPDMAFPRMNNMSF
+                     WLIPPSFLLLIASAGNESGVGTGWTIYPPLSGPVAHAGGCVDLAIFSLHLAGASSIMA
+                     SINFISTIFNMRAPGMTMDRTPLFVWSILITTFLLLLSLPVLAGAITMLLTDRNINTT
+                     FFDPTGGGDPILFQHLFWFFGHPEVYILILPGFGIISHVVTNRTGKQQPFGYLGMMYA
+                     MIAIGILGFIVWAHHMFTVGLDVDTRAYFTAATMIIAIPTGVKVFSWLATLQGVPFII
+                     NKTHPSMLWALGFIFLFTVGGLTGIILSNSSLNIALHDTYYVTAHFHYVLSMGAVFAI
+                     FSGFTHWFPLFTGAHLDNTSASAHFILMFIGVNLTFFPQHFLGLAGMPRRYSDYPDAF
+                     SFWNTVSSLGSLLSFIGTIGFLTITAL"
+ORIGIN      
+        1 ttatatatta accgatgact tttttctact aaacataagg atataggaac cctataccta
+       61 atatttggag catgagccgg aaccgtagga acagcaatga gcaaaattat tcgggtagaa
+      121 ctatcccaac caggatcact tattcaaaat gatcagactt ataaagtcat ggttacagcc
+      181 cacgcattca ttatgatctt ttttatggta atgccaatta tgattggagg attcggaaaa
+      241 tggttagttc ctttaatgat aggagcccca gacatggcat tcccacgcat gaaaaacatg
+      301 agattttgat taatcccacc ctcatttctc ctcttaatag cctcagccgg aaaagaaaga
+      361 ggagtaggaa ccgggtgaac tatctaccca cccttatcag gcccagtagc ccatgctgga
+      421 ggatgcgtcg acctcgcaat tttctcctta catttagctg gtgcctcatc aattatggct
+      481 tcaataaaat ttattagaac catttttaac atgcgagccc ctggtatgac aatggatcga
+      541 acacccttat ttgtatgatc tatcttaatc acaacattcc tgctccttct ctccctacct
+      601 gtcctcgcgg gagcaataac tatgctatta accgatcgaa acataaaaac taccttcttt
+      661 gatccaacag gaggaggaga cccaatcctc ttccaacact tattttgatt ttttggacat
+      721 ccagaagtct acattcttat cctccctgga tttgggatta tttcccacgt tgttactaaa
+      781 cgaacaggaa agcaacaacc atttggctac ttaggtatga tgtacgcaat gatagctata
+      841 ggaattctag gatttattgt ctgagcacat cacatgttta cagtaggcct tgatgtagac
+      901 actcgagcct acttcactgc cgccactatg attattgcaa ttccaaccgg agttaaggta
+      961 tttagatgat tagcaactct tcaaggggta ccctttatca taaaaaagac ccacccctca
+     1021 atgctctgag ccctaggatt tatattttta tttaccgtag gtggcctaac aggaatcatt
+     1081 ttatctaatt cttccttaaa aatagcactc catgatacct actatgttac cgcacacttt
+     1141 cattatgtct tatcgatggg agccgtattt gcaatattta gcggttttac tcactgattc
+     1201 cctctattta ccggtgccca ccttgacaaa acaagagcct ctgcacactt tattttaatg
+     1261 tttataggag taaacttaac tttcttcccc caacacttcc tcggtttagc aggaatgcca
+     1321 cgacgatatt cagattatcc agacgcattc tccttttgaa aaacagtttc ctcactcgga
+     1381 tcacttctat ccttcatagg cacaatagga ttcctgacca tcacagccct a
+//
+
+

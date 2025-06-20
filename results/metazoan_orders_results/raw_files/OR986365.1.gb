@@ -1,0 +1,68 @@
+LOCUS       OR986365                 604 bp    DNA     linear   INV 21-APR-2025
+DEFINITION  Euphausia pacifica voucher SQ19_16S_690E-1 cytochrome c oxidase
+            subunit I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   OR986365
+VERSION     OR986365.1
+DBLINK      BioProject: PRJNA971221
+KEYWORDS    .
+SOURCE      mitochondrion Euphausia pacifica (North Pacific krill)
+  ORGANISM  Euphausia pacifica
+            Eukaryota; Metazoa; Ecdysozoa; Arthropoda; Crustacea;
+            Multicrustacea; Malacostraca; Eumalacostraca; Eucarida;
+            Euphausiacea; Euphausiidae; Euphausia.
+REFERENCE   1  (bases 1 to 604)
+  AUTHORS   Questel,J.M., Smoot,C.A., Collins,A.G., Lindsay,D.J. and
+            Hopcroft,R.R.
+  TITLE     DNA barcoding deep-water zooplankton from the Gulf of Alaska, North
+            Pacific Ocean
+  JOURNAL   Front Mar Sci 12, 1-13 (2025)
+  REMARK    DOI: 10.3389/fmars.2025.1515048
+REFERENCE   2  (bases 1 to 604)
+  AUTHORS   Questel,J.M.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-DEC-2023) Institute of Marine Science, University of
+            Alaska Fairbanks, O'Neill Building Suite 245, 2150 Koyukuk Drive,
+            Fairbanks, AK 99775, USA
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..604
+                     /organism="Euphausia pacifica"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolation_source="Gulf of Alaska"
+                     /specimen_voucher="SQ19_16S_690E-1"
+                     /db_xref="taxon:102976"
+                     /geo_loc_name="USA"
+                     /lat_lon="56.238955 N 145.393313 W"
+                     /collection_date="Jul-2019"
+                     /collected_by="Russell Hopcroft, Jennifer Questel"
+                     /note="station: Deep_Quinn; gear: MOCNESS.5.1"
+     gene            <1..>604
+                     /gene="COX1"
+     CDS             <1..>604
+                     /gene="COX1"
+                     /codon_start=3
+                     /transl_table=5
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="WQG45784.1"
+                     /translation="FGAWAGMVGTSLSLIIRAELGQPGSLIGDDQIYNVVVTAHAFVM
+                     IFFMVMPIMIGGFGNWLVPLMLGAPDMAFPRMNNMSFWLLPPSLTLLLGSGLVESGVG
+                     TGWTVYPPLSAGIAHAGASVDMGIFSLHIAGASSILGAVNFITTVINMRSAGMTMDRI
+                     PLFVWSVFITAILLLLSLPVLAGAITMLLTDRNLNTSFFDP"
+ORIGIN      
+        1 tttttggtgc atgagccggg atagtaggta cttctttaag attaattatt cgagctgaac
+       61 taggacaacc aggtaggtta attggagacg accaaatcta taatgttgta gtaacagccc
+      121 atgcttttgt tataattttt tttatagtga taccaatcat aattggagga tttggaaact
+      181 gacttgttcc tcttatgtta ggtgcccctg atatggcctt ccctcgaatg aataatataa
+      241 gattttggct tttaccccct tcattaactc ttttattagg caggggctta gtagaaagtg
+      301 gagtgggaac aggttgaaca gtgtatcccc ctttatctgc aggaattgca catgctgggg
+      361 cttctgtaga tataggaatc ttttcactac atattgctgg agcctcttct attttaggag
+      421 cagttaattt cattacaact gtaattaata tgcgatcagc aggaataact atagaccgta
+      481 tccccttatt cgtatggtct gtgtttatta cagcaatttt acttttattg tctctaccag
+      541 ttttagctgg agcaatcaca atacttttaa cagaccgtaa tttaaataca tctttcttcg
+      601 accc
+//
+
+

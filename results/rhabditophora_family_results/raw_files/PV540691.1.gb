@@ -1,0 +1,84 @@
+LOCUS       PV540691                1620 bp    DNA     linear   INV 29-APR-2025
+DEFINITION  Kontikia andersoni voucher MNHN JL467 cytochrome c oxidase subunit
+            1 (cox1) gene, complete cds; mitochondrial.
+ACCESSION   PV540691
+VERSION     PV540691.1
+KEYWORDS    .
+SOURCE      mitochondrion Kontikia andersoni
+  ORGANISM  Kontikia andersoni
+            Eukaryota; Metazoa; Spiralia; Lophotrochozoa; Platyhelminthes;
+            Rhabditophora; Seriata; Tricladida; Continenticola; Geoplanoidea;
+            Geoplanidae; Caenoplaninae; Kontikia.
+REFERENCE   1  (bases 1 to 1620)
+  AUTHORS   Gastineau,R., Murchie,A.K., Winsor,L. and Justine,J.-L.
+  TITLE     Genomic investigations of two terrestrial flatworms invasive in
+            Northern Ireland
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1620)
+  AUTHORS   Gastineau,R., Murchie,A.K., Winsor,L. and Justine,J.-L.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (09-APR-2025) Institute of Marine and Environmental
+            Sciences, University of Szczecin, Ul. Mickiewicza, Szczecin, aucune
+            70-383, Pologne
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: SPAdes v. 4
+            Sequencing Technology :: DNBSEQ
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1620
+                     /organism="Kontikia andersoni"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="MNHN JL467"
+                     /db_xref="taxon:3325556"
+                     /geo_loc_name="United Kingdom: Northern Ireland, County
+                     Down"
+     gene            1..1620
+                     /gene="cox1"
+     CDS             1..1620
+                     /gene="cox1"
+                     /codon_start=1
+                     /transl_table=9
+                     /product="cytochrome c oxidase subunit 1"
+                     /protein_id="XRR13249.1"
+                     /translation="MSFLSFNSLRKLSFGFNYFFPYYFSRWFLSTNHKDIGSLYFVLG
+                     SCSGLIGTSLSVLIRIEVSSPGMFFGDPIFYNFLITTHGLVMIFFFVMPVIMGGFGNW
+                     LIPLMLGVPDMAFPRANNLSFWLLIPSLIFLLVSGMIGGGVGAGWTLYPPLTSNMFHG
+                     GISMDYAIFSLHIAGISSILGAINFITSILNMSVNMRVVNFPLFVWSILITAILLLLA
+                     LPVLAGGLTMLLVDRNFNTSFFDPGGGGDPLLFQHVFWFFGHPEVYILILPGFGIISH
+                     IVLFYSSKNFAFGHLGMVYSMICIGLLGFIVWAHHMYTTGIDFDTRAYFTGATMIIGV
+                     PTGIKVFSWLGTIYGAGNRFFWDSISLLWALGFIFLFTVGGLTGIVLSNASLDVSLHD
+                     TYYVVAHFHYVLSLGAVFAIFAGFIHWWPLFSGCNFNPVFLFSHFWIMFIGVNMTFFP
+                     QHFLGLQGMPRRYVDYSDEFAWWNTVSSAGSIISLFGVIFFVYVVVLSLLSSERTVFI
+                     QTSPISLEWLNVVLPLSFHTHESMLRVWIQK"
+ORIGIN      
+        1 atgtcatttt taagttttaa ttctttacgt aagttgtctt ttggttttaa ttattttttc
+       61 ccttactatt tttctcgttg gttcttgtcc acaaaccaca aggatattgg ttctttatat
+      121 tttgttttgg ggagatgtag gggtctaata ggtactagtt taagggtttt gattcgtatt
+      181 gaggtttctt ctccaggtat gttttttggt gatccaattt tttataattt tttaattact
+      241 actcatggtt tggttatgat tttttttttt gttatgcctg taattatggg tggttttggt
+      301 aaatggttaa ttcctttaat gttaggtgtt cctgatatgg cttttcctcg ggcaaataat
+      361 ctcagttttt ggttattgat tccttcttta atttttttat tagtttctgg aatgattggt
+      421 ggtggtgtag gtgctggttg aactttgtat cctcctttga cttccaatat gtttcatggt
+      481 ggtatcagaa tggattatgc tattttttct ttacatatag cgggtattag ttctatttta
+      541 ggggctatta attttataac cagtattctt aatatgtctg ttaatatgcg ggttgtaaaa
+      601 tttcctttat ttgtgtggtc tattttgatt actgcaattt tgcttttatt ggctcttcct
+      661 gtattagctg gtggtttaac tatgcttcta gttgatcgaa actttaaaac ttcttttttt
+      721 gatccaggag ggggtggaga tcctttactt tttcagcatg ttttttgatt ttttgggcat
+      781 cctgaggttt acattttgat tttacctggc tttggaataa tttcacatat agttttattt
+      841 tatagaagaa agaattttgc ttttgggcat ttagggatgg tttattcaat gatttgtatt
+      901 ggtttgttag gttttattgt ttgggcacat catatgtata ctactggaat tgattttgat
+      961 actcgtgctt attttactgg ggcgacaatg ataattgggg tacctacagg tataaaggtt
+     1021 tttagttggt tgggtactat ttatggtgct ggtaaccgtt ttttttggga ttcaatatct
+     1081 ttattgtggg ctttaggctt tatttttctt tttactgttg gtggattaac tgggattgtt
+     1141 ctttctaatg ctagtttaga tgtaagttta catgatactt attatgttgt agctcatttt
+     1201 cattatgttc tttctttggg agctgttttt gctatttttg ctgggtttat tcattggtgg
+     1261 cctttgtttt ctggctgtaa ttttaatcct gtttttttat tttctcattt ttggattatg
+     1321 tttattgggg taaatatgac tttttttcct caacattttt tgggtttaca aggaatgcct
+     1381 cgtcgttatg tggattattc agatgaattt gcatgatgaa acactgtgtc tagtgcaggt
+     1441 tctataattt ctttgtttgg tgtcatattt tttgtttatg ttgttgtttt aagtttatta
+     1501 agaagggaac gtactgtatt tatacaaact tccccaatta gtttagaatg gttaaatgta
+     1561 gttttacctt taagttttca tacccatgaa tctatgcttc gtgtttgaat tcaaaagtaa
+//
+
+

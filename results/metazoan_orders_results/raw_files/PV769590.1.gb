@@ -1,0 +1,89 @@
+LOCUS       PV769590                1539 bp    RNA     linear   INV 15-JUN-2025
+DEFINITION  Enchytraeus albidus strain PL-A cytochrome c oxidase subunit I
+            (COX1), partial cds; mitochondrial.
+ACCESSION   PV769590
+VERSION     PV769590.1
+DBLINK      BioProject: PRJNA956247
+            BioSample: SAMN34207299
+KEYWORDS    .
+SOURCE      mitochondrion Enchytraeus albidus
+  ORGANISM  Enchytraeus albidus
+            Eukaryota; Metazoa; Spiralia; Lophotrochozoa; Annelida; Clitellata;
+            Oligochaeta; Enchytraeida; Enchytraeidae; Enchytraeus.
+REFERENCE   1  (bases 1 to 1539)
+  AUTHORS   Gajda,L., Daszkowska-Golec,A. and Swiatek,P.
+  TITLE     Trophic Position of the White Worm (Enchytraeus albidus) in the
+            Context of Digestive Enzyme Genes Revealed by Transcriptomics
+            Analysis
+  JOURNAL   Int J Mol Sci 25 (9), 4685 (2024)
+   PUBMED   38731903
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 1539)
+  AUTHORS   Gajda,L. and Swiatek,P.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (10-JUN-2025) Institute of Biology, Biotechnology and
+            Environmental Protection, University of Silesia in Katowice,
+            Bankowa 9, Katowice, Silesia 40-007, Poland
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: Trinity v. 2.12
+            Sequencing Technology :: Illumina
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1539
+                     /organism="Enchytraeus albidus"
+                     /organelle="mitochondrion"
+                     /mol_type="transcribed RNA"
+                     /strain="PL-A"
+                     /isolate="PL-A"
+                     /isolation_source="lab culture"
+                     /db_xref="taxon:6390"
+                     /geo_loc_name="Poland"
+                     /collection_date="Nov-2019"
+     gene            <1..1539
+                     /gene="COX1"
+     CDS             <1..1539
+                     /gene="COX1"
+                     /codon_start=1
+                     /transl_table=5
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="XVC12963.1"
+                     /translation="MRWLYSTNHKDIGTLYFILGVWAGMMGAAMSLLIRIELSQPGSF
+                     LGSDQLYNTIVTAHAFLMIFFLVMPVFIGGFGNWLLPLMLGAPDMAFPRLNNMSFWLL
+                     PPALMLLLSSAAVEKGAGTGWTVYPPLASNIAHAGPSVDLAIFSLHLAGASSILGAVN
+                     FITTVINMRWQGLTLERIPLFVWAVTITVVLLLLSLPVLAGAITMLLTDRNLNTSFFD
+                     PAGGGDPILYQHLFWFFGHPEVYILIIPGFGAISHIVSHYSAKLEPFGTLGMIYAMLG
+                     IAVLGFIVWAHHMFTVGMDVDTRAYFTAATMIIAVPTGIKVFSWLATLHGSKVKYTAP
+                     MLWALGFIFLFTTGGVTGIILSNSALDIILHDTYYVVAHFHYVLSMGAVFAIFAAFTH
+                     WFPLFTGLTLHSRWSKVQFFMMFIGVNLTFFPQHFLGLSGMPRRYSDYPDALMKWNVV
+                     SSMGSLLSFTALLFFIFILWEAFAAQRTVIASPHMPTSMEWSDILPLDFHNLSETGMI
+                     TSPA"
+ORIGIN      
+        1 atgcgctgac tatattctac aaatcacaaa gacattggta ccctatattt tattttagga
+       61 gtttgagccg gtataatggg tgctgccata agattattaa ttcgaattga attaagacaa
+      121 ccaggatcat tcttagggag agaccaactt tataatacaa ttgttactgc tcatgcattt
+      181 cttataattt tctttcttgt tataccagta tttattggtg gatttggaaa ctgactttta
+      241 cctctaatac taggagcacc tgatatagca tttccacgac taaataacat aagattctga
+      301 cttctacccc ctgctttaat attattacta tcttcagcag ctgtagaaaa aggtgccgga
+      361 actggatgaa cagtttatcc gccactagct agaaatattg cacacgcggg cccctctgta
+      421 gatttagcta ttttttctct acatttagca ggagcctcct ctattttagg agctgtaaac
+      481 ttcattacaa ctgtaattaa tatacgatga caaggattga cacttgaacg aattccatta
+      541 tttgtatgag ccgttactat tactgtagtt ttattacttc tttctctacc agtacttgct
+      601 ggtgcaatca ctatattatt aacagatcga aatttaaata catcattctt tgacccagct
+      661 ggtggtggag atccaattct atatcaacac ttattttgat tttttggcca tccagaagta
+      721 tatattttaa ttattccagg atttggggca atttctcata ttgtttctca ctatagagct
+      781 aaattagagc catttggaac actaggaata atttatgcta tattaggaat tgccgttcta
+      841 ggatttattg tatgagcaca ccacatattt acagtaggaa tagacgtaga tacacgagcc
+      901 tacttcacag cagctactat aattattgca gtcccaacag gaattaaagt atttagatga
+      961 ctagctaccc ttcatggatc taaagtaaaa tatactgcac caatactatg agccctggga
+     1021 tttatttttt tatttactac tggtggagta acaggaatta ttttatcaaa ttcagcctta
+     1081 gatatcattt tacatgatac atattatgta gttgcacatt ttcattacgt cctaagaatg
+     1141 ggggcagtat ttgctatttt tgctgcattt acccattgat tcccattatt tactggtcta
+     1201 acacttcatt cacgatgatc taaagttcaa ttcttcataa tatttattgg agtaaattta
+     1261 acattctttc ctcaacattt tttaggccta agaggaatac cacgacgata ttctgattac
+     1321 ccagatgcct taataaaatg aaatgtagta tcatctatag gatctctatt atcatttaca
+     1381 gcccttctat tttttatttt tattttatga gaagcattcg ctgctcaacg aacagtaatt
+     1441 gctagtcctc atataccaac atctatagaa tgaagagata ttttaccact agacttccac
+     1501 aatttaagag aaacaggtat aattactaga cctgcataa
+//
+
+

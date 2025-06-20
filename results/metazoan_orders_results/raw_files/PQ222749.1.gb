@@ -1,0 +1,77 @@
+LOCUS       PQ222749                1088 bp    DNA     linear   INV 29-AUG-2024
+DEFINITION  Neomenia megatrapezata isolate Ap259.5R cytochrome c oxidase
+            subunit I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   PQ222749
+VERSION     PQ222749.1
+KEYWORDS    .
+SOURCE      mitochondrion Neomenia megatrapezata
+  ORGANISM  Neomenia megatrapezata
+            Eukaryota; Metazoa; Spiralia; Lophotrochozoa; Mollusca;
+            Aplacophora; Solenogastres; Neomeniamorpha; Neomeniidae; Neomenia.
+REFERENCE   1  (bases 1 to 1088)
+  AUTHORS   Cobo,M.C., Farris,W.J., Olson,C.J., McLaughlin,E.L. and Kocot,K.M.
+  TITLE     Autonomous Reef Monitoring Structures (ARMS) as a tool to uncover
+            neglected marine biodiversity: two new Solenogastres (Mollusca,
+            Aplacophora) from the Gulf of Mexico
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1088)
+  AUTHORS   Cobo,M.C., Farris,W.J., Olson,C.J., McLaughlin,E.L. and Kocot,K.M.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (24-AUG-2024) Department of Biological Sciences, The
+            University of Alabama, 500 Hackberry Lane, Tuscaloosa, AL 35487,
+            USA
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: Trinity v. 2.10
+            Sequencing Technology :: Illumina
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1088
+                     /organism="Neomenia megatrapezata"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="Ap259.5R"
+                     /db_xref="taxon:1077245"
+                     /geo_loc_name="Antarctica"
+                     /lat_lon="64.411200 S 61.963167 W"
+                     /collection_date="2013-11-28"
+                     /collected_by="Kevin Kocot"
+                     /identified_by="Kevin Kocot"
+                     /note="SAMN39711722"
+     gene            <1..>1088
+                     /gene="COX1"
+     CDS             <1..>1088
+                     /gene="COX1"
+                     /codon_start=1
+                     /transl_table=5
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="XES82195.1"
+                     /translation="MRWFFSTNHKDIGTLYLLFSLWAGMVGAGLSMIIRMELGQPGSI
+                     FGDDHLYNVIVTAHAFVMIFFLVMPMMMGGFGNWLIPLMLNSPDMAFPRLNNMSFWLL
+                     PPSLLLLLSSALVESGAGTGWTVYPPLSGVVSHGGASVDMAIFSLHMAGASSILASIN
+                     FLVTIFNARSNSLGFERMTLFIWSIMVTAILLVLSLPVLAGAITMLLFDRNFSTAFFD
+                     PAGGGDPVLYQHLFWFFGHPEVYILILPGFGMISHIIIYYCNKKHTFGVLGMIYAMVG
+                     IGVLGFVVWAHHMYVIGMDIDTRAYFMAATMVIAVPTGVKVFSWLATMYGSRLRYEAP
+                     LLWALGFIFLFTTGGLTGIVLSNSSIDVA"
+ORIGIN      
+        1 atgcgttgat ttttttctac taatcataaa gatattggta ctttatattt actttttagt
+       61 ttatgggctg gtatagttgg tgctgggcta agaataatta ttcggataga attagggcaa
+      121 cctgggtcta tttttggaga tgatcattta tataatgtaa ttgtgactgc acatgctttt
+      181 gtgatgattt tttttttggt gatacctata atgatagggg gttttgggaa ttgattaatt
+      241 ccgttaatat taaatagtcc tgatatagct tttcctcgtt taaataatat aagattttga
+      301 cttcttcctc cttctttatt attattacta tcttctgctt tagtagagtc tggggctgga
+      361 actgggtgga ctgtttatcc acctttatct ggagttgtta gacatggagg ggcttctgtt
+      421 gatatagcta ttttttcttt acatatggct ggggctagaa gtattttggc ttcaattaat
+      481 tttctagtta ctatttttaa tgctcgttca aacagattag gttttgagcg aataactttg
+      541 tttatttgat caattatagt tactgctatt ttgttagttc tttctttgcc tgttttagct
+      601 ggggctatta ctatactttt atttgaccgg aattttagta ctgctttttt tgatcctgct
+      661 gggggtggag atccagtttt atatcagcat ttattttggt tttttggtca ccctgaagtt
+      721 tacattttaa ttttacctgg ttttgggata atttcacata tcattattta ttattgtaat
+      781 aaaaaacata cttttggggt tttaggtata atttatgcta tagttggtat tggtgtgtta
+      841 gggtttgttg tttgggcgca tcatatatat gtaattggga tggatattga tacacgggcc
+      901 tattttatag ccgctactat agttattgct gtgcctactg gagtgaaagt ttttagatgg
+      961 ttagctacta tatatggttc tcgtcttcgc tatgaagctc ctttgttatg ggctttaggt
+     1021 tttatttttc tatttactac tggtggatta actggtattg tattatcaaa cagatcaatt
+     1081 gatgtagc
+//
+
+
