@@ -1,0 +1,66 @@
+LOCUS       PQ672313                 658 bp    DNA     linear   INV 03-APR-2025
+DEFINITION  Asterias rubens voucher GEANS231 cytochrome c oxidase subunit I
+            (COX1) gene, partial cds; mitochondrial.
+ACCESSION   PQ672313
+VERSION     PQ672313.1
+DBLINK      BioProject: PRJNA1236822
+KEYWORDS    .
+SOURCE      mitochondrion Asterias rubens (European starfish)
+  ORGANISM  Asterias rubens
+            Eukaryota; Metazoa; Echinodermata; Eleutherozoa; Asterozoa;
+            Asteroidea; Forcipulatacea; Forcipulatida; Asteriidae; Asterias.
+REFERENCE   1  (bases 1 to 658)
+  AUTHORS   Christodoulou,M., Derycke,S., Beentjes,K., Hillewaert,H.,
+            Lundin,K., Kamyab,E., Khodami,S., Maes,S., Reiss,H., Uhlir,C., Van
+            den Bulcke,L., Van der Hoorn,B., De Backer,A. and Martinez
+            Arbizu,P.
+  TITLE     A taxonomically reliable DNA barcode reference library for North
+            Sea macrobenthos
+  JOURNAL   Sci Data (2025) In press
+REFERENCE   2  (bases 1 to 658)
+  AUTHORS   Christodoulou,M., Schroeer,A. and Bierschenk,T.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (03-DEC-2024) German Centre for Marine Biodiversity
+            Research, Senckenberg am Meer, Sudstrand 44, Wilhelmshaven 26382,
+            Germany
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..658
+                     /organism="Asterias rubens"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="GEANS231"
+                     /db_xref="taxon:7604"
+                     /geo_loc_name="North Sea"
+                     /lat_lon="54.136 N 7.896 E"
+                     /collection_date="16-Oct-2020"
+     gene            <1..>658
+                     /gene="COX1"
+     CDS             <1..>658
+                     /gene="COX1"
+                     /codon_start=2
+                     /transl_table=9
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="XKX08759.1"
+                     /translation="TLYLIFGAWAGMIGTAMSVIIRTELAQPGSLLQDDQIYNVIVTA
+                     HALVMIFFMVMPIMIGGFGNWLIPLMIGAPDMAFPRMNNMSFWLIPPSFLLLLASAGV
+                     ESGAGTGWTIYPPLSSGLAHAGGSVDLAIFSLHLAGASSILASINFITTIINMRTPGM
+                     SFDRLPLFVWSVFVTAFLLLLSLPVLAGAITMLLTDRNINTTFFDPAGGGDPILFQHL
+                     F"
+ORIGIN      
+        1 tactctttat ttaatatttg gagcttgagc tggtatgatt ggaaccgcta tgagagttat
+       61 aattcgtact gagcttgcac aaccagggtc tttacttcaa gacgatcaaa tttataaagt
+      121 tatagtaact gctcatgccc tcgtaatgat attttttatg gtaatgccta ttatgatagg
+      181 aggatttggt aaatgactaa tccctctcat gataggagcc ccagacatgg cattcccccg
+      241 catgaaaaaa atgaggtttt gactaatccc cccttctttt ttacttctcc tagcttccgc
+      301 tggggttgaa agaggggcag ggactgggtg aacaatttac ccccctttat ctagagggct
+      361 agctcacgca ggaggatctg ttgatcttgc tatcttttcc ctacacttgg ctggagcttc
+      421 ttctatttta gcctccataa aatttattac aacaattata aaaatgcgaa cgcctggaat
+      481 gtcttttgat cgacttcctc ttttcgtttg atcagtgttt gtaactgctt ttctcctcct
+      541 actttctctc cctgttttag ccggagctat tactatgctc ttgacagatc gaaaaattaa
+      601 tacaactttt ttcgaccccg ctggaggagg agaccctata ctttttcaac atttattc
+//
+
+

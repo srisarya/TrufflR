@@ -1,0 +1,66 @@
+LOCUS       OR297979                 657 bp    DNA     linear   INV 01-MAR-2024
+DEFINITION  Hippospongia communis voucher 20200522-MRS-FTP4 cytochrome c
+            oxidase subunit I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   OR297979
+VERSION     OR297979.1
+KEYWORDS    .
+SOURCE      mitochondrion Hippospongia communis (horse sponge)
+  ORGANISM  Hippospongia communis
+            Eukaryota; Metazoa; Porifera; Demospongiae; Keratosa;
+            Dictyoceratida; Spongiidae; Hippospongia.
+REFERENCE   1  (bases 1 to 657)
+  AUTHORS   Grenier,M., Simmler,C., Chevaldonne,P., Callizot,N. and Perez,T.
+  TITLE     Searching for Mediterranean bath sponges (Demospongiae:
+            Dictyoceratida: Spongiidae) in the Northeast Atlantic reveals a new
+            species: an integrative taxonomic approach
+  JOURNAL   Zool J Linn Soc (2023)
+REFERENCE   2  (bases 1 to 657)
+  AUTHORS   Grenier,M. and Perez,T.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (18-JUL-2023) Station Marine d'Endoume (SME), IMBE CNRS
+            UMR 7263, Chemin de la Batterie des Lions, Marseille, Bouches du
+            Rhone 13007, France
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..657
+                     /organism="Hippospongia communis"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="20200522-MRS-FTP4"
+                     /db_xref="taxon:119431"
+                     /geo_loc_name="France: Marseille"
+                     /collection_date="20-May-2020"
+                     /collected_by="Thierry Perez (CNRS, IMBE)"
+                     /identified_by="Marie Grenier (CNRS, IMBE)"
+                     /note="PCR_primers=fwd_name: dgLCO1490, rev_name:
+                     dgHCO2198"
+     gene            <1..>657
+                     /gene="COX1"
+     CDS             <1..>657
+                     /gene="COX1"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="WKN81725.1"
+                     /translation="TLYLLFGIVGGTVGLSLSLIMRFELSSPGTLLGDDTIYNVVVTA
+                     HGLIMVFFLVMPVLIGGFGNWFVPLYIGSPDMAFPRLNNLSFWLLPPAFIMLVGSVFV
+                     EEGAGTGWTLYPPLSGGMGHSGPSVDMAIFSLHLAGISSILGAINFISTIFNMRASGV
+                     GWTRMPLFVWSILVTVFLLLLSLPVLAGGITMLLTDRNFNTSFFDPVGGGDPILFQHL
+                     F"
+ORIGIN      
+        1 acattatatt tattattcgg gattgtgggg ggaacggtgg gtttatcttt aagtctgata
+       61 atgcggttcg agttgtcttc cccgggaacc ttattggggg atgatactat atataatgtt
+      121 gttgtaacag cacatggttt gataatggtc ttttttttgg taatgcctgt attgatcggg
+      181 gggtttggta attggtttgt tcccctgtat atcgggtcgc ccgatatggc gttcccacgg
+      241 ctaaataatt taagtttttg gttattgccg ccggcattta ttatgttagt tgggtctgtt
+      301 tttgtggaag agggggccgg aaccggctgg actttgtacc ccccgctatc tggcggcatg
+      361 gggcattccg ggccatctgt ggatatggct atttttagtt tgcatttggc gggtatatct
+      421 tctatcttgg gggcgattaa ttttattagt actattttta atatgcgggc gtccggagta
+      481 ggttgaactc gaatgccttt gtttgtatga tctattttag ttacagtgtt tttattatta
+      541 ttgtcattac cagtattggc cgggggaata actatgttat taactgatcg gaattttaat
+      601 acttctttct ttgatccggt gggaggcggg gaccccatat tgtttcaaca cttattt
+//
+
+

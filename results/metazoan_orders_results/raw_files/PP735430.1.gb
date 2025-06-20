@@ -1,0 +1,66 @@
+LOCUS       PP735430                 696 bp    DNA     linear   INV 04-MAY-2024
+DEFINITION  Plococidaris verticillata isolate PV1 cytochrome c oxidase subunit
+            I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   PP735430
+VERSION     PP735430.1
+KEYWORDS    .
+SOURCE      mitochondrion Plococidaris verticillata
+  ORGANISM  Plococidaris verticillata
+            Eukaryota; Metazoa; Echinodermata; Eleutherozoa; Echinozoa;
+            Echinoidea; Perischoechinoidea; Cidaroida; Cidaridae; Plococidaris.
+REFERENCE   1  (bases 1 to 696)
+  AUTHORS   Aulia,E.D. and Park,J.
+  TITLE     Echinoderms from Situbondo Coral Reefs, Indonesia
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 696)
+  AUTHORS   Aulia,E.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-APR-2024) Convergence Study on the Ocean Science and
+            Technology, Korea Maritime and Ocean University, 727 Taejong-ro,
+            Yeongdo-gu, Busan 49112, South Korea
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..696
+                     /organism="Plococidaris verticillata"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="PV1"
+                     /isolation_source="muscle"
+                     /db_xref="taxon:1105220"
+                     /geo_loc_name="Indonesia: Situbondo, Batu Lawang"
+                     /lat_lon="7.693965 S 113.819003 E"
+                     /collection_date="16-Jul-2023"
+                     /collected_by="Elsa Dianita Aulia"
+                     /identified_by="Elsa Dianita Aulia"
+                     /note="PCR_primers=fwd_name: COIceF, rev_name: COIceR"
+     gene            <1..>696
+                     /gene="COX1"
+     CDS             <1..>696
+                     /gene="COX1"
+                     /codon_start=1
+                     /transl_table=9
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="XAF35065.1"
+                     /translation="MIFFMVMPIMIGGFGNWLIPLMIGAPDMAFPRMNNMSFWLVPPS
+                     FILLLASAGVESGAGTGWTIYPPLSSNLAHAGGSVDLAIFSLHLAGASSILASINFIT
+                     TIINMRTPGISFDRLPLFVWSVFVTAFLLLLSLPVLAGAITMLLTDRNINTTFFDPAG
+                     GGDPILFQHLFWFFGHPEVYILILPGFGMISHVIAHYAGKSEPFGYLGMVYAMIAIGI
+                     LGFLVWAHHMFTVG"
+ORIGIN      
+        1 atgatatttt ttatggttat gcctataatg ataggaggat ttggaaattg actaatcccc
+       61 ctaatgatag gtgcaccaga catggcattt ccgcgaatga aaaatatgag attttgatta
+      121 gtacctccat catttatact actactagca tcagcgggag tcgaaagagg ggcaggaaca
+      181 gggtgaacca tctatccccc tctctcaaga aacctagcac acgccggagg ctctgtagac
+      241 ttagctatct tctccttaca cctagcgggt gcatcatcta tcctagcctc aattaacttt
+      301 attacaacta tcatcaatat gcgtacccca ggcatctctt ttgaccgatt acctttattt
+      361 gtctggtcag tatttgtaac tgctttccta ctactactat ccctcccagt actagccgga
+      421 gctataacaa tgctactaac agatcgaaac attaaaacta cattctttga cccagcagga
+      481 ggaggagacc ccatcctatt tcaacaccta ttttggttct ttggacaccc agaagtttat
+      541 atcctaattc tccctggatt tggaatgatt tcacatgtaa tagcccatta cgctggaaag
+      601 agagaaccgt ttggttatct cggaatggta tacgcgatga tcgcgatagg gattctaggg
+      661 tttttagtgt gggcacacca catgttcaca gtagga
+//
+
+

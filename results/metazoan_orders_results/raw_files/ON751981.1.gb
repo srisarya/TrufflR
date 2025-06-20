@@ -1,0 +1,58 @@
+LOCUS       ON751981                 396 bp    DNA     linear   INV 01-DEC-2022
+DEFINITION  Ovactis brasiliensis voucher Ovactis_brasiliensis_2 cytochrome c
+            oxidase subunit I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   ON751981
+VERSION     ON751981.1
+KEYWORDS    .
+SOURCE      mitochondrion Ovactis brasiliensis
+  ORGANISM  Ovactis brasiliensis
+            Eukaryota; Metazoa; Cnidaria; Anthozoa; Ceriantharia; Penicillaria
+            (in: tube anenomes); Arachnactidae; Ovactis.
+REFERENCE   1  (bases 1 to 396)
+  AUTHORS   Lopes,C.S., Maronna,M.M., Martinello-Filho,J.E., Morandini,A.C. and
+            Stampar,S.N.
+  TITLE     The tale of planktonic species of Ceriantharia (Cnidaria) is
+            falling: evidence from specimens collected in the Amazon coast
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 396)
+  AUTHORS   Stampar,S.N.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (13-JUN-2022) FC/Bauru, UNESP - Sao Paulo State
+            University, Av. Eng. Luiz Edmundo Carrijo Coube, 14-01, Bauru, Sao
+            Paulo 17033-360, Brazil
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..396
+                     /organism="Ovactis brasiliensis"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="Ovactis_brasiliensis_2"
+                     /db_xref="taxon:2952499"
+                     /geo_loc_name="Brazil"
+                     /lat_lon="0.585667 S 47.560114 W"
+                     /identified_by="Sergio Stampar"
+                     /note="PCR_primers=fwd_name: LCO1490, rev_name: HCO2198"
+     gene            <1..>396
+                     /gene="COX1"
+     CDS             <1..>396
+                     /gene="COX1"
+                     /codon_start=3
+                     /transl_table=4
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="USC32494.1"
+                     /translation="VMIGGFGNWFVPLQIGAPDMAFPRLNNISFWLLPPALLLLLNSA
+                     FIEQGAGTGWTVYPPLSGLQAHSGGSVDMAIFSLHLAGASSILGAINFITTIFNMRSP
+                     GVKWDKLPLFVWSILITAFLLLLSLPVLA"
+ORIGIN      
+        1 cggtcatgat cggcgggttt ggaaattgat ttgtgccatt acaaataggc gcccctgata
+       61 tggcttttcc cagattgaac aatattagct tttgactcct accccctgcc ctgttgttac
+      121 tattaaactc ggcttttata gaacaaggtg ccggaacagg ctgaacagtc tatccgccgt
+      181 tgtcaggact acaagcccac tcgggggggt ctgtggacat ggcaattttt agtcttcatt
+      241 tagcgggcgc ttcttctata ttgggcgcca tcaattttat aacaactatt tttaatatga
+      301 ggtcaccagg ggtcaaatga gacaagcttc ccttgtttgt atggtctatt ttaataactg
+      361 cttttctatt actcctatcg cttccggttc tggcgg
+//
+
+

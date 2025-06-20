@@ -1,0 +1,72 @@
+LOCUS       KX012675                 633 bp    DNA     linear   MAM 01-DEC-2016
+DEFINITION  Orycteropus afer voucher NZG:BWP38741 cytochrome oxidase subunit 1
+            (COI) gene, partial cds; mitochondrial.
+ACCESSION   KX012675
+VERSION     KX012675.1
+DBLINK      BioProject: PRJNA301744
+KEYWORDS    .
+SOURCE      mitochondrion Orycteropus afer (aardvark)
+  ORGANISM  Orycteropus afer
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Mammalia; Eutheria; Afrotheria; Tubulidentata; Orycteropodidae;
+            Orycteropus.
+REFERENCE   1  (bases 1 to 633)
+  AUTHORS   Mwale,M., Dalton,D.L., Roelofse,M., Mokgokong,P.S., Labuschagne,K.
+            and Kotze,A.
+  TITLE     Barcode of Wildlife project [South Africa]
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 633)
+  AUTHORS   Mwale,M., Dalton,D.L., Roelofse,M., Mokgokong,P.S., Labuschagne,K.
+            and Kotze,A.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (31-MAR-2016) Research and Scientific Services, National
+            Zoological Garderns of South Africa, 232 Boom Street, Pretoria,
+            Gauteng 0001, South Africa
+COMMENT     ##BWP:1.0-START##
+            basisOfIdentification    :: Digital images
+            chainOfCustody           :: Yes
+            identificationConfidence :: high
+            identificationDate       :: 18-Jun-2015
+            typeStatus               :: none
+            ##BWP:1.0-END##
+FEATURES             Location/Qualifiers
+     source          1..633
+                     /organism="Orycteropus afer"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="NZG:BWP38741"
+                     /db_xref="taxon:9818"
+                     /geo_loc_name="South Africa"
+                     /collection_date="05-Jan-2015"
+                     /collected_by="Leith Meyer"
+                     /identified_by="Tracy Rehse"
+                     /PCR_primers="fwd_name: LCO1490, fwd_seq:
+                     ggtcaacaaatcataaagatattgg, rev_name: HCO2198, rev_seq:
+                     taaacttcagggtgaccaaaaaatca"
+     gene            <1..>633
+                     /gene="COI"
+     CDS             <1..>633
+                     /gene="COI"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="cytochrome oxidase subunit 1"
+                     /protein_id="ANH56772.1"
+                     /translation="WAGMVGTALSLLIRAELGQPGALLGDDQIYNVVVTAHAFVMIFF
+                     MVMPIMIGGFGNWLVPLMIGAPDMAFPRMNNMSFWLLPPSFLLLLASSMVEAGAGTGW
+                     TVYPPLAGNLAHAGASVDLTIFSLHLAGVSSILGAINFITTIINMKPPALSQYQTPLF
+                     VWSVLITAVLLLLSLPVLAAGITMLLTDRNLNTTFFDPAGGGDPILYQHLY"
+ORIGIN      
+        1 tgagctggaa tagtgggaac agccctaagc ttattaatcc gagctgaact aggtcagcct
+       61 ggtgctctac taggagacga ccaaatctat aacgttgttg taacagctca tgcattcgta
+      121 ataattttct ttatagtgat gcctattata attggaggtt ttggaaactg attagtaccc
+      181 ctaataattg gagcacctga catagcattc cctcgaataa acaatataag cttctgacta
+      241 ttgccccctt cattcctcct attattagcc tcatctatag tagaagctgg tgcagggaca
+      301 ggctgaacag tctacccgcc cttagcagga aatctcgccc atgcaggtgc ctcagtagac
+      361 ttaacaatct tttcccttca tctagcaggt gtgtcatcca tcctaggagc aatcaatttc
+      421 attaccacta ttatcaatat aaaaccacca gccttatcac agtatcaaac accattattt
+      481 gtatgatccg tattaatcac cgccgtccta ttactcttgt ctttaccagt tttagccgca
+      541 ggaattacta tgctactgac tgatcggaac ctaaatacaa cttttttcga tcctgctgga
+      601 ggaggagacc caattctcta tcaacaccta tac
+//
+
+

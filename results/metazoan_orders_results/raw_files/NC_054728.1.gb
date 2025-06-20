@@ -1,0 +1,492 @@
+LOCUS       NC_054728              17652 bp    DNA     circular CON 03-APR-2023
+DEFINITION  Falco naumanni isolate bFalNau1 mitochondrion, complete sequence.
+ACCESSION   NC_054728
+VERSION     NC_054728.1
+DBLINK      BioProject: PRJNA927338
+            BioSample: SAMN16870685
+KEYWORDS    RefSeq.
+SOURCE      mitochondrion Falco naumanni (lesser kestrel)
+  ORGANISM  Falco naumanni
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Neoaves; Telluraves; Australaves;
+            Falconiformes; Falconidae; Falco.
+REFERENCE   1  (bases 1 to 17652)
+  AUTHORS   Rubolini,D., Formenti,G., Secomandi,S., Maloney,B., Bounas,T.,
+            Mountcastle,J., Haase,B., Bonisoli-Alquati,A., Galimberti,A.,
+            Ficetola,G.F., Tracey,A., Sims,Y., Howe,K., Rhie,A., Fedrigo,O. and
+            Jarvis,E.D.
+  TITLE     Falco naumanni (Lesser kestrel) genome, bFalNau1, paternal
+            haplotype
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 17652)
+  CONSRTM   NCBI Genome Project
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-MAY-2021) National Center for Biotechnology
+            Information, NIH, Bethesda, MD 20894, USA
+REFERENCE   3  (bases 1 to 17652)
+  AUTHORS   Rubolini,D., Formenti,G., Secomandi,S., Maloney,B., Bounas,T.,
+            Mountcastle,J., Haase,B., Bonisoli-Alquati,A., Galimberti,A.,
+            Ficetola,G.F., Tracey,A., Sims,Y., Howe,K., Rhie,A., Fedrigo,O. and
+            Jarvis,E.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (18-MAR-2021) Vertebrate Genomes Project, G10K, 1230 York
+            Avenue, New York, NY 10065, USA
+COMMENT     PROVISIONAL REFSEQ: This record has not yet been subject to final
+            NCBI review. The reference sequence is identical to CM030192.
+            
+            ##Genome-Assembly-Data-START##
+            Assembly Date          :: 14-JUL-2020
+            Assembly Method        :: TrioCanu v. 1.8; purge_dups v. 1.0.0;
+                                      Scaff 10x v. 4.1.0; Bionano solve v.
+                                      3.2.1_04122018; Salsa2 HiC v. 2.2; pbgcpp
+                                      v. 1.9.0; Freebayes v. 1.3.1; gEVAL
+                                      manual curation v. 2020-07-14; VGP trio
+                                      assembly pipeline v. 1.6
+            Assembly Name          :: bFalNau1.pat
+            Diploid                :: Principal pseudohaplotype
+            Genome Representation  :: Full
+            Expected Final Version :: No
+            Genome Coverage        :: 104.34x
+            Sequencing Technology  :: PacBio Sequel I CLR; Illumina NovaSeq;
+                                      Arima Genomics Hi-C; Bionano Genomics DLS
+            ##Genome-Assembly-Data-END##
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..17652
+                     /organism="Falco naumanni"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="bFalNau1"
+                     /specimen_voucher="P51P2 - H187058 (nest 2016-P51)"
+                     /db_xref="taxon:148594"
+                     /sex="female"
+                     /tissue_type="blood"
+                     /dev_stage="juvenile"
+                     /geo_loc_name="Italy: Matera"
+                     /lat_lon="40.67 N 16.60 E"
+                     /collection_date="2016-06-25"
+                     /collected_by="Diego Rubolini"
+     gene            1..70
+                     /locus_tag="KIH17_mgt01"
+                     /db_xref="GeneID:64854605"
+     tRNA            1..70
+                     /locus_tag="KIH17_mgt01"
+                     /product="tRNA-Phe"
+                     /db_xref="GeneID:64854605"
+     gene            71..1047
+                     /locus_tag="KIH17_mgr02"
+                     /db_xref="GeneID:64854582"
+     rRNA            71..1047
+                     /locus_tag="KIH17_mgr02"
+                     /product="12S ribosomal RNA"
+                     /db_xref="GeneID:64854582"
+     gene            1048..1121
+                     /locus_tag="KIH17_mgt02"
+                     /db_xref="GeneID:64854583"
+     tRNA            1048..1121
+                     /locus_tag="KIH17_mgt02"
+                     /product="tRNA-Val"
+                     /db_xref="GeneID:64854583"
+     gene            1122..2714
+                     /locus_tag="KIH17_mgr01"
+                     /db_xref="GeneID:64854584"
+     rRNA            1122..2714
+                     /locus_tag="KIH17_mgr01"
+                     /product="16S ribosomal RNA"
+                     /db_xref="GeneID:64854584"
+     gene            2715..2788
+                     /locus_tag="KIH17_mgt03"
+                     /db_xref="GeneID:64854585"
+     tRNA            2715..2788
+                     /locus_tag="KIH17_mgt03"
+                     /product="tRNA-Leu"
+                     /codon_recognized="UUR"
+                     /db_xref="GeneID:64854585"
+     gene            2804..3778
+                     /gene="ND1"
+                     /locus_tag="KIH17_mgp13"
+                     /db_xref="GeneID:64854586"
+     CDS             2804..3778
+                     /gene="ND1"
+                     /locus_tag="KIH17_mgp13"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="NADH dehydrogenase subunit 1"
+                     /protein_id="YP_010059949.1"
+                     /db_xref="GeneID:64854586"
+                     /translation="MTQPTPLTHLIMFSAYALPVLIAVAFLTLVERKVLSYMQARKGP
+                     NIVGPFGLLQPVADGVKLFTKEPIRPSTSSPLLFTLTPALALLLAISIWTPLPLPFSL
+                     ADLNLGLLFLLAMSSLAVYSILWSGWASNSKYALIGALRAVAQTISYEVTLAIILLSV
+                     IMLSGNYTLNTLTTTQEPLYLIFSTWPLAMMWYISTLAETNRAPFDLTEGESELVSGF
+                     NVEYAAGPFALFFLAEYANIMLMNTLTTIMFINPGSLGLPLELFPTILATKTLLLSSG
+                     FLWIRASYPRFRYDQLMHLLWKNFLPLTLALCLWHTSMPICYAGLPPT"
+     gene            3793..3865
+                     /locus_tag="KIH17_mgt04"
+                     /db_xref="GeneID:64854569"
+     tRNA            3793..3865
+                     /locus_tag="KIH17_mgt04"
+                     /product="tRNA-Ile"
+                     /db_xref="GeneID:64854569"
+     gene            complement(3876..3946)
+                     /locus_tag="KIH17_mgt05"
+                     /db_xref="GeneID:64854587"
+     tRNA            complement(3876..3946)
+                     /locus_tag="KIH17_mgt05"
+                     /product="tRNA-Gln"
+                     /db_xref="GeneID:64854587"
+     gene            3946..4016
+                     /locus_tag="KIH17_mgt06"
+                     /db_xref="GeneID:64854588"
+     tRNA            3946..4016
+                     /locus_tag="KIH17_mgt06"
+                     /product="tRNA-Met"
+                     /db_xref="GeneID:64854588"
+     gene            4018..5057
+                     /gene="ND2"
+                     /locus_tag="KIH17_mgp12"
+                     /db_xref="GeneID:64854589"
+     CDS             4018..5057
+                     /gene="ND2"
+                     /locus_tag="KIH17_mgp12"
+                     /note="TAA stop codon is completed by the addition of 3' A
+                     residues to the mRNA"
+                     /codon_start=1
+                     /transl_except=(pos:5056..5057,aa:TERM)
+                     /transl_table=2
+                     /product="NADH dehydrogenase subunit 2"
+                     /protein_id="YP_010059950.1"
+                     /db_xref="GeneID:64854589"
+                     /translation="MSPLTKLTFSLSLMLGTTITISSSHWMLAWAGLEINTLAIIPFI
+                     SKSHHPRAIEAAIKYFLTQATASALILFSSTINAQFTGQWDITQLTQPTASLLLTAAI
+                     AMKLGLVPFHFWFPEVMQGSPMTTALLLSTLMKLPPISILFLTAPSLNPLLLTTMAIA
+                     STAVGGWMGLNQTQIRKVLAFSSIAHLGWMTIILIYNPKLTMVTFYLYAMVTTPIFLA
+                     LNTTNSSKLTTMMTSWAKMPSLNASLMLTLLSLAGLPPLTGFLPKWLIIQELTKQEMS
+                     TTAMVISMLSLLGLFFYLRLAYCSTITLPPNTTNSMKQWYNNKPASTSIATLISLSTL
+                     LLPLSPMILTIT"
+     gene            5058..5134
+                     /locus_tag="KIH17_mgt07"
+                     /db_xref="GeneID:64854570"
+     tRNA            5058..5134
+                     /locus_tag="KIH17_mgt07"
+                     /product="tRNA-Trp"
+                     /db_xref="GeneID:64854570"
+     gene            complement(5145..5214)
+                     /locus_tag="KIH17_mgt08"
+                     /db_xref="GeneID:64854590"
+     tRNA            complement(5145..5214)
+                     /locus_tag="KIH17_mgt08"
+                     /product="tRNA-Ala"
+                     /db_xref="GeneID:64854590"
+     gene            complement(5226..5298)
+                     /locus_tag="KIH17_mgt09"
+                     /db_xref="GeneID:64854591"
+     tRNA            complement(5226..5298)
+                     /locus_tag="KIH17_mgt09"
+                     /product="tRNA-Asn"
+                     /db_xref="GeneID:64854591"
+     gene            complement(5301..5367)
+                     /locus_tag="KIH17_mgt10"
+                     /db_xref="GeneID:64854592"
+     tRNA            complement(5301..5367)
+                     /locus_tag="KIH17_mgt10"
+                     /product="tRNA-Cys"
+                     /db_xref="GeneID:64854592"
+     gene            complement(5367..5437)
+                     /locus_tag="KIH17_mgt11"
+                     /db_xref="GeneID:64854593"
+     tRNA            complement(5367..5437)
+                     /locus_tag="KIH17_mgt11"
+                     /product="tRNA-Tyr"
+                     /db_xref="GeneID:64854593"
+     gene            5439..6989
+                     /gene="COX1"
+                     /locus_tag="KIH17_mgp11"
+                     /db_xref="GeneID:64854594"
+     CDS             5439..6989
+                     /gene="COX1"
+                     /locus_tag="KIH17_mgp11"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="YP_010059951.1"
+                     /db_xref="GeneID:64854594"
+                     /translation="MTFINRWLFSTNHKDIGTLYLLFGAWAGMAGTALSLLIRAELGQ
+                     PGTLLGDDQIYNVIVTAHAFVMIFFMVMPIMIGGFGNWLVPLMIGAPDMAFPRMNNMS
+                     FWLLPPSFLLLLASSTVEAGVGTGWTVYPPLAGNLAHAGASVDLAIFSLHLAGVSSIL
+                     GAINFITTAINMKPPTLSQYQTPLFVWSVLITAVLLLLSLPVLAAGITMLLTDRNLNT
+                     TFFDPAGGGDPILYQHLFWFFGHPEVYILILPGFGIISHVVTYYAGKKEPFGYMGMVW
+                     AMLSIGFLGFIVWAHHMFTVGMDVDTRAYFTSATMIIAIPTGIKVFSWLATLHGGTIK
+                     WDPPMLWALGFIFLFTIGGLTGIVLANSSLDIALHDTYYVVAHFHYVLSMGAVFAILA
+                     GFTHWFPLFTGYTLHPTWSKTHFGVMFTGVNLTFFPQHFLGLAGMPRRYSDYPDAYTL
+                     WNTLSSIGSLISMTAVVLLMFIIWEAFAAKRKVLQTELTTTNIEWIYGCPPPYHTFEE
+                     PTFVQTQE"
+     gene            complement(6981..7054)
+                     /locus_tag="KIH17_mgt12"
+                     /db_xref="GeneID:64854571"
+     tRNA            complement(6981..7054)
+                     /locus_tag="KIH17_mgt12"
+                     /product="tRNA-Ser"
+                     /codon_recognized="UCN"
+                     /db_xref="GeneID:64854571"
+     gene            7057..7125
+                     /locus_tag="KIH17_mgt13"
+                     /db_xref="GeneID:64854595"
+     tRNA            7057..7125
+                     /locus_tag="KIH17_mgt13"
+                     /product="tRNA-Asp"
+                     /db_xref="GeneID:64854595"
+     gene            7129..7812
+                     /gene="COX2"
+                     /locus_tag="KIH17_mgp10"
+                     /db_xref="GeneID:64854596"
+     CDS             7129..7812
+                     /gene="COX2"
+                     /locus_tag="KIH17_mgp10"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="cytochrome c oxidase subunit II"
+                     /protein_id="YP_010059952.1"
+                     /db_xref="GeneID:64854596"
+                     /translation="MANQSQFGFQDASSPIMEELVEFHDHALMVALAICSLVLYLLTL
+                     MLAEKLSSNTVDAQEVELIWTILPAIVLILLALPSLQILYMMDETDEPDLTLKAIGHQ
+                     WYWAYEYTDFKDLTFDSYMIPTTELSPGHFRLLEVDHRVVVPMESPIRIIITANDVLH
+                     SWAVPSLGVKTDAIPGRLNQTSFITTRPGIFYGQCSEICGANHSYMPIVVESTPLTHF
+                     EYWSALQPS"
+     gene            7814..7884
+                     /locus_tag="KIH17_mgt14"
+                     /db_xref="GeneID:64854572"
+     tRNA            7814..7884
+                     /locus_tag="KIH17_mgt14"
+                     /product="tRNA-Lys"
+                     /db_xref="GeneID:64854572"
+     gene            7886..8053
+                     /gene="ATP8"
+                     /locus_tag="KIH17_mgp09"
+                     /db_xref="GeneID:64854597"
+     CDS             7886..8053
+                     /gene="ATP8"
+                     /locus_tag="KIH17_mgp09"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="ATP synthase F0 subunit 8"
+                     /protein_id="YP_010059953.1"
+                     /db_xref="GeneID:64854597"
+                     /translation="MPQLNPNPWFLTMLTTWVIFSLIIQPKLLPFTPTNHPQNKTSIL
+                     DKSTPWTWPWT"
+     gene            8044..8727
+                     /gene="ATP6"
+                     /locus_tag="KIH17_mgp08"
+                     /db_xref="GeneID:64854573"
+     CDS             8044..8727
+                     /gene="ATP6"
+                     /locus_tag="KIH17_mgp08"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="ATP synthase F0 subunit 6"
+                     /protein_id="YP_010059954.1"
+                     /db_xref="GeneID:64854573"
+                     /translation="MNLSFFDQFSSPYLMGMPLALLSILFPTLLFPSPNTRWVNNRLT
+                     TLQSWLIHLTTKQLMTPLNKKGHKWALILTSLMMLLLTINLLGLLPYTFTPTTQLSMN
+                     MALAFPLWLATLLTGLRNQPTTSLGHLLPEGTPTPLIPALIMIETTSLFIRPLALGVR
+                     LTANLTAGHLLIQLISTATAVLLPIMPAISIATMLILLLLTILEVAVAMIQAYVFVLL
+                     LSLYLQENI"
+     gene            8727..9510
+                     /gene="COX3"
+                     /locus_tag="KIH17_mgp07"
+                     /db_xref="GeneID:64854574"
+     CDS             8727..9510
+                     /gene="COX3"
+                     /locus_tag="KIH17_mgp07"
+                     /note="TAA stop codon is completed by the addition of 3' A
+                     residues to the mRNA"
+                     /codon_start=1
+                     /transl_except=(pos:9510,aa:TERM)
+                     /transl_table=2
+                     /product="cytochrome c oxidase subunit III"
+                     /protein_id="YP_010059955.1"
+                     /db_xref="GeneID:64854574"
+                     /translation="MAHQAHPFHMVDPSPWPISGAAAALLTTSGLAMWFHYNTPQPLA
+                     LGLTSMLLVMLQWWRDIIRESTFQGHHTLPVQKGLRYGMILFITSEVFFFLGFFWAFF
+                     HSSLAPTPELGGQWPPTGIKPMNPMEVPLLNTAILLASGVTVTWAHHSITEGTRKQAI
+                     QALGLTVLLGAYFTALQAMEYYEAPFSIADSVYGSTFFIATGFHGLHVIIGSSFLLIC
+                     LLRLINFHFTPNHHFGFEAAAWYWHFVDVIWLFLYMTIYWWGS"
+     gene            9511..9579
+                     /locus_tag="KIH17_mgt15"
+                     /db_xref="GeneID:64854575"
+     tRNA            9511..9579
+                     /locus_tag="KIH17_mgt15"
+                     /product="tRNA-Gly"
+                     /db_xref="GeneID:64854575"
+     gene            9580..9931
+                     /gene="ND3"
+                     /locus_tag="KIH17_mgp06"
+                     /db_xref="GeneID:64854598"
+     CDS             join(9580..9753,9755..9931)
+                     /gene="ND3"
+                     /locus_tag="KIH17_mgp06"
+                     /note="frameshift mechanism unknown (Mindell et al., 1998,
+                     Mol. Biol. Evol., 15:1568-1571)"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="NADH dehydrogenase subunit 3"
+                     /protein_id="YP_010059956.1"
+                     /db_xref="GeneID:64854598"
+                     /translation="MNMILFMLALSLALSITLISLNFWLAQMTPDSEKLSPYECGFDP
+                     LGSARLPFSIRFFLVAILFLLFDLEIALLLPLPWATQLQSPTTTLAWTLLIITLLTLG
+                     LIYEWLQGGLEWAE"
+     gene            9933..10001
+                     /locus_tag="KIH17_mgt16"
+                     /db_xref="GeneID:64854576"
+     tRNA            9933..10001
+                     /locus_tag="KIH17_mgt16"
+                     /product="tRNA-Arg"
+                     /db_xref="GeneID:64854576"
+     gene            10003..10299
+                     /gene="ND4L"
+                     /locus_tag="KIH17_mgp05"
+                     /db_xref="GeneID:64854599"
+     CDS             10003..10299
+                     /gene="ND4L"
+                     /locus_tag="KIH17_mgp05"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="NADH dehydrogenase subunit 4L"
+                     /protein_id="YP_010059957.1"
+                     /db_xref="GeneID:64854599"
+                     /translation="MSPMHLSYCSAFALSSLGLTLHRTHLISALLCLESMMLSLYIAL
+                     STLPIENQTTSLALAPIFMLTFSACEAGTGLSMLVASTRTHGSDHLHNLNLLQC"
+     gene            10293..11670
+                     /gene="ND4"
+                     /locus_tag="KIH17_mgp04"
+                     /db_xref="GeneID:64854577"
+     CDS             10293..11670
+                     /gene="ND4"
+                     /locus_tag="KIH17_mgp04"
+                     /note="TAA stop codon is completed by the addition of 3' A
+                     residues to the mRNA"
+                     /codon_start=1
+                     /transl_except=(pos:11670,aa:TERM)
+                     /transl_table=2
+                     /product="NADH dehydrogenase subunit 4"
+                     /protein_id="YP_010059958.1"
+                     /db_xref="GeneID:64854577"
+                     /translation="MLKILLPTLLLPPTALLSPTKFLWVNTTAHSLLIALLSLHWLLP
+                     TYYPSKTLTQWTGMDQISSPLLTLTCWLLPLMILASQNHLQHEPTPRKRTFILTLTLT
+                     QPLIVLAFSATELMLFYISFEATLIPTLALITRWGNQPDRLSAGIYLMFYTLISSLPL
+                     LVTILALHSQTGTLHLLMMKLNHPTMPHSWTGVLSTLALLLAFMVKAPLYGLHLWLPK
+                     AHVEAPITGSMLLAALLLKLGGYGIMRMTLLMNPLLSHLYYPFITLALWGALMTSSIC
+                     LRQIDLKSLIAYSSVSHMGLVIAASMIQTPWSFSGAMILMISHGLTSSMLFCLANTNY
+                     ERTHSRILLMTRGLQPLLPLMATWWLLANLTNMALPPTTNLMAELTIMTALFNWSTPT
+                     IILTGTASLMTALYTLYLLLTTQRGITPTHITRLQNSNTREHLLMTLHILPLILLIFK
+                     PALMSGMPQ"
+     gene            11671..11741
+                     /locus_tag="KIH17_mgt17"
+                     /db_xref="GeneID:64854578"
+     tRNA            11671..11741
+                     /locus_tag="KIH17_mgt17"
+                     /product="tRNA-His"
+                     /db_xref="GeneID:64854578"
+     gene            11742..11807
+                     /locus_tag="KIH17_mgt18"
+                     /db_xref="GeneID:64854600"
+     tRNA            11742..11807
+                     /locus_tag="KIH17_mgt18"
+                     /product="tRNA-Ser"
+                     /codon_recognized="AGY"
+                     /db_xref="GeneID:64854600"
+     gene            11807..11877
+                     /locus_tag="KIH17_mgt19"
+                     /db_xref="GeneID:64854601"
+     tRNA            11807..11877
+                     /locus_tag="KIH17_mgt19"
+                     /product="tRNA-Leu"
+                     /codon_recognized="CUN"
+                     /db_xref="GeneID:64854601"
+     gene            11878..13692
+                     /gene="ND5"
+                     /locus_tag="KIH17_mgp03"
+                     /db_xref="GeneID:64854602"
+     CDS             11878..13692
+                     /gene="ND5"
+                     /locus_tag="KIH17_mgp03"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="NADH dehydrogenase subunit 5"
+                     /protein_id="YP_010059959.1"
+                     /db_xref="GeneID:64854602"
+                     /translation="METTLLLSTFTILALTLIATPMMLPLLTKTLKNSPTTITHATKT
+                     AFLISLVPMMIFIYSNTESITTCWEWKLTTNFKIPVSLKMDQYSIMFFPIALFVTWSI
+                     LQFATWYMTPEPNITKFFSYLSIFLIAMLTLTLANNMFLLFVGWEGVGIMSFMLIGWW
+                     HARAKANTAALQAVLYNRIGDIGLIISMAWMASTTNTWEIQQTSSHTYTPMLPLLGLI
+                     LAAMGKSAQFGLHPWLPAAMEGPTPVSALLHSSTMVVAGIFLLIRTHPMLSNNQTALT
+                     ACLCLGALSTLFAATCALTQNDIKKIIAFSTSSQLGLMMVAIGLNLPQLAFLHISTHA
+                     FFKAMLFLCSGSIIHNLAGEQDIRKMGGLQKTLPTTTSCLTIGNLALMGTPFLAGFYS
+                     KDLIIENLNTSYLNTWALTLTLLATSFTAAYSLRMTSLVQAGFTRISTTTPINENNSL
+                     ITNPILRLAMGTILSGLLITSYTIPTKTPPMTMPTTTKTAAILVTILGIILALELSNM
+                     THTLTHPKQNIYSNFSTNLGYFNPLTHRPSTTNLLNHGQKFALHLTDLFWYKKMGPEG
+                     LANLQQMAAKTSTTLHTGLIKTYLGSFALSITIILLTL"
+     gene            13701..14843
+                     /gene="CYTB"
+                     /locus_tag="KIH17_mgp02"
+                     /db_xref="GeneID:64854579"
+     CDS             13701..14843
+                     /gene="CYTB"
+                     /locus_tag="KIH17_mgp02"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="cytochrome b"
+                     /protein_id="YP_010059960.1"
+                     /db_xref="GeneID:64854579"
+                     /translation="MAPNIRKSHPLMKMINNSLIDLPTPSNISMWWNFGSLLGICLAT
+                     QILTGLLLAMHYTADTTLAFSSVAHTCRNVQYGWLIRNLHANGASLFFICIYMHIGRG
+                     IYYGSYLYKETWNTGIILLLTLMATAFVGYVLPWGQMSFWGATVITNLFSAIPYIGQT
+                     LVEWAWGGFSVDNPTLTRFFALHFLLPFLIAGLTLIHLTFLHESGSNNPLGMTSNCDK
+                     IPFHPYYSLKDLLGFMLMYLPLMTLALFTPNLLSDPENFTPANPLVTPPHIKPEWYFL
+                     FAYAILRSIPNKLGGVLALAASVLILFLNPLLHKSKQRTMTFRPLSQSLFWLLVTNLA
+                     ILTWVGSQPVEQPFIIIGQLASLSYFTILLILLPLTGALENKILNY"
+     gene            14846..14914
+                     /locus_tag="KIH17_mgt20"
+                     /db_xref="GeneID:64854580"
+     tRNA            14846..14914
+                     /locus_tag="KIH17_mgt20"
+                     /product="tRNA-Thr"
+                     /db_xref="GeneID:64854580"
+     misc_feature    14915..16238
+                     /note="control region"
+     gene            complement(16239..16307)
+                     /locus_tag="KIH17_mgt21"
+                     /db_xref="GeneID:64854603"
+     tRNA            complement(16239..16307)
+                     /locus_tag="KIH17_mgt21"
+                     /product="tRNA-Pro"
+                     /db_xref="GeneID:64854603"
+     gene            complement(16323..16844)
+                     /gene="ND6"
+                     /locus_tag="KIH17_mgp01"
+                     /db_xref="GeneID:64854604"
+     CDS             complement(16323..16844)
+                     /gene="ND6"
+                     /locus_tag="KIH17_mgp01"
+                     /codon_start=1
+                     /transl_table=2
+                     /product="NADH dehydrogenase subunit 6"
+                     /protein_id="YP_010059961.1"
+                     /db_xref="GeneID:64854604"
+                     /translation="MTYFVFFLGVCFVFGALAVASNPSPYYGVVGLVLGSVVGCGWLM
+                     SLGVSFISLVLLMVYLGGMLVVFVYSVALAADPFPEAWGNWRVVGCGVGLTLLLLVGV
+                     MVVGDVGCLGYGVGTVDSGGMVSVRLDFGGVAMFYSHGAGMFFIAGWGLLLTLFVVLE
+                     LVRGLSRGAIRAV"
+     gene            complement(16848..16918)
+                     /locus_tag="KIH17_mgt22"
+                     /db_xref="GeneID:64854581"
+     tRNA            complement(16848..16918)
+                     /locus_tag="KIH17_mgt22"
+                     /product="tRNA-Glu"
+                     /db_xref="GeneID:64854581"
+     misc_feature    16919..17652
+                     /note="control region"
+CONTIG      join(JAGFVS010000291.1:1..17652)
+//
+
+

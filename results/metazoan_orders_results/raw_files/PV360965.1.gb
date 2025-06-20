@@ -1,0 +1,85 @@
+LOCUS       PV360965                1593 bp    DNA     linear   INV 26-MAR-2025
+DEFINITION  Aphanipathes verticillata voucher 130 cytochrome c oxidase subunit
+            I (COX1) gene, partial cds; mitochondrial.
+ACCESSION   PV360965
+VERSION     PV360965.1
+KEYWORDS    .
+SOURCE      mitochondrion Aphanipathes verticillata
+  ORGANISM  Aphanipathes verticillata
+            Eukaryota; Metazoa; Cnidaria; Anthozoa; Hexacorallia; Antipatharia;
+            Aphanipathidae; Aphanipathes.
+REFERENCE   1  (bases 1 to 1593)
+  AUTHORS   Wishingrad,V., Shizuru,L.E.K., Takata,K., Montgomery,A.D.,
+            Wagner,D. and Toonen,R.J.
+  TITLE     Hawaiian black coral (Antipatharia) complete mitochondrial genomes
+            have limited phylogenetic signal for taxonomic resolution of
+            species
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1593)
+  AUTHORS   Wishingrad,V., Shizuru,L.E.K., Takata,K., Montgomery,A.D.,
+            Wagner,D. and Toonen,R.J.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (21-MAR-2025) Marine Biology, Hawaii Institute of Marine
+            Biology, 46-007 Lilipuna Road, ToBo Lab, Kaneohe, HI 96744, USA
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: SPAdes v. 3.13.0
+            Sequencing Technology :: Illumina
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1593
+                     /organism="Aphanipathes verticillata"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="130"
+                     /db_xref="taxon:1350338"
+                     /geo_loc_name="USA"
+                     /collection_date="04-Apr-2008"
+     gene            <1..1593
+                     /gene="COX1"
+     CDS             <1..1593
+                     /gene="COX1"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="XQJ38792.1"
+                     /translation="MISEFLTRWVFSTNHKDIGTLYLVFGIGSGMIGTALSMLIRLEL
+                     SAPGTMLGDDHLYNVIVTAHALIMIFFLVMPVMIGGFGNWLVPLYIGAPDMAFPRLNN
+                     ISFWLLPPALILLLGSSFVEQGVGAGWTIYPPLSSIQAHSGGAVDMAIFSLHLAGASS
+                     ILGAMNFITTILNMRAPGVTMDRLPLFVWSILITAFLLLLSLPVLAGAITMLLTDRNF
+                     NTTFFDPAGGGDPILFQHLFWFFGHPEVYILILPGFGMVSQIVPTFSAKKQIFGYLGM
+                     VYAMLSIGILGFIVWAHHMFTVGMDVDTRAYFTAATMIIAVPTGIKVFSWLATIYGGA
+                     LRFDTPMLWAIGFIFLFTIGGLTGVVVANSSLDVVLHDTYYVVAHFHYVLSMGAVFAI
+                     FGGFYFWFGKITGYCYNELYGKIHFWLMFIGVNLTFFPQHFLGLAGFPRRYSDFADSF
+                     AGWNLVSSLGSTISIVGVLWFVYIIYDAYVREVRFISWVENTESSWASLEWVQPSPPL
+                     SHTYNELPFVYGSYAGPKSIDS"
+ORIGIN      
+        1 atgataagtg aatttttaac tcgttgagtt ttttccacaa accataaaga tatcggcaca
+       61 ttatatctag tatttggaat agggtccggt atgataggta cagctttaag tatgttgata
+      121 agattagaat tatctgctcc tggcactatg ttaggagatg accaccttta taatgttata
+      181 gtaacagcac atgctcttat tatgattttt ttcctagtca tgccagttat gataggagga
+      241 tttgggaatt ggctagtgcc actatatatt ggagcacctg atatggcttt tccacgactt
+      301 aataatataa gtttttggtt actaccccct gctttaatac tattattagg gtcctcattt
+      361 gtagaacaag gagttggggc cggatgaaca atatatcctc ctttatccag cattcaagca
+      421 cattctgggg gagccgtcga tatggctatt tttagtctcc atctagcggg tgcttcttcc
+      481 atattggggg caatgaactt tataactacc atattaaata tgagggcccc aggagtaaca
+      541 atggatagat tgccactttt tgtgtggtct atactaataa ctgcttttct actactacta
+      601 tctctaccgg tgttagctgg ggctataact atgcttttga cagatagaaa ttttaatacc
+      661 actttttttg atcccgcggg agggggagac ccgattttat ttcaacattt attttggttc
+      721 tttggccacc cagaggttta cattttgatt ttaccaggct ttggaatggt ctctcaaata
+      781 gtaccaactt tttctgctaa gaaacaaatt tttggatatt tagggatggt ttatgcaatg
+      841 ttatctattg gaatactagg ctttattgtg tgggctcatc atatgttcac ggttggaatg
+      901 gatgtagaca caagagccta ttttactgca gcaactatga ttattgctgt gcctactgga
+      961 ataaaagtat ttagttggtt ggccactatt tatggaggag ctcttagatt tgatacccct
+     1021 atgctttggg ccatagggtt cattttttta ttcacaatag gaggtttgac tggagtcgta
+     1081 gtggctaata gttctttaga cgttgtatta cacgacacat actatgtggt ggctcacttt
+     1141 cattatgttt tatctatggg agctgttttt gctatatttg gcgggtttta cttttgattt
+     1201 gggaaaatca ctggttactg ctataacgaa ctttatggca aaattcactt ttggttaatg
+     1261 tttataggag taaacttaac ttttttccct caacatttct taggtttagc tgggtttcca
+     1321 agacgatact ccgactttgc cgatagtttt gcgggttgga atttagtaag ttctctaggg
+     1381 tcaactattt ctatcgtagg ggtattatgg tttgtttata ttatttatga tgcttatgtt
+     1441 cgagaggtaa gatttattag ttgggtagaa aacactgagt caagttgggc ttctttagaa
+     1501 tgggttcagc cctcccctcc tctctctcat acttataatg aactaccttt tgtatatggt
+     1561 tcttacgcag ggcctaagtc tatcgattct taa
+//
+
+

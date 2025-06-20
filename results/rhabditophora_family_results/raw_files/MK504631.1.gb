@@ -1,0 +1,67 @@
+LOCUS       MK504631                 606 bp    DNA     linear   INV 20-MAY-2019
+DEFINITION  Microstomum septentrionale isolate S112 cytochrome oxidase subunit
+            I (cox1) gene, partial cds; mitochondrial.
+ACCESSION   MK504631
+VERSION     MK504631.1
+KEYWORDS    .
+SOURCE      mitochondrion Microstomum septentrionale
+  ORGANISM  Microstomum septentrionale
+            Eukaryota; Metazoa; Spiralia; Lophotrochozoa; Platyhelminthes;
+            Rhabditophora; Macrostomorpha; Macrostomida; Microstomidae;
+            Microstomum.
+REFERENCE   1  (bases 1 to 606)
+  AUTHORS   Atherton,S. and Jondelius,U.
+  TITLE     A taxonomic review and revisions of Microstomidae (Platyhelminthes:
+            Macrostomorpha)
+  JOURNAL   PLoS ONE 14 (4), e0212073 (2019)
+   PUBMED   31017906
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 606)
+  AUTHORS   Atherton,S. and Jondelius,U.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-FEB-2019) Zoology, Naturhistoriska riksmuseet, Box
+            500007, Stockholm 104 05, Sweden
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..606
+                     /organism="Microstomum septentrionale"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="S112"
+                     /db_xref="taxon:2574747"
+                     /geo_loc_name="Sweden"
+                     /lat_lon="58.251389 N 11.464444 E"
+                     /collection_date="25-Aug-2015"
+                     /collected_by="S. Atherton"
+                     /PCR_primers="fwd_name: Mac_COIF, fwd_seq:
+                     gttctacaaatcataaggatattgg, rev_name: Mac_COIR, rev_seq:
+                     taaacytcwgggtgaccaaaaaacca"
+     gene            <1..>606
+                     /gene="cox1"
+     CDS             <1..>606
+                     /gene="cox1"
+                     /codon_start=1
+                     /transl_table=9
+                     /product="cytochrome oxidase subunit I"
+                     /protein_id="QCQ66627.1"
+                     /translation="IGLSLSVLIRFNLSTPYFVFSSEFYNSVVTLHAIFMIFFFVMPM
+                     TVGGFGNWIIPLHCNLPDMALPRLNNLSFWLLFPALSFVLLSFFQNVLPGTGWTLYPP
+                     LSTFGLPEKSVDFLIFSLHVAGVSSLVSSINFIVTFFSSNTSFISLSLFSWSILCTTW
+                     LLLLSLPVLAGGLTMLISDRNFNTSFFDPTGGGDAILFQHIF"
+ORIGIN      
+        1 attggtttat ctttaagtgt tttgattcgt ttcaatctaa gaactccata ttttgttttt
+       61 tcaagagaat tttataattc agtagttaca ttacatgcta tttttatgat ctttttcttt
+      121 gtaatgccaa tgacagtagg aggttttggg aattggataa ttcctttaca ttgtaatctg
+      181 cctgatatgg ctttacctcg cttaaataat ttaagttttt gattattatt tccagcatta
+      241 agatttgttt tattatcttt tttccagaaa gttcttccag gaacaggatg aactttatat
+      301 cctcctctct caactttcgg attacctgaa aagagtgtag atttcctaat ttttagtctt
+      361 catgttgcag gtgttagatc tcttgtttct tctattaatt ttatagttac attcttttct
+      421 tcaaatacta gttttatttc tttaagtctt tttagttgaa gaattctttg tactacttga
+      481 ttacttttat taagattacc cgtgcttgct ggtggtctta ctatgttaat tagagatcga
+      541 aattttaaca cctcattttt tgatccaacc ggaggtggag atgctatttt attccaacat
+      601 attttt
+//
+
+

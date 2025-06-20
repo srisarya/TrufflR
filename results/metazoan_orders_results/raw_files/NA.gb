@@ -1,0 +1,46 @@
+LOCUS       YAAV01000000              13 rc    mRNA    linear   TSA 25-OCT-2023
+DEFINITION  TPA_asm: Randiella sp. DSW-2020, transcriptome shotgun assembly.
+ACCESSION   YAAV00000000
+VERSION     YAAV00000000.1
+DBLINK      BioProject: PRJDB14830
+            BioSample: SAMD00561021
+            Sequence Read Archive: SRR10997431
+KEYWORDS    TSA; Transcriptome Shotgun Assembly; Third Party Data; TPA;
+            TPA:assembly.
+SOURCE      mitochondrion Randiella sp. DSW-2020
+  ORGANISM  Randiella sp. DSW-2020
+            Eukaryota; Metazoa; Spiralia; Lophotrochozoa; Annelida; Clitellata;
+            Oligochaeta; Randiellida; Randiellidae; Randiella.
+REFERENCE   1
+  AUTHORS   Kobayashi,G.
+  TITLE     Buried treasure in a public repository: Mining mitochondrial genes
+            of 32 annelid species from sequence reads deposited in the Sequence
+            Read Archive (SRA)
+  JOURNAL   PeerJ 11, e16446 (2023)
+   PUBMED   38047014
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 13)
+  AUTHORS   Kobayashi,G.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (13-MAR-2023) Contact:Genki Kobayashi Ishinomaki Senshu
+            University, Research Center for Creative Partnerships; 1 Shinmito,
+            Minamisakai, Ishinomaki, Miyagi 986-8580, Japan
+COMMENT     The Randiella sp. DSW-2020 transcriptome shotgun assembly (TSA)
+            project has the project accession YAAV00000000.  This version of
+            the project (01) has the accession number YAAV01000000, and
+            consists of sequences YAAV01000001-YAAV01000013.
+            
+            ##Assembly-Data-START##
+            Assembly Method       :: GetOrganelle v. 1.7.1a
+            Sequencing Technology :: Illumina HiSeq 2000
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..13
+                     /organism="Randiella sp. DSW-2020"
+                     /organelle="mitochondrion"
+                     /mol_type="mRNA"
+                     /db_xref="taxon:2705241"
+TSA         YAAV01000001-YAAV01000013
+//
+
+

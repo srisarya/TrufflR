@@ -1,0 +1,87 @@
+LOCUS       PQ350129                1617 bp    DNA     linear   INV 12-MAR-2025
+DEFINITION  Chambriella megacephala voucher MHNG-PLAT-91863 cytochrome c
+            oxidase subunit I (COX1) gene, complete cds; mitochondrial.
+ACCESSION   PQ350129
+VERSION     PQ350129.1
+KEYWORDS    .
+SOURCE      mitochondrion Chambriella megacephala
+  ORGANISM  Chambriella megacephala
+            Eukaryota; Metazoa; Spiralia; Lophotrochozoa; Platyhelminthes;
+            Cestoda; Eucestoda; Proteocephalidea; Monticelliidae;
+            Monticelliinae; Chambriella.
+REFERENCE   1  (bases 1 to 1617)
+  AUTHORS   Vieira Alves,P., da Silva,R.J., Scholz,T., de Chambrier,A.,
+            Luque,J.L., Duchenko,A., Janies,D. and Jacob Machado,D.
+  TITLE     Machine learning models accurately predict clades of
+            proteocephalidean tapeworms (Onchoproteocephalidea) based on host
+            and biogeographical data
+  JOURNAL   Cladistics, 1-19 (2025)
+  REMARK    DOI: 10.1111/cla.12610
+REFERENCE   2  (bases 1 to 1617)
+  AUTHORS   Alves,P.V.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (19-SEP-2024) Setor de Parasitologia, Universidade
+            Estadual Paulista - UNESP, Rua Prof. Dr. Antonio Celso Wagner
+            Zanin, Botucatu, Sao Paulo 18616689, Brazil
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1617
+                     /organism="Chambriella megacephala"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolation_source="Pi582A2"
+                     /host="Sorubimichthys planiceps"
+                     /specimen_voucher="MHNG-PLAT-91863"
+                     /db_xref="taxon:1921615"
+                     /geo_loc_name="Peru: Amazon River, Iquitos, Loreto"
+     gene            1..1617
+                     /gene="COX1"
+     CDS             1..1617
+                     /gene="COX1"
+                     /codon_start=1
+                     /transl_table=9
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="XHB01689.1"
+                     /translation="MRTINNFLNWLFTLDHKRIGILYTLVGIWAGFLGLSFSLMIRVN
+                     FLEPYYNVISTDCYNFLVTSHGILMIFFFLMPILIGGFGNFLIPLLSGLSDLNLPRLN
+                     ALSFWLLVPSVIFLIISMCLGAGVGWTFYPPLSSSLFSGSKGVDFLMFSLHLAGVSSI
+                     FSSINFICTLYSVFSVNLASRSSVILWTYLFTSILLLTTLPVLAAAITMLLFDRNFGS
+                     AFFDPLGGGDPVLFQHMFWFFGHPEVYVLILPGFGMVSHACLNMGCAPDVFGFYGLVF
+                     ASFSIVCLGSVVWAHHMFTVGLDVKTAVFFSSVTMVIGVPTGIKVFTWLYMLLNSNVN
+                     KSDPVFLWVVSFIILFTFGGVTGIVLSACVLDSVLHDTWFVVAHFHYVMSLGSYISII
+                     IMFIWWWPLITGVSLNKYLLQCQCVVSNIGFNMCFFPMHYFGLCGLPRRVCMYESSFN
+                     WINVVCTVGAFISMFSGCFFMFILWESLVSRHIALGSFGASSVITNMILSPIAYHNNF
+                     FTHYLSVNYSYGVYHIYWKNNVYIGTWTVF"
+ORIGIN      
+        1 atgcgtacca taaataaatt tctaaattga ttatttacgc tagatcataa gcgtataggt
+       61 attttgtaca cattagttgg aatttgggct gggttcttag gtttaagttt tagtttaatg
+      121 attcgtgtaa aatttttaga gccctactat aatgtgattt ctactgactg ttataaattt
+      181 cttgttacta gacatgggat tttgatgatt ttcttttttt tgatgcctat attaatagga
+      241 ggttttggta aattcttgat tccattatta agtggtttat cggatttgaa attgcctcgt
+      301 cttaatgctt tgagattttg gcttttagta ccttcagtta tatttttaat tataagaatg
+      361 tgcctaggtg ctggtgtagg ttgaactttt tatccacctt tatcatcctc tttgtttaga
+      421 ggaagaaagg gtgtagattt tttaatgttt tctttacatc tagctggtgt ctcaagtata
+      481 tttagatcta tcaattttat ttgtactctt tacagtgttt ttagtgttaa attagcttca
+      541 cgtagttcag ttatactttg aacttattta ttcacatcaa tacttctttt aactacatta
+      601 cctgtattag cagctgctat cactatgctt ctttttgatc gaaattttgg ttctgctttc
+      661 tttgatcccc ttggtggtgg tgatcctgtc ttatttcagc atatgttttg attttttggt
+      721 caccctgaag tgtatgtatt aattttacct ggctttggta tggttagaca tgcttgttta
+      781 aatatgggct gtgctcctga tgtgtttggg ttttatggct tggtatttgc taggttttca
+      841 attgtatgtc ttggtagagt agtttgggct catcatatgt ttactgttgg tttagatgta
+      901 aagacagctg tcttttttag ttcagtaaca atggttattg gagtaccaac tgggattaag
+      961 gtttttactt gattgtacat gcttttaaaa agaaaagtta ataagaggga tcctgtcttt
+     1021 ttatgagttg tttcttttat tattcttttt acatttggtg gtgttacggg tattgttctt
+     1081 tctgcatgtg tgcttgatag agttcttcat gatacttgat ttgtagtagc tcactttcat
+     1141 tatgtaatgt ccttaggttc ttatataaga attattataa tgtttatttg atgatgacca
+     1201 ttaattacag gggttagtct aaataagtat ttgcttcagt gtcagtgtgt tgtttctaat
+     1261 attggattta atatgtgttt ttttcctatg cactattttg gtttatgtgg tttacctcgt
+     1321 cgtgtgtgca tgtatgagag aagttttaac tgaatcaatg ttgtttgcac agtaggtgct
+     1381 tttatctcta tgtttagtgg ttgtttcttt atgtttattc tttgagaatc tttagttagt
+     1441 cgtcatatcg ctttaggttc attcggtgct tctagcgtaa ttactaacat gatattaagt
+     1501 cctatagctt atcataataa tttttttact cattacttat ctgtaaatta ttcgtatggg
+     1561 gtttaccaca tatattgaaa gaataaagta tatataggta cctgaacggt tttttag
+//
+
+

@@ -1,0 +1,57 @@
+LOCUS       KY595142                 201 bp    DNA     linear   INV 12-JUL-2017
+DEFINITION  Reighardia sternae voucher 3LF-2834 cytochrome c oxidase subunit 1
+            (CO1) gene, partial cds; mitochondrial.
+ACCESSION   KY595142
+VERSION     KY595142.1
+KEYWORDS    .
+SOURCE      mitochondrion Reighardia sternae
+  ORGANISM  Reighardia sternae
+            Eukaryota; Metazoa; Ecdysozoa; Arthropoda; Crustacea; Oligostraca;
+            Ichthyostraca; Pentastomida; Reighardiida; Reighardiidae;
+            Reighardia.
+REFERENCE   1  (bases 1 to 201)
+  AUTHORS   Literak,I., Casero,M., Koubkova,B., Tesinsky,M. and Heneberg,P.
+  TITLE     Morphological and molecular assessment of pentastomes from gulls in
+            Portugal
+  JOURNAL   J. Parasitol. (2017) In press
+   PUBMED   28665257
+  REMARK    Publication Status: Available-Online prior to print
+REFERENCE   2  (bases 1 to 201)
+  AUTHORS   Heneberg,P., Tesinsky,M., Casero,M., Koubkova,B. and Literak,I.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-FEB-2017) Third Faculty of Medicine, Charles
+            University in Prague, Ruska 87, Prague 10, CZ 100 00, Czech
+            Republic
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..201
+                     /organism="Reighardia sternae"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /host="Larus michahellis"
+                     /specimen_voucher="3LF-2834"
+                     /db_xref="taxon:244999"
+                     /geo_loc_name="Portugal: Faro district"
+                     /collection_date="2016"
+                     /collected_by="Maria Casero"
+                     /identified_by="Bozena Koubkova"
+     gene            <1..>201
+                     /gene="CO1"
+     CDS             <1..>201
+                     /gene="CO1"
+                     /codon_start=1
+                     /transl_table=5
+                     /product="cytochrome c oxidase subunit 1"
+                     /protein_id="ASK40108.1"
+                     /translation="NFITTILNMRPYSMNLSQTPLLTWSILITAALLILALPVLAGAI
+                     TMLLSDRNFNSSFFDPTGGGDPI"
+ORIGIN      
+        1 aacttcatca ccaccatcct caacatacga ccatactcaa taaacctctc ccaaaccccc
+       61 ctactcacat gatccatcct catcaccgcc gctctcctaa ttttagcctt acccgtatta
+      121 gcaggagcta tcaccatgct cctctcagac cgaaatttca actcatcctt cttcgacccc
+      181 accggaggag gagaccccat c
+//
+
+

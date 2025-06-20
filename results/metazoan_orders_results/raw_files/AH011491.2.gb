@@ -1,0 +1,126 @@
+LOCUS       AH011491                1677 bp    DNA     linear   INV 10-JUN-2016
+DEFINITION  Opilioacarid SJD-2001 NADH dehydrogenase subunit 1 (ND1) gene,
+            partial cds; tRNA-Leu genes, complete sequence; 16S ribosomal RNA
+            gene, partial sequence; tRNA-Cys and tRNA-Tyr genes, complete
+            sequence; cytochrome c oxidase subunit 1 (Cox1) gene, partial cds;
+            and tRNA-Ala, tRNA-Glu, tRNA-Phe, tRNA-Asn, tRNA-Arg, and tRNA-Ser
+            genes, complete sequence; mitochondrial.
+ACCESSION   AH011491 AY059206 AY059207 AY059208 AY059209 AY059210 AY059211
+            AY059212 AY059213
+VERSION     AH011491.2
+KEYWORDS    .
+SOURCE      mitochondrion opilioacarid SJD-2001
+  ORGANISM  opilioacarid SJD-2001
+            Eukaryota; Metazoa; Ecdysozoa; Arthropoda; Chelicerata; Arachnida;
+            Acari; Opilioacariformes; Opilioacarida; Opilioacaridae.
+REFERENCE   1  (bases 1 to 1677)
+  AUTHORS   Murrell,A., Campbell,N.J. and Barker,S.C.
+  TITLE     The value of idiosyncratic markers and changes to conserved tRNA
+            sequences from the mitochondrial genome of hard ticks (Acari:
+            Ixodida: Ixodidae) for phylogenetic inference
+  JOURNAL   Syst. Biol. 52 (3), 296-310 (2003)
+   PUBMED   12775521
+REFERENCE   2  (bases 1 to 1677)
+  AUTHORS   Campbell,N.J.H., Murrell,A. and Barker,S.C.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (10-OCT-2001) Microbiology and Parasitology and Institute
+            for Molecular Biosciences, University of Queensland, Brisbane,
+            Queensland 4072, Australia
+COMMENT     On or before Jun 10, 2016 this sequence version replaced
+            AY059206.1, AY059207.1, AY059208.1, AY059209.1, AY059210.1,
+            AY059211.1, AY059212.1, AY059213.1, AH011491.1.
+FEATURES             Location/Qualifiers
+     source          1..1677
+                     /organism="opilioacarid SJD-2001"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /db_xref="taxon:150113"
+     gene            complement(<1..71)
+                     /gene="ND1"
+     CDS             complement(<1..71)
+                     /gene="ND1"
+                     /codon_start=1
+                     /transl_table=5
+                     /product="NADH dehydrogenase subunit 1"
+                     /protein_id="AAL79406.1"
+                     /translation="MMGLIYLIILMVCVLVSVAFFTL"
+     tRNA            complement(69..128)
+                     /product="tRNA-Leu"
+                     /note="codons recognized: UUR"
+     tRNA            complement(129..189)
+                     /product="tRNA-Leu"
+                     /note="codons recognized: CUN"
+     rRNA            complement(190..>383)
+                     /product="16S ribosomal RNA"
+     gap             384..483
+                     /estimated_length=unknown
+     tRNA            complement(500..552)
+                     /product="tRNA-Cys"
+     tRNA            complement(553..612)
+                     /product="tRNA-Tyr"
+     gene            605..>710
+                     /gene="Cox1"
+     CDS             605..>710
+                     /gene="Cox1"
+                     /codon_start=1
+                     /transl_table=5
+                     /product="cytochrome c oxidase subunit 1"
+                     /protein_id="AAL79407.1"
+                     /translation="MSSRWFFSTNHKDIGTMYLMFGAWAAMIGTAMSML"
+     gap             711..810
+                     /estimated_length=unknown
+     tRNA            811..873
+                     /product="tRNA-Ala"
+     gap             874..973
+                     /estimated_length=unknown
+     tRNA            974..1034
+                     /product="tRNA-Glu"
+     gap             1035..1134
+                     /estimated_length=unknown
+     tRNA            1135..1194
+                     /product="tRNA-Phe"
+     gap             1195..1294
+                     /estimated_length=unknown
+     tRNA            1295..1361
+                     /product="tRNA-Asn"
+     gap             1362..1461
+                     /estimated_length=unknown
+     tRNA            1462..1521
+                     /product="tRNA-Arg"
+     gap             1522..1621
+                     /estimated_length=unknown
+     tRNA            1622..1677
+                     /product="tRNA-Ser"
+                     /note="codons recognized: AGN"
+ORIGIN      
+        1 aacaatgtaa aaaaagcaac acttactaaa acacaaacca ttaaaataat taaatagatt
+       61 aaacccatta ttaaagggat aaccctataa gaagcttaaa ttctttgcat aaactctgcc
+      121 actttaatta ttatttggtt atcccctatt caatttctaa aactgataca attactctgc
+      181 caaaataatc ttttcatcat aactcttcct aatcattatc atacttaatt cctttcgtac
+      241 tataaatatc ccactccaaa atagatataa accgacctgg ctcacgccgg tctgaactcc
+      301 gatcatgtaa aactttaatg gttgaacaaa ccaacttatt aagcttctac tcctaatagt
+      361 ccttttaatc caacatcgaa gttnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+      421 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+      481 nnntataaat tactatcgta agtcttagct aacatagcct agttgaattt gcaattctac
+      541 tatcataaga cctaatgaaa ggaaacccct acataaattt acaatttatt gcctaatctc
+      601 agccatttca tcgcgatgat ttttctccac taatcataag gacattggaa caatatattt
+      661 aatgtttgga gcctgagcag ccatgatcgg aaccgctatg agaatactaa nnnnnnnnnn
+      721 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+      781 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn agataggtat ttaaacacat aaaacctaat
+      841 ttgcaattag aaattgtcac atgaccctgt ctannnnnnn nnnnnnnnnn nnnnnnnnnn
+      901 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+      961 nnnnnnnnnn nnngtttctt tggtgtaacg aacacataac attttcattg ttaaactgaa
+     1021 atcttcaaga aatannnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+     1081 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnngttttt
+     1141 atagtttatt taaaatacag tgttgaaaat actgagaaga taattctaag aatannnnnn
+     1201 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+     1261 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnttaata gaagccaaaa cccccggagg
+     1321 ccattcactg ttaatgaatg aactgagaca ttcctattaa annnnnnnnn nnnnnnnnnn
+     1381 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+     1441 nnnnnnnnnn nnnnnnnnnn nataagagaa acaaaatttg taatcagttt cgacctgaaa
+     1501 atcagggtaa accctcttat tnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+     1561 nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn nnnnnnnnnn
+     1621 naagaaacta cgggcagagc tgctaactct cacaaattta taaaatttag tttctgt
+//
+
+

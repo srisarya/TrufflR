@@ -1,0 +1,61 @@
+LOCUS       OL716082                 429 bp    DNA     linear   INV 09-MAY-2022
+DEFINITION  Polycelis felina isolate HR 89 cytochrome c oxidase subunit I
+            (COX1) gene, partial cds; mitochondrial.
+ACCESSION   OL716082
+VERSION     OL716082.1
+KEYWORDS    .
+SOURCE      mitochondrion Polycelis felina
+  ORGANISM  Polycelis felina
+            Eukaryota; Metazoa; Spiralia; Lophotrochozoa; Platyhelminthes;
+            Rhabditophora; Seriata; Tricladida; Continenticola; Planarioidea;
+            Planariidae; Polycelis.
+REFERENCE   1  (bases 1 to 429)
+  AUTHORS   Rataj,M., Zhang,T. and Vd'acny,P.
+  TITLE     Nuclear and Mitochondrial SSU rRNA Genes Reveal Hidden Diversity of
+            Haptophrya Endosymbionts in Freshwater Planarians and Challenge
+            Their Traditional Classification in Astomatia
+  JOURNAL   Front Microbiol 13, 830951 (2022)
+   PUBMED   35495648
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 429)
+  AUTHORS   Rataj,M. and Vdacny,P.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-DEC-2021) Department of Zoology, Comenius University
+            in Bratislava, Ilkovicova 6, Bratislava 84215, Slovakia
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..429
+                     /organism="Polycelis felina"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /isolate="HR 89"
+                     /db_xref="taxon:39785"
+                     /geo_loc_name="Slovakia"
+                     /PCR_primers="fwd_name: COIpr-a2, fwd_seq:
+                     agctgcagttttggttttttgga, rev_name: COIpr-b2, rev_seq:
+                     atgagcaacaacataataagtatcatg"
+     gene            <1..>429
+                     /gene="COX1"
+     CDS             <1..>429
+                     /gene="COX1"
+                     /codon_start=1
+                     /transl_table=9
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="UFS12062.1"
+                     /translation="WFFGHPEVYILILPGFGIVSHVIIHYSLKDFSFGHMGMLYAMVG
+                     IGFLGFIVWAHHMYTVGLDLDTRAYFTGATMIIGIPTGIKIFSWLASIYGSDFNFIYD
+                     SVALLWALGFIFLFTVGGLTGIILSNACLDVSLHDTYYVVA"
+ORIGIN      
+        1 tggttttttg gacaccctga ggtttatatt ttgattttac ctggttttgg tatagtttca
+       61 catgttataa ttcattacag gttaaaggat ttttcttttg gtcatatggg tatgctttat
+      121 gctatggttg gaattgggtt tttagggttt atagtttgag ctcaccatat gtatactgtg
+      181 ggtttagatt tagatactcg ggcttatttt actggtgcta ctatgattat tggtattcct
+      241 actggtataa agatttttag gtgactagct tccatatatg gaagggattt taattttatt
+      301 tatgattctg ttgctctttt atgggcttta ggttttattt ttttgttcac agtagggggg
+      361 cttactggaa ttattttatc taaagcttgt ttggatgttt ctttgcatga tacttattat
+      421 gttgttgct
+//
+
+

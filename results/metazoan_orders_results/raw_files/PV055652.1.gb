@@ -1,0 +1,64 @@
+LOCUS       PV055652                 628 bp    DNA     linear   INV 03-APR-2025
+DEFINITION  Priapulus caudatus voucher BNSB0286 cytochrome c oxidase subunit I
+            (COX1) gene, partial cds; mitochondrial.
+ACCESSION   PV055652
+VERSION     PV055652.1
+DBLINK      BioProject: PRJNA1236822
+KEYWORDS    .
+SOURCE      mitochondrion Priapulus caudatus
+  ORGANISM  Priapulus caudatus
+            Eukaryota; Metazoa; Ecdysozoa; Scalidophora; Priapulida;
+            Priapulimorpha; Priapulimorphida; Priapulidae; Priapulus.
+REFERENCE   1  (bases 1 to 628)
+  AUTHORS   Christodoulou,M., Derycke,S., Beentjes,K., Hillewaert,H.,
+            Laakmann,S., Lundin,K., Kamyab,E., Khodami,S., Maes,S., Reiss,H.,
+            Uhlir,C., Van den Bulcke,L., Van der Hoorn,B., De Backer,A. and
+            Martinez Arbizu,P.
+  TITLE     A taxonomically reliable DNA barcode reference library for North
+            Sea macrobenthos
+  JOURNAL   Sci Data (2025) In press
+REFERENCE   2  (bases 1 to 628)
+  AUTHORS   Uhlir,C. and Kamyab,E.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (27-JAN-2025) German Centre for Marine Biodiversity
+            Research, Senckenberg am Meer, Sudstrand 44, Wilhelmshaven 26382,
+            Germany
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..628
+                     /organism="Priapulus caudatus"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /specimen_voucher="BNSB0286"
+                     /db_xref="taxon:37621"
+                     /geo_loc_name="North Sea"
+                     /collection_date="2011"
+     gene            <1..>628
+                     /gene="COX1"
+     CDS             <1..>628
+                     /gene="COX1"
+                     /codon_start=2
+                     /transl_table=5
+                     /product="cytochrome c oxidase subunit I"
+                     /protein_id="XNY85377.1"
+                     /translation="AMVGSGLSLIFRAELGQAGSLLGDDHLYNVIVTAHAFVMIFFMV
+                     MPILIGGFGNWMLPLMLGAPDMAFPRLNNLSFWLLPPSLTLLLASSLVEAGAGTGWTV
+                     YPPLASNIAHAGGSVDLAIFSLHLAGASSILGAVNFITTVINMRTEGMVFERIPLFVW
+                     AVKITVVLLLLSLPVLAGAITMLLTDRNLNTSFFDPAGGGDPILYQHLF"
+ORIGIN      
+        1 tgccatagtt ggttcagggt taagtttaat ttttcgagct gaactcgggc aagcaggctc
+       61 ccttctagga gacgatcacc tatataatgt gattgttact gcccacgcat ttgtaataat
+      121 tttttttata gtaatgccta ttttaattgg gggttttggt aactgaatgc ttccattaat
+      181 attaggagca ccagacatag cctttccacg attaaacaat ttaagtttct gattattacc
+      241 accctcatta acgcttcttt tagcctcttc tttagtagaa gcaggtgctg ggactggttg
+      301 gactgtttac ccccctctag ctagaaatat tgctcacgcc ggtggctctg tagatttagc
+      361 aattttttct ttacatttag caggtgcttc ttccatttta ggggcagtaa attttattac
+      421 aacagtgatt aatatacgta ctgaggggat agtttttgag cgaatcccgc tttttgtttg
+      481 agcagtcaaa atcacagttg ttttacttct tctttcactc ccagtccttg ctggggcaat
+      541 cactatatta ttgacagatc gaaatctaaa tacttctttt tttgatcctg caggaggagg
+      601 agaccctatt ttgtatcaac atcttttt
+//
+
+

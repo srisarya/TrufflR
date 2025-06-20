@@ -1,0 +1,91 @@
+LOCUS       KT997995                1753 bp    DNA     linear   INV 21-FEB-2016
+DEFINITION  Petrobiona massiliana chromosome 4 mitochondrion, complete
+            sequence.
+ACCESSION   KT997995
+VERSION     KT997995.1
+KEYWORDS    .
+SOURCE      mitochondrion Petrobiona massiliana
+  ORGANISM  Petrobiona massiliana
+            Eukaryota; Metazoa; Porifera; Calcarea; Calcaronea; Baerida;
+            Petrobionidae; Petrobiona.
+REFERENCE   1  (bases 1 to 1753)
+  AUTHORS   Lavrov,D.V., Adamski,M., Chevaldonne,P. and Adamska,M.
+  TITLE     Extensive Mitochondrial mRNA Editing and Unusual Mitochondrial
+            Genome Organization in Calcaronean Sponges
+  JOURNAL   Curr. Biol. 26 (1), 86-92 (2016)
+   PUBMED   26725199
+REFERENCE   2  (bases 1 to 1753)
+  AUTHORS   Lavrov,D.V.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (03-NOV-2015) EEOB, Iowa State University, 343A Bessey
+            Hall, Ames, IA 50011, USA
+COMMENT     GenBank Accession Numbers KT997977-KT997998 represent sequences
+            from the 22 segments of Petrobiona massiliana.
+FEATURES             Location/Qualifiers
+     source          1..1753
+                     /organism="Petrobiona massiliana"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /db_xref="taxon:68578"
+                     /chromosome="4"
+     gene            156..1481
+                     /gene="cox1"
+     CDS             156..1481
+                     /gene="cox1"
+                     /EC_number="1.9.3.1"
+                     /codon_start=1
+                     /transl_except=(pos:240..242,aa:Met)
+                     /transl_except=(pos:315..317,aa:Met)
+                     /transl_except=(pos:330..332,aa:Met)
+                     /transl_except=(pos:339..341,aa:Met)
+                     /transl_except=(pos:519..521,aa:Met)
+                     /transl_except=(pos:681..683,aa:Met)
+                     /transl_except=(pos:696..698,aa:Met)
+                     /transl_except=(pos:702..704,aa:Met)
+                     /transl_except=(pos:936..938,aa:Met)
+                     /transl_except=(pos:1449..1451,aa:Met)
+                     /transl_table=4
+                     /product="cytochrome c oxidase subunit 1"
+                     /protein_id="AMJ16569.1"
+                     /translation="MENHYWGQITNHKEIGIIYLTFGGVARFMSTAFSLVLRWELSSP
+                     LSVLGDGRLMNSRVMRHMLAIIFLFLMPFLVGGVGNWFLPVWLGAPDMAFPRLNNFSL
+                     WLLFVSAPFLTIGIASTRGMGWTLYPPLSSAMGTPSSGIEGIIFFLHLAGLSSLLGAI
+                     NFLTTVALIRHSKRWMDPRLMAMAIWITTALLLLALPVLAGAVTILLTDRVVSGSFFD
+                     PTGGGDPILFQHLFWFFGHPEVYVLILPAFGLVSQVLGQARGMVFAKIGIIQSIISIG
+                     VVGFLVWGHHIFTVGMDVDVRAYFTAVTLVVAVPTGVKVFSWLATIWGSSVPLGRPDI
+                     IWVNLFLVLFTFGGFTGLILANAGVDLLLHDTYYVVAHFHYVLSLGAVFGLMAGTTYG
+                     SVATRWVPFPASAGRLHAMLLFVGANGVFYPLHQLGLRGMPRRVFFMLG"
+ORIGIN      
+        1 gagggggggg aggagggaac tgggagaatc gcatctagga catgccatat gctagcatta
+       61 gctctacatt aaaaaattaa aaaactaaaa aaaatttttt aattggaagg gtccacgagt
+      121 tctttgtcgg agcttaacac cagttcgatg ttggtttaga aaaccattat tggggacaaa
+      181 tcactaatca taaggaaatt gggattatat atctgacatt tgggggagta gccaggtttg
+      241 ggtcaaccgc attttcgttg gtgctgcgat gagagctgtc gtctcccctg tcggtgctgg
+      301 gggacggaag attatacaat tccagggtta ccaggcatgg gttggccata atctttcttt
+      361 ttttaatgcc gtttctggtt gggggggtgg ggaactgatt tttgccggtt tgattgggcg
+      421 ccccagatat ggcattccct cgtttaaata atttctctct gtggttgttg tttgtatctg
+      481 ctcctttttt gacaataggg attgcctcca ccagggggcc ggggtgaacc ctttacccac
+      541 ccctttcctc ggccatgggc acaccctcaa gcggtataga gggaataatt ttctttttgc
+      601 atctggccgg actatcgtcg ttgttgggtg ccatcaactt tttaacgaca gtggcattga
+      661 tacgacactc taaaagatgg acagacccta gattgagggc tcatgcaatc tggatcacga
+      721 cagctctact gttgttggcc ctccctgtgt tggcgggggc cgtcaccata ctcttaacag
+      781 accgggtggt aagtgggtct ttttttgatc ccacaggagg gggcgaccct atcctattcc
+      841 aacacctctt ttggttcttt gggcatccag aggtgtatgt tttgattctt ccagcctttg
+      901 ggttggtttc ccaggtgttg ggacaagcca gagggcgggt atttgccaag atagggataa
+      961 ttcagtcgat aatctcgatc ggagtggtgg ggttcctagt ctgaggtcat catatattca
+     1021 cggtgggtat ggacgttgac gttcgtgcgt actttacagc tgttaccctt gttgtggcgg
+     1081 tgccaactgg agtgaaggtt ttttcatggt tggccacaat ttgaggctca agcgtaccgt
+     1141 taggacgccc ggacatcata tgggttaatt tgttcctagt gctctttaca tttggaggtt
+     1201 ttacagggct tatcttggcc aatgcggggg tagacctgtt gctacacgat acgtactacg
+     1261 tggtggcaca ctttcactac gtactttcgt tgggggccgt atttgggcta atggctggta
+     1321 ctacctatgg aagtgtggct acgcgatgag ttcctttccc agcgagtgcg ggtcgcttac
+     1381 acgcgatgct gctgtttgtg ggggctaatg gggtattcta cccactccat cagctgggcc
+     1441 ttagaggggc gccacgtcgg gtgtttttca tgctgggata gcctgcaggt gtcacagcgc
+     1501 aggggttcac tattctcgac aatacttgta ggggttagag tatccacctt agctctagtc
+     1561 aggcgcatgc gctaattttt taatttttta atgtagagct aatgctagca tatggcatgt
+     1621 cctagatgcg attctcccag ttccctcctc cccccccccc cccccctttt tttttttttt
+     1681 tttttttttt tttttttttt tttttttttt tttttttttt tttttttttt tttttttttt
+     1741 tttttttttt tct
+//
+
+
