@@ -3,13 +3,36 @@
 # TrufflR: Extract specific gene sequences from NCBI's database for specific taxa
 # Command line version
 
-library(optparse)    # A command line parser  to write "#!" shebang scripts that accept flag/options.
-library(rentrez)     # For interfacing with NCBI Entrez databases
-library(geneviewer)  # For parsing GenBank files
-library(Biostrings)  # For sequence manipulation
-library(seqinr)      # For sequence manipulation and reverse complement
+# install required packages if not already installed
+
+# CRAN packages
+if (!require("optparse", quietly = TRUE))
+    install.packages("optparse")
+library(optparse)
+
+if (!require("rentrez", quietly = TRUE))
+    install.packages("rentrez")
+library(rentrez)
+
+if (!require("seqinr", quietly = TRUE))
+    install.packages("seqinr")
+library(seqinr)
+
+if (!require("geneviewer", quietly = TRUE))
+    install.packages("geneviewer")
+library(geneviewer)
+
+# Bioconductor manager
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+# Bioconductor packages
+if (!require("Biostrings", quietly = TRUE))
+    BiocManager::install("Biostrings")
+library(Biostrings)
 
 # Define command line options
+# Define command line options - CORRECTED VERSION
 option_list <- list(
   make_option(c("-t", "--taxids"), type="character", 
               help="Path to text file containing taxids (one per line)", 
@@ -23,11 +46,11 @@ option_list <- list(
               help="Feature type to extract: CDS, gene, rRNA, tRNA, or all [default=%default]", 
               metavar="TYPE"),
   
-  make_option(c("-n", "--retmax"), type="integer", default=5,
+  make_option(c("-r", "--retmax"), type="integer", default=5,
               help="Maximum number of sequences to retrieve per taxid [default=%default]", 
               metavar="NUMBER"),
   
-  make_option(c("-o", "--output-dir"), type="character", default="./trufflr_output",
+  make_option(c("-o", "--output-dir"), type="character", default="trufflr_output",
               help="Output directory [default=%default]", 
               metavar="DIR"),
   
@@ -48,7 +71,6 @@ option_list <- list(
   make_option(c("-v", "--verbose"), action="store_true", default=FALSE,
               help="Print extra output")
 )
-
 # Parse command line arguments
 opt_parser <- OptionParser(
   option_list = option_list,
@@ -56,7 +78,7 @@ opt_parser <- OptionParser(
   epilogue = paste(
     "Examples:",
     "  Rscript trufflr.R -t taxids.txt -g 'COI[Gene],COX1[Gene]' -o results",
-    "  Rscript trufflr.R -t taxids.txt -g 'COI[Gene]' -f CDS -n 10 -c -a",
+    "  Rscript trufflr.R -t taxids.txt -g 'COI[Gene]' -f CDS -r 10 -c -a",
     "",
     "Gene search terms should include NCBI field tags like [Gene] or [All Fields]",
     sep = "\n"
@@ -65,18 +87,58 @@ opt_parser <- OptionParser(
 
 opt <- parse_args(opt_parser)
 
-# Validate required arguments
+# IMPROVED VALIDATION AND DIRECTORY HANDLING
+# Validate required arguments first
 if (is.null(opt$taxids)) {
-  cat("Error: Taxids file is required\n")
+  cat("Error: Taxids file is required (use -t or --taxids)\n")
   print_help(opt_parser)
   quit(status = 1)
 }
 
 if (is.null(opt$genes)) {
-  cat("Error: Gene search terms are required\n")
+  cat("Error: Gene search terms are required (use -g or --genes)\n")
   print_help(opt_parser)
   quit(status = 1)
 }
+
+# Handle output directory with improved logic
+if (is.null(opt$`output-dir`)) {
+    # This should not happen with default value, but just in case
+    opt$`output-dir` <- "trufflr_output"
+    cat("Warning: Output directory was NULL, using default: trufflr_output\n")
+}
+
+# Clean up the output directory path
+output_dir <- trimws(as.character(opt$`output-dir`))
+
+# Additional safety check
+if (output_dir == "" || is.na(output_dir)) {
+    output_dir <- "trufflr_output"
+    cat("Warning: Output directory was empty, using default: trufflr_output\n")
+}
+
+# Create the directory if it doesn't exist
+if (!dir.exists(output_dir)) {
+    tryCatch({
+        dir.create(output_dir, recursive = TRUE)
+        if (opt$verbose) cat("Created output directory:", output_dir, "\n")
+    }, error = function(e) {
+        cat("Error: Could not create output directory '", output_dir, "': ", e$message, "\n")
+        quit(status = 1)
+    })
+} else {
+    if (opt$verbose) cat("Using existing output directory:", output_dir, "\n")
+}
+
+# Verify directory is writable
+test_file <- file.path(output_dir, "test_write.tmp")
+tryCatch({
+    writeLines("test", test_file)
+    unlink(test_file)  # Clean up test file
+}, error = function(e) {
+    cat("Error: Output directory '", output_dir, "' is not writable: ", e$message, "\n")
+    quit(status = 1)
+})
 
 # Check if taxids file exists
 if (!file.exists(opt$taxids)) {
@@ -87,26 +149,18 @@ if (!file.exists(opt$taxids)) {
 # Parse gene synonyms from comma-separated string
 gene_synonyms <- trimws(strsplit(opt$genes, ",")[[1]])
 
-# Create output directory if it doesn't exist
-if (!dir.exists(opt$output_dir)) {
-  dir.create(opt$output_dir, recursive = TRUE)
-  if (opt$verbose) cat("Created output directory:", opt$output_dir, "\n")
-}
-
 # Print configuration if verbose
 if (opt$verbose) {
   cat("Configuration:\n")
   cat("  Taxids file:", opt$taxids, "\n")
   cat("  Gene synonyms:", paste(gene_synonyms, collapse = ", "), "\n")
-  cat("  Feature type:", opt$feature_type, "\n")
+  cat("  Feature type:", opt$`feature-type`, "\n")
   cat("  Max sequences per taxid:", opt$retmax, "\n")
-  cat("  Output directory:", opt$output_dir, "\n")
-  cat("  Combine nucleotides:", opt$combine_nt, "\n")
-  cat("  Combine amino acids:", opt$combine_aa, "\n")
+  cat("  Output directory:", output_dir, "\n")
+  cat("  Combine nucleotides:", opt$`combine-nt`, "\n")
+  cat("  Combine amino acids:", opt$`combine-aa`, "\n")
   cat("\n")
 }
-
-# [INSERT ALL THE ORIGINAL FUNCTIONS HERE - they remain unchanged]
 
 # Function to extract GenBank accession from FASTA header
 extract_accession <- function(fasta_header) {
@@ -609,29 +663,29 @@ combine_aa_sequences <- function(output_dir, combined_file = "combined_seqs.faa"
 }
 
 # MAIN EXECUTION
-# Run the main function with parsed arguments
+# Update the function call to use the cleaned output_dir variable
 cat("Starting TrufflR analysis...\n")
 
 results <- extract_gene_sequences(
   taxid_file = opt$taxids,
   gene_synonyms = gene_synonyms,
-  feature_type = opt$feature_type,
+  feature_type = opt$`feature-type`,  # Note: using backticks for hyphenated names
   retmax = opt$retmax,
-  output_base_dir = opt$output_dir
+  output_base_dir = output_dir  # Use the cleaned variable
 )
 
 # Combine sequences if requested
-if (opt$combine_nt) {
+if (opt$`combine-nt`) {
   cat("\nCombining nucleotide sequences...\n")
-  nt_output_file <- file.path(opt$output_dir, opt$nt_file)
-  combine_nt_sequences(opt$output_dir, nt_output_file)
+  nt_output_file <- file.path(output_dir, opt$`nt-file`)
+  combine_nt_sequences(output_dir, nt_output_file)
 }
 
-if (opt$combine_aa) {
+if (opt$`combine-aa`) {
   cat("\nCombining amino acid sequences...\n")
-  aa_output_file <- file.path(opt$output_dir, opt$aa_file)
-  combine_aa_sequences(opt$output_dir, aa_output_file)
+  aa_output_file <- file.path(output_dir, opt$`aa-file`)
+  combine_aa_sequences(output_dir, aa_output_file)
 }
 
 cat("\nTrufflR analysis complete!\n")
-cat("Results saved in:", opt$output_dir, "\n")
+cat("Results saved in:", output_dir, "\n")
