@@ -1,10 +1,11 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env RScript
 
 # TrufflR: Extract specific gene sequences from NCBI's database for specific taxa
 # Command line version
 
-# install required packages if not already installed
+#---------------------------------------------------------------------#
 
+# install required packages if not already installed
 # CRAN packages
 if (!require("optparse", quietly = TRUE))
     install.packages("optparse")
@@ -31,8 +32,9 @@ if (!require("Biostrings", quietly = TRUE))
     BiocManager::install("Biostrings")
 library(Biostrings)
 
+#---------------------------------------------------------------------#
 # Define command line options
-# Define command line options - CORRECTED VERSION
+
 option_list <- list(
   make_option(c("-t", "--taxids"), type="character", 
               help="Path to text file containing taxids (one per line)", 
@@ -60,11 +62,11 @@ option_list <- list(
   make_option(c("-a", "--combine-aa"), action="store_true", default=FALSE,
               help="Combine all amino acid sequences into one file"),
   
-  make_option(c("--nt-file"), type="character", default="combined_seqs.fna",
+  make_option(c("--nt-file"), type="character", default="combined_nucleotide_seqs.fna",
               help="Name for combined nucleotide file [default=%default]", 
               metavar="FILENAME"),
   
-  make_option(c("--aa-file"), type="character", default="combined_seqs.faa",
+  make_option(c("--aa-file"), type="character", default="combined_aminoacid_seqs.faa",
               help="Name for combined amino acid file [default=%default]", 
               metavar="FILENAME"),
   
@@ -101,7 +103,7 @@ if (is.null(opt$genes)) {
   quit(status = 1)
 }
 
-# Handle output directory with improved logic
+# Handle output directory
 if (is.null(opt$`output-dir`)) {
     # This should not happen with default value, but just in case
     opt$`output-dir` <- "trufflr_output"
@@ -109,11 +111,7 @@ if (is.null(opt$`output-dir`)) {
 }
 
 # Clean up the output directory path
-output_dir <- if(is.null(opt$`output-dir`) || length(opt$`output-dir`) == 0) {
-    "trufflr_output" 
-} else { 
-    trimws(as.character(opt$`output-dir`)) 
-}
+output_dir <- trimws(as.character(opt$`output-dir`))
 
 # Additional safety check
 if (output_dir == "" || is.na(output_dir)) {
@@ -166,7 +164,10 @@ if (opt$verbose) {
   cat("\n")
 }
 
-# Keep the existing helper functions unchanged
+#---------------------------------------------------------------------#
+# Script subfunctions start here
+
+# Extract accession from FASTA header
 extract_accession <- function(fasta_header) {
   header_clean <- gsub("^>", "", fasta_header)
   accession_match <- regexpr("^[A-Z]{2}[0-9]{6}\\.[0-9]", header_clean)
@@ -181,6 +182,7 @@ extract_accession <- function(fasta_header) {
   }
 }
 
+# Determine sequence type based on title
 determine_sequence_type <- function(title) {
   title_lower <- tolower(title)
   
@@ -193,7 +195,7 @@ determine_sequence_type <- function(title) {
   }
 }
 
-# 1. Initialize search query
+# Initialize search query
 initialize_search_query <- function(taxid, gene_synonyms) {
   # This function creates the search query for NCBI and prepares gene patterns for filtering
   # It also retrieves taxon information for better organization
@@ -231,7 +233,7 @@ initialize_search_query <- function(taxid, gene_synonyms) {
   ))
 }
 
-# 2. Initialize storage lists
+# Initialize storage lists
 initialize_storage_lists <- function() {
   # This function creates all the empty data structures needed to store results
   # Having this separate makes it clear what data we're collecting
@@ -244,7 +246,7 @@ initialize_storage_lists <- function() {
   ))
 }
 
-# 3. Perform NCBI search
+# Perform NCBI search
 perform_ncbi_search <- function(full_query, retmax) {
   # This function handles the actual NCBI database search
   # Separating this makes it easier to modify search parameters or add error handling
@@ -258,7 +260,7 @@ perform_ncbi_search <- function(full_query, retmax) {
   return(search_result$ids)
 }
 
-# 4. Save raw GenBank and nucleotide FASTA sequences
+# Save raw GenBank and nucleotide FASTA sequences
 save_raw_sequences <- function(ids, raw_files_folder, storage_lists) {
   # This function downloads and saves the raw GenBank and FASTA files
   # It also populates the storage lists with parsed data
@@ -334,7 +336,7 @@ save_raw_sequences <- function(ids, raw_files_folder, storage_lists) {
   return(storage_lists)
 }
 
-# 5. Extract coordinates for target gene synonym genes
+# Extract coordinates for target gene synonym genes
 extract_gene_coordinates <- function(storage_lists, gene_patterns, feature_type) {
   # This function filters the GenBank features to find target genes
   # and extracts their coordinates for sequence extraction
@@ -365,10 +367,9 @@ extract_gene_coordinates <- function(storage_lists, gene_patterns, feature_type)
   return(gene_coords)
 }
 
-# 6. Save translated amino acid sequences for target genes
-save_translated_sequences <- function(storage_lists, output_base_dir) {
-  # This function extracts protein translations from GenBank features
-  # and saves them as amino acid FASTA files
+# Save translated amino acid sequences for target genes
+save_translated_sequences <- function(storage_lists, extracted_folder, gene_patterns) {
+  # This function extracts protein translations from GenBank features and saves them as amino acid FASTA files
   
   all_translations <- list()
   
@@ -379,6 +380,12 @@ save_translated_sequences <- function(storage_lists, output_base_dir) {
     if (!is.null(gb_df) && "translation" %in% colnames(gb_df)) {
       # Filter for rows with non-empty translations
       translations_df <- gb_df[!is.na(gb_df$translation) & gb_df$translation != "", ]
+      
+      # Filter for target genes matching the search synonyms 
+      if (nrow(translations_df) > 0 && "gene" %in% colnames(translations_df)) {
+        translations_df <- translations_df[grepl(paste(gene_patterns, collapse = "|"), 
+                                                tolower(translations_df$gene), ignore.case = TRUE), ]
+      }
       
       if (nrow(translations_df) > 0) {
         # Create descriptive sequence names combining gene information
@@ -399,7 +406,9 @@ save_translated_sequences <- function(storage_lists, output_base_dir) {
         all_translations[[paste0("taxid_", id)]] <- translation_seqs
         
         # Save the translations as FASTA file
-        translation_filename <- file.path(output_base_dir, paste0(accession, "_translations.fasta"))
+        protein_folder <- file.path(extracted_folder, "protein")
+        if (!dir.exists(protein_folder)) dir.create(protein_folder, recursive = TRUE)
+        translation_filename <- file.path(protein_folder, paste0(accession, "_aa.faa"))
         Biostrings::writeXStringSet(translation_seqs, translation_filename)
         cat("  Translations saved to:", translation_filename, "\n")
       }
@@ -409,10 +418,10 @@ save_translated_sequences <- function(storage_lists, output_base_dir) {
   return(all_translations)
 }
 
-# 7. Save subsectioned nucleotide sequences for target genes
-save_gene_subsequences <- function(gene_coords, storage_lists, extracted_folder, taxon_name_clean, taxid) {
-  # This function extracts the actual gene sequences from the full genomic sequences
-  # based on the coordinates found in the GenBank features
+# Save subsectioned nucleotide sequences for target genes
+save_gene_subsequences <- function(gene_coords, storage_lists, extracted_folder, taxon_name_clean, taxid, gene_patterns) {
+  # This function extracts the actual gene sequences from the full genomic sequences based on the coordinates found in the GenBank features
+  # The gene_coords should already be filtered, but we include gene_patterns for consistency
   
   for (id in names(gene_coords)) {
     if (id %in% names(storage_lists$gb_seq_dfs)) {
@@ -424,6 +433,19 @@ save_gene_subsequences <- function(gene_coords, storage_lists, extracted_folder,
       
       # Create separate sequences for this accession
       id_extracted_sequences <- list()
+      
+      # ADDITIONAL SAFETY CHECK: Verify that the coordinates are for target genes
+      # This ensures consistency even if gene_coords filtering had issues
+      if ("gene" %in% colnames(coords)) {
+        coords <- coords[grepl(paste(gene_patterns, collapse = "|"), 
+                              tolower(coords$gene), ignore.case = TRUE), ]
+      }
+      
+      # Skip if no matching genes remain after filtering
+      if (nrow(coords) == 0) {
+        cat("  No target genes found for accession", accession, "after filtering\n")
+        next
+      }
       
       for (j in 1:nrow(coords)) {
         gene_name <- coords$gene[j]
@@ -473,9 +495,12 @@ save_gene_subsequences <- function(gene_coords, storage_lists, extracted_folder,
         names(gene_stringset) <- clean_names
         
         # Create filename with taxon name and accession
-        output_filename <- paste0(taxon_name_clean, "_taxid", taxid, "_", accession, "_extracted_genes.fasta")
+        output_filename <- paste0(accession, "_nt.fna")
         output_file <- file.path(extracted_folder, output_filename)
         
+        nucleotide_folder <- file.path(extracted_folder, "nucleotide")
+        if (!dir.exists(nucleotide_folder)) dir.create(nucleotide_folder, recursive = TRUE)
+        output_file <- file.path(nucleotide_folder, output_filename)
         Biostrings::writeXStringSet(gene_stringset, output_file)
         cat("Gene sequences for accession", accession, "saved to:", output_file, "\n")
       } else {
@@ -485,10 +510,10 @@ save_gene_subsequences <- function(gene_coords, storage_lists, extracted_folder,
   }
 }
 
-# 8. Save summary CSV and stdout information
+# Save summary CSV and stdout information
 save_summary_information <- function(storage_lists, taxid, taxon_name, taxon_name_clean, full_query, 
-                                     feature_type, ids, gene_coords, output_folder, extracted_folder,
-                                     overall_sequence_summary) {
+                                   feature_type, ids, gene_coords, output_folder, extracted_folder,
+                                   overall_sequence_summary) {
   # This function creates comprehensive summary information about the analysis
   # including CSV files and text summaries
   
@@ -567,7 +592,7 @@ save_summary_information <- function(storage_lists, taxid, taxon_name, taxon_nam
   cat("Gene matches found:", length(gene_coords), "\n", file = summary_file, append = TRUE)
   
   # Count total extracted sequences across all accessions
-  total_extracted <- length(list.files(extracted_folder, pattern = paste0(taxon_name_clean, "_taxid", taxid, "_.*_extracted_genes.fasta")))
+  total_extracted <- length(list.files(extracted_folder, pattern = paste0("*nt.fna")))
   cat("Separate FASTA files created:", total_extracted, "\n", file = summary_file, append = TRUE)
   
   # Add sequence type breakdown to summary
@@ -589,7 +614,9 @@ save_summary_information <- function(storage_lists, taxid, taxon_name, taxon_nam
   ))
 }
 
-# Main refactored function that orchestrates all the subfunctions
+#---------------------------------------------------------------------#
+
+# Main function that orchestrates all the subfunctions
 extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "all", retmax = 5, output_base_dir) {
   
   # Read taxids from file (keeping this in main function as it's setup logic)
@@ -669,18 +696,18 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
       gene_coords <- extract_gene_coordinates(storage_lists, search_info$gene_patterns, feature_type)
       
       # 6. Save translated amino acid sequences for target genes
-      taxid_translations <- save_translated_sequences(storage_lists, output_base_dir)
+      taxid_translations <- save_translated_sequences(storage_lists, extracted_folder, search_info$gene_synonyms)
       all_translations <- c(all_translations, taxid_translations)
       
       # 7. Save subsectioned nucleotide sequences for target genes
       save_gene_subsequences(gene_coords, storage_lists, extracted_folder, 
-                             search_info$taxon_name_clean, taxid)
+                           search_info$taxon_name_clean, taxid, search_info$gene_patterns)
       
       # 8. Save summary CSV and stdout information
       summary_results <- save_summary_information(storage_lists, taxid, search_info$taxon_name, 
-                                                  search_info$taxon_name_clean, search_info$full_query,
-                                                  feature_type, ids, gene_coords, output_folder, 
-                                                  extracted_folder, overall_sequence_summary)
+                                                 search_info$taxon_name_clean, search_info$full_query,
+                                                 feature_type, ids, gene_coords, output_folder, 
+                                                 extracted_folder, overall_sequence_summary)
       
       overall_sequence_summary <- summary_results$overall_sequence_summary
       
@@ -746,18 +773,20 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
   ))
 }
 
+#---------------------------------------------------------------------#
 # MAIN EXECUTION
-# Run the main function with parsed arguments
+# Update the function call to use the cleaned output_dir variable
 cat("Starting TrufflR analysis...\n")
 
 results <- extract_gene_sequences(
   taxid_file = opt$taxids,
-  gene_synonyms = gene_synonyms,
-  feature_type = opt$`feature-type`,
+  gene_synonyms = opt$gene_synonyms, # Use the cleaned variable
+  feature_type = opt$`feature-type`,  # Note: using backticks for hyphenated names
   retmax = opt$retmax,
-  output_base_dir = output_dir
+  output_base_dir = output_dir  # Use the cleaned variable
 )
 
+# Combine sequences if requested
 if (opt$`combine-nt`) {
   cat("\nCombining nucleotide sequences...\n")
   nt_output_file <- file.path(output_dir, opt$`nt-file`)
