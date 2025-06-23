@@ -109,7 +109,11 @@ if (is.null(opt$`output-dir`)) {
 }
 
 # Clean up the output directory path
-output_dir <- trimws(as.character(opt$`output-dir`))
+output_dir <- if(is.null(opt$`output-dir`) || length(opt$`output-dir`) == 0) {
+    "trufflr_output" 
+} else { 
+    trimws(as.character(opt$`output-dir`)) 
+}
 
 # Additional safety check
 if (output_dir == "" || is.na(output_dir)) {
@@ -339,10 +343,31 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
           gb_str_dfs[[ids[i]]] <- gb_df
           all_gb_str_dfs[[paste0(taxid, "_", ids[i])]] <- gb_df
           
-          # Print the GenBank dataframe
-          cat("GenBank features for", accession, ":\n")
-          print(gb_df)
-          cat("\n")
+          # Filter the dataframe for target genes BEFORE printing
+          if (!is.null(gb_df) && nrow(gb_df) > 0 && "gene" %in% colnames(gb_df)) {
+            # Filter by gene name using the same logic as later in the code
+            filtered_gb_df <- gb_df[grepl(paste(gene_patterns, collapse = "|"), 
+                                          tolower(gb_df$gene), ignore.case = TRUE), ]
+            
+            # Filter by feature type if specified
+            if (feature_type != "all" && "type" %in% colnames(filtered_gb_df)) {
+              filtered_gb_df <- filtered_gb_df[tolower(filtered_gb_df$type) == tolower(feature_type), ]
+            }
+            
+            # Print the FILTERED GenBank dataframe instead of the full one
+            cat("Filtered GenBank features for", accession, ":\n")
+            if (nrow(filtered_gb_df) > 0) {
+              print(filtered_gb_df)
+            } else {
+              cat("No matching features found for the specified genes and feature type.\n")
+            }
+            cat("\n")
+          } else {
+            # If no gene column or empty dataframe, print the original
+            cat("GenBank features for", accession, "(no gene filtering applied):\n")
+            print(gb_df)
+            cat("\n")
+          }
           
           # Add this right after the translation extraction block:
           if (!is.null(gb_df) && "translation" %in% colnames(gb_df)) {
@@ -663,29 +688,29 @@ combine_aa_sequences <- function(output_dir, combined_file = "combined_seqs.faa"
 }
 
 # MAIN EXECUTION
-# Update the function call to use the cleaned output_dir variable
+# Run the main function with parsed arguments
 cat("Starting TrufflR analysis...\n")
 
 results <- extract_gene_sequences(
   taxid_file = opt$taxids,
   gene_synonyms = gene_synonyms,
-  feature_type = opt$`feature-type`,  # Note: using backticks for hyphenated names
+  feature_type = opt$feature_type,
   retmax = opt$retmax,
-  output_base_dir = output_dir  # Use the cleaned variable
+  output_base_dir = opt$output_dir
 )
 
 # Combine sequences if requested
-if (opt$`combine-nt`) {
+if (opt$combine_nt) {
   cat("\nCombining nucleotide sequences...\n")
-  nt_output_file <- file.path(output_dir, opt$`nt-file`)
-  combine_nt_sequences(output_dir, nt_output_file)
+  nt_output_file <- file.path(opt$output_dir, opt$nt_file)
+  combine_nt_sequences(opt$output_dir, nt_output_file)
 }
 
-if (opt$`combine-aa`) {
+if (opt$combine_aa) {
   cat("\nCombining amino acid sequences...\n")
-  aa_output_file <- file.path(output_dir, opt$`aa-file`)
-  combine_aa_sequences(output_dir, aa_output_file)
+  aa_output_file <- file.path(opt$output_dir, opt$aa_file)
+  combine_aa_sequences(opt$output_dir, aa_output_file)
 }
 
 cat("\nTrufflR analysis complete!\n")
-cat("Results saved in:", output_dir, "\n")
+cat("Results saved in:", opt$output_dir, "\n")
