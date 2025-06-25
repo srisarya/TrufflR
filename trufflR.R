@@ -340,30 +340,39 @@ save_raw_sequences <- function(ids, raw_files_folder, storage_lists) {
 extract_gene_coordinates <- function(storage_lists, gene_patterns, feature_type) {
   # This function filters the GenBank features to find target genes
   # and extracts their coordinates for sequence extraction
-  
-  gene_coords <- lapply(storage_lists$gb_str_dfs, function(df) {
+
+  filtered_gb_str_dfs <- list()  # To store filtered dfs
+
+  gene_coords <- lapply(names(storage_lists$gb_str_dfs), function(id) {
+    df <- storage_lists$gb_str_dfs[[id]]
     if (!is.null(df) && nrow(df) > 0 && "gene" %in% colnames(df)) {
       # Filter by gene name using pattern matching
-      filtered_df <- df[grepl(paste(gene_patterns, collapse = "|"), 
+      filtered_df <- df[grepl(paste(gene_patterns, collapse = "|"),
                               tolower(df$gene), ignore.case = TRUE), ]
-      
-      # Filter by feature type if specified (not "all")
+      # Optionally filter by feature type
       if (feature_type != "all" && "type" %in% colnames(filtered_df)) {
         filtered_df <- filtered_df[tolower(filtered_df$type) == tolower(feature_type), ]
       }
-      
-      # Return only the columns we need for coordinate extraction
+      # Save filtered df back to storage_lists
+      filtered_gb_str_dfs[[id]] <- filtered_df
+      # Return only the columns needed for coordinates
       available_cols <- intersect(c("gene", "strand", "start", "end", "type"), colnames(filtered_df))
-      if (length(available_cols) > 0) {
+      if (length(available_cols) > 0 && nrow(filtered_df) > 0) {
         return(filtered_df[, available_cols, drop = FALSE])
       }
     }
+    # If no match, save empty df
+    filtered_gb_str_dfs[[id]] <- data.frame()
     return(data.frame())
   })
-  
-  # Remove empty dataframes (sequences with no matching genes)
+  names(gene_coords) <- names(storage_lists$gb_str_dfs)
+  # Remove empty dataframes
   gene_coords <- gene_coords[sapply(gene_coords, nrow) > 0]
-  
+  filtered_gb_str_dfs <- filtered_gb_str_dfs[sapply(filtered_gb_str_dfs, nrow) > 0]
+
+  # Update storage_lists in the parent environment
+  storage_lists$gb_str_dfs <- filtered_gb_str_dfs
+
   return(gene_coords)
 }
 
@@ -394,7 +403,7 @@ save_translated_sequences <- function(storage_lists, extracted_folder, gene_patt
           ifelse(!is.na(translations_df$gene) & translations_df$gene != "", 
                  translations_df$gene, "unknown_gene"), "|",
           ifelse(!is.na(translations_df$type) & translations_df$type != "", 
-                 translations_df$type, "unknown_type"),
+                 translations_df$type, "unknown_type")
         )
         
         # Create AAStringSet from translations
@@ -512,7 +521,7 @@ save_gene_subsequences <- function(gene_coords, storage_lists, extracted_folder,
 # Save summary CSV and stdout information
 save_summary_information <- function(storage_lists, taxid, taxon_name, taxon_name_clean, full_query, 
                                    feature_type, ids, gene_coords, output_folder, extracted_folder,
-                                   overall_sequence_summary, gene_synonyms, gene_patterns) {
+                                   overall_sequence_summary, gene_synonyms) {
   # This function creates comprehensive summary information about the analysis
   # including CSV files and text summaries
   # fix: was missing the gene_synonyms param
@@ -707,7 +716,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
       summary_results <- save_summary_information(storage_lists, taxid, search_info$taxon_name, 
                                                  search_info$taxon_name_clean, search_info$full_query,
                                                  feature_type, ids, gene_coords, output_folder, 
-                                                 extracted_folder, overall_sequence_summary, gene_synonyms, gene_patterns)
+                                                 extracted_folder, overall_sequence_summary, gene_synonyms)
       
       overall_sequence_summary <- summary_results$overall_sequence_summary
       
@@ -780,7 +789,7 @@ cat("Starting TrufflR analysis...\n")
 
 results <- extract_gene_sequences(
   taxid_file = opt$taxids,
-  gene_synonyms = opt$gene_synonyms, # Use the cleaned variable
+  gene_synonyms = gene_synonyms, # Use the cleaned variable
   feature_type = opt$`feature-type`,  # Note: using backticks for hyphenated names
   retmax = opt$retmax,
   output_base_dir = output_dir  # Use the cleaned variable
