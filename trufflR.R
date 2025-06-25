@@ -390,12 +390,11 @@ save_translated_sequences <- function(storage_lists, extracted_folder, gene_patt
       if (nrow(translations_df) > 0) {
         # Create descriptive sequence names combining gene information
         seq_names <- paste0(
-          accession, "_",
+          accession, "|",
           ifelse(!is.na(translations_df$gene) & translations_df$gene != "", 
-                 translations_df$gene, "unknown_gene"), "_",
+                 translations_df$gene, "unknown_gene"), "|",
           ifelse(!is.na(translations_df$type) & translations_df$type != "", 
-                 translations_df$type, "unknown_type"), "_",
-          seq_len(nrow(translations_df))
+                 translations_df$type, "unknown_type"),
         )
         
         # Create AAStringSet from translations
@@ -513,9 +512,10 @@ save_gene_subsequences <- function(gene_coords, storage_lists, extracted_folder,
 # Save summary CSV and stdout information
 save_summary_information <- function(storage_lists, taxid, taxon_name, taxon_name_clean, full_query, 
                                    feature_type, ids, gene_coords, output_folder, extracted_folder,
-                                   overall_sequence_summary) {
+                                   overall_sequence_summary, gene_synonyms, gene_patterns) {
   # This function creates comprehensive summary information about the analysis
   # including CSV files and text summaries
+  # fix: was missing the gene_synonyms param
   
   # Create sequence type summary table for this taxid
   seq_summary_df <- do.call(rbind, lapply(storage_lists$sequence_info, function(x) {
@@ -696,7 +696,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
       gene_coords <- extract_gene_coordinates(storage_lists, search_info$gene_patterns, feature_type)
       
       # 6. Save translated amino acid sequences for target genes
-      taxid_translations <- save_translated_sequences(storage_lists, extracted_folder, search_info$gene_synonyms)
+      taxid_translations <- save_translated_sequences(storage_lists, extracted_folder, search_info$gene_patterns) # fix: was passing gene_synonyms but should have passed gene_patterns
       all_translations <- c(all_translations, taxid_translations)
       
       # 7. Save subsectioned nucleotide sequences for target genes
@@ -707,7 +707,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
       summary_results <- save_summary_information(storage_lists, taxid, search_info$taxon_name, 
                                                  search_info$taxon_name_clean, search_info$full_query,
                                                  feature_type, ids, gene_coords, output_folder, 
-                                                 extracted_folder, overall_sequence_summary)
+                                                 extracted_folder, overall_sequence_summary, gene_synonyms, gene_patterns)
       
       overall_sequence_summary <- summary_results$overall_sequence_summary
       
