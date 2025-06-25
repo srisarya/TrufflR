@@ -68,6 +68,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
   
   all_gb_str_dfs <- list()
   all_gb_seq_dfs <- list()
+  all_translations <- list()
   
   # Define gene patterns for filtering (remove NCBI field tags and convert to lowercase)
   gene_patterns <- gsub("\\[.*?\\]", "", gene_synonyms)
@@ -202,6 +203,36 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
           cat("GenBank features for", accession, ":\n")
           print(gb_df)
           cat("\n")
+          
+          # Add this right after the translation extraction block:
+          if (!is.null(gb_df) && "translation" %in% colnames(gb_df)) {
+            # Filter for rows with non-empty translations
+            translations_df <- gb_df[!is.na(gb_df$translation) & gb_df$translation != "", ]
+            
+            if (nrow(translations_df) > 0) {
+              # Create sequence names combining gene info
+              seq_names <- paste0(
+                accession, "_",
+                ifelse(!is.na(translations_df$gene) & translations_df$gene != "", 
+                       translations_df$gene, "unknown_gene"), "_",
+                ifelse(!is.na(translations_df$type) & translations_df$type != "", 
+                       translations_df$type, "unknown_type"), "_",
+                seq_len(nrow(translations_df))
+              )
+              
+              # Create AAStringSet from translations
+              translation_seqs <- Biostrings::AAStringSet(translations_df$translation)
+              names(translation_seqs) <- seq_names
+              
+              # Store in the combined list
+              all_translations[[paste0(taxid, "_", ids[i])]] <- translation_seqs
+              
+              # SAVE THE TRANSLATIONS AS FASTA FILE:
+              translation_filename <- file.path(output_base_dir, paste0(accession, "_translations.fasta"))
+              Biostrings::writeXStringSet(translation_seqs, translation_filename)
+              cat("  Translations saved to:", translation_filename, "\n")
+            }
+          }
           
         }, error = function(e) {
           cat("Error processing GenBank for ID", ids[i], ":", e$message, "\n")
@@ -426,8 +457,9 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
     # Save overall summary table (now includes accession column)
     return(list(
       results = all_results,
-      gb_dataframes = all_gb_str_dfs,     # ALL dataframes across all taxids
-      fasta_sequences = all_gb_seq_dfs,   # ALL sequences across all taxids  
+      gb_dataframes = all_gb_str_dfs,
+      fasta_sequences = all_gb_seq_dfs,
+      translations = all_translations,
       sequence_summary = overall_sequence_summary
     ))
     
@@ -448,7 +480,7 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
 # @param - output_dir - directory for output multifasta (default: current directory)
 # @param - combined_file - output multifasta (default: combined_seqs.fa)
 
-combine_sequences <- function(output_dir, combined_file = "combined_seqs.fa") {
+combine_nt_sequences <- function(output_dir, combined_file = "combined_seqs.fna") {
   fasta_files <- list.files(output_dir, pattern = "\\.fasta$", full.names = TRUE)
   
   if (length(fasta_files) == 0) {
@@ -457,6 +489,30 @@ combine_sequences <- function(output_dir, combined_file = "combined_seqs.fa") {
   }
   
   cat("Combining", length(fasta_files), "FASTA files into", combined_file, "\n")
+  
+  all_sequences <- character()
+  
+  for (file in fasta_files) {
+    sequences <- readLines(file)
+    all_sequences <- c(all_sequences, sequences)
+  }
+  
+  writeLines(all_sequences, combined_file)
+  
+  total_seqs <- length(grep("^>", all_sequences))
+  cat("Combined file contains", total_seqs, "sequences\n")
+  cat("Saved as:", combined_file, "\n")
+}
+
+combine_aa_sequences <- function(output_dir, combined_file = "combined_seqs.faa") {
+  fasta_files <- list.files(output_dir, pattern = "\\_translations.fasta$", full.names = TRUE)
+  
+  if (length(fasta_files) == 0) {
+    cat("No AA FASTA files found in", output_dir, "\n")
+    return()
+  }
+  
+  cat("Combining", length(fasta_files), "AA FASTA files into", combined_file, "\n")
   
   all_sequences <- character()
   
@@ -493,8 +549,9 @@ rRNA_28S_synonyms <- c("28S[Title]",
                        "LSU rRNA[Title]")
 
 # Run analysis with feature type filtering
-results <- extract_gene_sequences("taxids/proseriate_taxid.txt", coi_synonyms, feature_type = "CDS", retmax = 10, output_base_dir = "test/test_proseriate")
-combine_sequences(output_dir = "tests/test_proseriate", combined_file = "test/test_proseriate/gene_sequences.fasta")
+results <- extract_gene_sequences("taxids/proseriate_taxid.txt", coi_synonyms, feature_type = "CDS", retmax = 5, output_base_dir = "tests/test_proseriate")
+combine_nt_sequences(output_dir = "tests/test_proseriate", combined_file = "tests/test_proseriate/gene_sequences.fasta")
+combine_aa_sequences(output_dir = "tests/test_proseriate", combined_file = "tests/test_proseriate/AA_sequences.fasta")
 
 #main_analysis_result<-extract_gene_sequences("results/rhabditophora_family_results/", coi_synonyms, feature_type = "CDS", retmax = 10, output_base_dir = "results/rhabditophora_family_results/")
 #combine_sequences(output_dir = "results/rhabditophora_family_results/", combined_file = "results/rhabditophora_family_results/gene_sequences.fasta")
