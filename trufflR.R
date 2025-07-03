@@ -782,6 +782,58 @@ extract_gene_sequences <- function(taxid_file, gene_synonyms, feature_type = "al
   ))
 }
 
+# Combine all nt sequences into one multifasta file
+combine_nt_sequences <- function(extracted_folder, combined_file = "combined_seqs.fna") {
+  # Find all *_nt.fna files recursively in extracted_folder
+  fasta_files <- list.files(extracted_folder, pattern = "_nt\\.fna$", full.names = TRUE, recursive = TRUE)
+  
+  if (length(fasta_files) == 0) {
+    cat("No FASTA files found in", extracted_folder, "\n")
+    return()
+  }
+  
+  cat("Combining", length(fasta_files), "FASTA files into", combined_file, "\n")
+  
+  all_sequences <- character()
+  
+  for (file in fasta_files) {
+    sequences <- readLines(file)
+    all_sequences <- c(all_sequences, sequences)
+  }
+  
+  writeLines(all_sequences, combined_file)
+  
+  total_seqs <- length(grep("^>", all_sequences))
+  cat("Combined file contains", total_seqs, "sequences\n")
+  cat("Saved as:", combined_file, "\n")
+}
+
+# Combine all aa sequences into one multifasta file
+combine_aa_sequences <- function(extracted_folder, combined_file = "combined_seqs.faa") {
+  # Find all *_aa.faa files recursively in extracted_folder
+  fasta_files <- list.files(extracted_folder, pattern = "_aa\\.faa$", full.names = TRUE, recursive = TRUE)
+  
+  if (length(fasta_files) == 0) {
+    cat("No AA FASTA files found in", extracted_folder, "\n")
+    return()
+  }
+  
+  cat("Combining", length(fasta_files), "AA FASTA files into", combined_file, "\n")
+  
+  all_sequences <- character()
+  
+  for (file in fasta_files) {
+    sequences <- readLines(file)
+    all_sequences <- c(all_sequences, sequences)
+  }
+  
+  writeLines(all_sequences, combined_file)
+  
+  total_seqs <- length(grep("^>", all_sequences))
+  cat("Combined file contains", total_seqs, "sequences\n")
+  cat("Saved as:", combined_file, "\n")
+}
+
 #---------------------------------------------------------------------#
 # MAIN EXECUTION
 # Update the function call to use the cleaned output_dir variable
