@@ -455,12 +455,12 @@ save_gene_subsequences <- function(gene_coords, storage_lists, extracted_folder,
         next
       }
       
-      for (j in 1:nrow(coords)) {
-        gene_name <- coords$gene[j]
-        start_pos <- coords$start[j]
-        end_pos <- coords$end[j]
-        strand <- if("strand" %in% colnames(coords)) coords$strand[j] else "+"
-        feature_info <- if("type" %in% colnames(coords)) coords$type[j] else "unknown"
+      for (gene_id in 1:nrow(coords)) {
+        gene_name <- coords$gene[gene_id]
+        start_pos <- coords$start[gene_id]
+        end_pos <- coords$end[gene_id]
+        strand <- if("strand" %in% colnames(coords)) coords$strand[gene_id] else "+"
+        feature_info <- if("type" %in% colnames(coords)) coords$type[gene_id] else "unknown"
         
         tryCatch({
           if (length(dna_seq) > 0) {
@@ -473,7 +473,7 @@ save_gene_subsequences <- function(gene_coords, storage_lists, extracted_folder,
             }
             
             # Use accession in sequence name instead of NCBI ID
-            seq_name <- paste0(accession, "_", gene_name, "_", feature_info, "_", j)
+            seq_name <- paste0(accession, "_", gene_name, "_", feature_info, "_", gene_id)
             id_extracted_sequences[[seq_name]] <- gene_subseq
             cat("  Extracted:", gene_name, "(", feature_info, ",", length(gene_subseq), "bp )\n")
           }
